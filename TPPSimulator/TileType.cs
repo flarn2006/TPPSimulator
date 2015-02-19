@@ -7,7 +7,7 @@ using System.Drawing;
 
 namespace TPPSimulator
 {
-    class TileType
+    public class TileType
     {
         public class StepEventArgs : EventArgs
         {

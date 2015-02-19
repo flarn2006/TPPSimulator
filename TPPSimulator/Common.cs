@@ -7,10 +7,10 @@ using System.Drawing;
 
 namespace TPPSimulator
 {
-    enum Direction { Up, Down, Left, Right, None }
-    enum Input { Up, Down, Left, Right, A, B, Start, Select }
+    public enum Direction { Up, Down, Left, Right, None }
+    public enum Input { Up, Down, Left, Right, A, B, Start, Select }
 
-    static class DirectionHelper
+    public static class DirectionHelper
     {
         public static Input ToInput(this Direction direction)
         {
@@ -84,7 +84,7 @@ namespace TPPSimulator
         }
     }
 
-    static class MiscExtensions
+    public static class MiscExtensions
     {
         public static bool SplitOnce(this string str, char splitAt, out string left, out string right)
         {

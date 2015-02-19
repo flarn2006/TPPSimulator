@@ -259,5 +259,10 @@ In the mean time, enjoy this preview!", "Welcome!", MessageBoxButtons.OKCancel, 
         {
             new AboutBox().ShowDialog();
         }
+
+        private void tsbResizeMap_Click(object sender, EventArgs e)
+        {
+            ResizeMapDialog.PromptToResize(tileGrid);
+        }
     }
 }

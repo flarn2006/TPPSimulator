@@ -7,7 +7,7 @@ using System.Drawing;
 
 namespace TPPSimulator
 {
-    class Player
+    public class Player
     {
         private Point location;
         private Direction facing = Direction.Down;
@@ -123,8 +123,11 @@ namespace TPPSimulator
                 } else {
                     // Don't forget, you're here forever!
                     Direction wasFacing = Facing;
-                    AttemptStep(SpinDirection);
-                    Facing = wasFacing.CounterClockwise();
+                    if (AttemptStep(SpinDirection)) {
+                        Facing = wasFacing.CounterClockwise();
+                    } else {
+                        SpinDirection = Direction.None;
+                    }
                 }
             } else {
                 FrozenForInputs--;

@@ -12,7 +12,7 @@ using System.Windows.Forms;
 namespace TPPSimulator
 {
     [DefaultEvent("GridChanged")]
-    partial class TileGrid : Control
+    public partial class TileGrid : Control
     {
         private int cols = 1, rows = 1;
         private TileType[,] grid;
@@ -99,6 +99,7 @@ namespace TPPSimulator
                     DrawTile(g, x, y);
                 }
             }
+            Invalidate();
         }
 
         private void DrawTile(Graphics g, int tileX, int tileY)
@@ -126,14 +127,14 @@ namespace TPPSimulator
         public int Columns
         {
             get { return cols; }
-            set { cols = value; InitializeGrid(); Invalidate(); }
+            set { ResizeGrid(value, rows); }
         }
 
         [DefaultValue(1), Category("Behavior"), Description("Indicates the number of tiles in the vertical direction.")]
         public int Rows
         {
             get { return rows; }
-            set { rows = value; InitializeGrid(); Invalidate(); }
+            set { ResizeGrid(cols, value); }
         }
 
         public TileType GetTile(int x, int y)
@@ -251,6 +252,26 @@ namespace TPPSimulator
                     SetTile(e.X / tileSize, e.Y / tileSize, TileType.Empty);
                 }
             }
+        }
+
+        public void ResizeGrid(int cols, int rows)
+        {
+            TileType[,] oldGrid = grid;
+            int minCols = Math.Min(this.cols, cols);
+            int minRows = Math.Min(this.rows, rows);
+
+            this.cols = cols;
+            this.rows = rows;
+            InitializeGrid();
+
+            for (int y = 0; y < minRows; y++) {
+                for (int x = 0; x < minCols; x++) {
+                    grid[y, x] = oldGrid[y, x];
+                }
+            }
+
+            FullImageUpdate();
+            OnGridChanged();
         }
     }
 }
