@@ -29,7 +29,10 @@ namespace TPPSimulator
         {
             InitializeComponent();
             InitializeGrid();
-            if (!DesignMode) {
+            if (LicenseManager.UsageMode != LicenseUsageMode.Designtime) {
+                // Ugh, LicenseManager...never thought I'd actually be using that part of the .NET Framework.
+                // Unfortunately it's the only way to check for runtime vs. design time. this.DesignMode doesn't work.
+                // Don't worry, no DRM here.
                 player = new Player(this);
                 player.NeedsTileGridRedraw += player_Moved;
             }

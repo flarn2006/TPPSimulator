@@ -208,10 +208,7 @@
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>if not exist $(ProjectDir)$(OutDir)Menu mkdir $(ProjectDir)$(OutDir)Menu
-xcopy /y /s $(ProjectDir)Menu $(ProjectDir)$(OutDir)Menu
-
-if not exist $(SolutionDir)Menu mkdir $(SolutionDir)Menu
-xcopy /y /s $(ProjectDir)Menu $(SolutionDir)Menu</PostBuildEvent>
+xcopy /y /s $(ProjectDir)Menu $(ProjectDir)$(OutDir)Menu</PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
