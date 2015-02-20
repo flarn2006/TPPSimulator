@@ -5,7 +5,6 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Media;
 
 namespace TPPSimulator
 {
@@ -23,7 +22,7 @@ namespace TPPSimulator
 
         private MenuState state = null;
         private Dictionary<string, MenuState> stateTable;
-        private bool designMode;
+        private string mainStateID = "main_0";
 
         public Menu()
         {
@@ -55,11 +54,6 @@ namespace TPPSimulator
             }
         }
 
-        public Menu(bool designMode) : this()
-        {
-            this.designMode = designMode;
-        }
-
         public event EventHandler StateChanged;
 
         protected virtual void OnStateChanged(EventArgs e)
@@ -79,6 +73,7 @@ namespace TPPSimulator
             {
                 state = value;
                 if (state != null) {
+                    if (state.StateID.StartsWith("main_")) mainStateID = state.StateID;
                     PerformAction(state.Action);
                 }
                 OnStateChanged();
@@ -122,15 +117,18 @@ namespace TPPSimulator
             if (action.Equals("exit")) {
                 State = null;
             } else if (action.Equals("cry")) {
-                SoundPlayer sp = new SoundPlayer();
-                sp.Stream = (rng.Next(20) == 0) ? Properties.Resources.kricketune : Properties.Resources.bulbasaur;
-                sp.Play();
+                SoundPlayer.Play((rng.Next(20) == 0) ? Properties.Resources.kricketune : Properties.Resources.bulbasaur);
             }
         }
 
         public void Input(Input input)
         {
             StateID = State.StateIDForInput(input);
+        }
+
+        public void Open()
+        {
+            StateID = mainStateID;
         }
     }
 }

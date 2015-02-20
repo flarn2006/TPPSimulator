@@ -119,7 +119,7 @@ namespace TPPSimulator
         public void Input(Input button)
         {
             if (menu.State == null) {
-                if (FrozenForInputs == 0) {
+                if (FrozenForInputs != 0) {
                     if (SpinDirection == Direction.None) {
                         switch (button) {
                             case TPPSimulator.Input.Up:
@@ -134,7 +134,7 @@ namespace TPPSimulator
                                 }
                                 break;
                             case TPPSimulator.Input.Start:
-                                menu.StateID = "main_0";
+                                menu.Open();
                                 break;
                         }
                     } else {
@@ -147,7 +147,7 @@ namespace TPPSimulator
                         }
                     }
                 } else {
-                    FrozenForInputs--;
+                    if (FrozenForInputs > 0) FrozenForInputs--;
                 }
             } else {
                 try {
