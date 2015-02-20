@@ -111,18 +111,22 @@ namespace TPPSimulator
 
         private void MainForm_KeyDown(object sender, KeyEventArgs e)
         {
-            Direction dir = Direction.None;
+            Input input = Input.None;
 
             switch (e.KeyCode) {
-                case Keys.W: dir = Direction.Up; break;
-                case Keys.S: dir = Direction.Down; break;
-                case Keys.A: dir = Direction.Left; break;
-                case Keys.D: dir = Direction.Right; break;
+                case Keys.W: input = Input.Up; break;
+                case Keys.S: input = Input.Down; break;
+                case Keys.A: input = Input.Left; break;
+                case Keys.D: input = Input.Right; break;
+                case Keys.H: input = Input.Select; break;
+                case Keys.J: input = Input.Start; break;
+                case Keys.K: input = Input.B; break;
+                case Keys.L: input = Input.A; break;
             }
 
-            if (dir != Direction.None) {
+            if (input != Input.None) {
                 InputCount++;
-                tileGrid.Player.Input(dir.ToInput());
+                tileGrid.Player.Input(input);
             }
         }
 

@@ -15,25 +15,33 @@ namespace TPPSimulator
         private TileGrid tileGrid;
         private bool gen1Movement = true;
         private int frozenForInputs = 0;
+        private Menu menu;
 
         public Player(TileGrid grid)
         {
             tileGrid = grid;
+            menu = new Menu();
+            menu.StateChanged += menu_StateChanged;
         }
 
-        public event EventHandler Moved;
+        void menu_StateChanged(object sender, EventArgs e)
+        {
+            OnNeedsTileGridRedraw();
+        }
+
+        public event EventHandler NeedsTileGridRedraw;
         public event EventHandler InputWhileFrozen;
 
         #region Event methods
 
-        protected virtual void OnMoved(EventArgs e)
+        protected virtual void OnNeedsTileGridRedraw(EventArgs e)
         {
-            if (Moved != null) Moved(this, e);
+            if (NeedsTileGridRedraw != null) NeedsTileGridRedraw(this, e);
         }
 
-        protected void OnMoved()
+        protected void OnNeedsTileGridRedraw()
         {
-            OnMoved(EventArgs.Empty);
+            OnNeedsTileGridRedraw(EventArgs.Empty);
         }
 
         protected virtual void OnInputWhileFrozen(EventArgs e)
@@ -51,13 +59,13 @@ namespace TPPSimulator
         public Point Location
         {
             get { return location; }
-            set { location = value; OnMoved(); }
+            set { location = value; OnNeedsTileGridRedraw(); }
         }
 
         public Direction Facing
         {
             get { return facing; }
-            set { facing = value; OnMoved(); }
+            set { facing = value; OnNeedsTileGridRedraw(); }
         }
 
         public Image CurrentImage
@@ -72,6 +80,11 @@ namespace TPPSimulator
                     default: throw new InvalidOperationException("Current direction isn't valid--something went wrong!");
                 }
             }
+        }
+
+        public Menu Menu
+        {
+            get { return menu; }
         }
 
         public bool Gen1Movement
@@ -105,32 +118,43 @@ namespace TPPSimulator
 
         public void Input(Input button)
         {
-            if (FrozenForInputs == 0) {
-                if (SpinDirection == Direction.None) {
-                    switch (button) {
-                        case TPPSimulator.Input.Up:
-                        case TPPSimulator.Input.Down:
-                        case TPPSimulator.Input.Left:
-                        case TPPSimulator.Input.Right:
-                            Direction dir = button.ToDirection();
-                            if (Facing != dir.Opposite() || Gen1Movement) {
-                                AttemptStep(dir);
-                            } else {
-                                Facing = dir;
-                            }
-                            break;
+            if (menu.State == null) {
+                if (FrozenForInputs == 0) {
+                    if (SpinDirection == Direction.None) {
+                        switch (button) {
+                            case TPPSimulator.Input.Up:
+                            case TPPSimulator.Input.Down:
+                            case TPPSimulator.Input.Left:
+                            case TPPSimulator.Input.Right:
+                                Direction dir = button.ToDirection();
+                                if (Facing != dir.Opposite() || Gen1Movement) {
+                                    AttemptStep(dir);
+                                } else {
+                                    Facing = dir;
+                                }
+                                break;
+                            case TPPSimulator.Input.Start:
+                                menu.StateID = "main_0";
+                                break;
+                        }
+                    } else {
+                        // Don't forget, you're here forever!
+                        Direction wasFacing = Facing;
+                        if (AttemptStep(SpinDirection)) {
+                            Facing = wasFacing.CounterClockwise();
+                        } else {
+                            SpinDirection = Direction.None;
+                        }
                     }
                 } else {
-                    // Don't forget, you're here forever!
-                    Direction wasFacing = Facing;
-                    if (AttemptStep(SpinDirection)) {
-                        Facing = wasFacing.CounterClockwise();
-                    } else {
-                        SpinDirection = Direction.None;
-                    }
+                    FrozenForInputs--;
                 }
             } else {
-                FrozenForInputs--;
+                try {
+                    menu.Input(button);
+                } catch (KeyNotFoundException ex) {
+                    System.Windows.Forms.MessageBox.Show(ex.Message, "Menu error", System.Windows.Forms.MessageBoxButtons.OK, System.Windows.Forms.MessageBoxIcon.Error);
+                }
             }
         }
     }

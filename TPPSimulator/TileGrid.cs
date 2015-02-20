@@ -29,8 +29,10 @@ namespace TPPSimulator
         {
             InitializeComponent();
             InitializeGrid();
-            player = new Player(this);
-            player.Moved += player_Moved;
+            if (!DesignMode) {
+                player = new Player(this);
+                player.NeedsTileGridRedraw += player_Moved;
+            }
             DoubleBuffered = true;
         }
 
@@ -119,7 +121,10 @@ namespace TPPSimulator
             if (grid != null) {
                 pe.Graphics.DrawImage(bmp, Point.Empty);
                 pe.Graphics.DrawImage(Properties.Resources.goal, goalLocation.X * tileSize, goalLocation.Y * tileSize);
-                pe.Graphics.DrawImage(player.CurrentImage, player.Location.X * tileSize, player.Location.Y * tileSize);
+                if (player != null) {
+                    pe.Graphics.DrawImage(player.CurrentImage, player.Location.X * tileSize, player.Location.Y * tileSize);
+                    pe.Graphics.DrawImage(player.Menu.Image, ClientRectangle);
+                }
             }
         }
 
@@ -272,6 +277,12 @@ namespace TPPSimulator
 
             FullImageUpdate();
             OnGridChanged();
+        }
+
+        protected override void OnResize(EventArgs e)
+        {
+            base.OnResize(e);
+            Invalidate();
         }
     }
 }

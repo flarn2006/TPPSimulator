@@ -8,7 +8,7 @@ using System.Drawing;
 namespace TPPSimulator
 {
     public enum Direction { Up, Down, Left, Right, None }
-    public enum Input { Up, Down, Left, Right, A, B, Start, Select }
+    public enum Input { Up, Down, Left, Right, A, B, Start, Select, None }
 
     public static class DirectionHelper
     {
@@ -19,7 +19,7 @@ namespace TPPSimulator
                 case Direction.Down: return Input.Down;
                 case Direction.Left: return Input.Left;
                 case Direction.Right: return Input.Right;
-                default: throw new ArgumentOutOfRangeException("Invalid direction specified!");
+                default: return Input.None;
             }
         }
 
