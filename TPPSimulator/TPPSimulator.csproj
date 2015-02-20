@@ -107,7 +107,6 @@
     <EmbeddedResource Include="ResizeMapDialog.resx">
       <DependentUpon>ResizeMapDialog.cs</DependentUpon>
     </EmbeddedResource>
-    <None Include="Menu\menu.csv" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -174,39 +173,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Images\shrub.png" />
-    <Content Include="Menu\cursor.png" />
-    <Content Include="Menu\item.png" />
-    <Content Include="Menu\item_dome.png" />
-    <Content Include="Menu\item_dome_consult1.png" />
-    <Content Include="Menu\item_dome_consult2.png" />
-    <Content Include="Menu\item_dome_toss.png" />
-    <Content Include="Menu\item_helix.png" />
-    <Content Include="Menu\item_helix_consult1.png" />
-    <Content Include="Menu\item_helix_consult2.png" />
-    <Content Include="Menu\item_helix_toss.png" />
-    <Content Include="Menu\main.png" />
-    <Content Include="Menu\options1.png" />
-    <Content Include="Menu\options2.png" />
-    <Content Include="Menu\options3.png" />
-    <Content Include="Menu\options4.png" />
-    <Content Include="Menu\pokedex.png" />
-    <Content Include="Menu\pokedex2.png" />
-    <Content Include="Menu\pokedex_area.png" />
-    <Content Include="Menu\pokedex_data.png" />
-    <Content Include="Menu\pokemon.png" />
-    <Content Include="Menu\pokemon2.png" />
-    <Content Include="Menu\pokemon3.png" />
-    <Content Include="Menu\pokemon_cut_fail.png" />
-    <Content Include="Menu\pokemon_cut_success.png" />
-    <Content Include="Menu\pokemon_stats1a.png" />
-    <Content Include="Menu\pokemon_stats2a.png" />
-    <Content Include="Menu\save.png" />
-    <Content Include="Menu\saved.png" />
-    <Content Include="Menu\saving.png" />
     <Content Include="Sounds\bulbasaur.wav" />
     <Content Include="Sounds\charmander.wav" />
     <Content Include="Sounds\kricketune.wav" />
-    <Content Include="Menu\trainer.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
