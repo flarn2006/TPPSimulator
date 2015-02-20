@@ -119,7 +119,7 @@ namespace TPPSimulator
         public void Input(Input button)
         {
             if (menu.State == null) {
-                if (FrozenForInputs != 0) {
+                if (FrozenForInputs == 0) {
                     if (SpinDirection == Direction.None) {
                         switch (button) {
                             case TPPSimulator.Input.Up:
