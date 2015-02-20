@@ -268,5 +268,17 @@ In the mean time, enjoy this preview!", "Welcome!", MessageBoxButtons.OKCancel, 
         {
             ResizeMapDialog.PromptToResize(tileGrid);
         }
+
+        private void controlsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show(@"W = Up
+S = Down
+A = Left
+D = Right
+H = Select
+J = Start
+K = B
+L = A", "Manual Input Controls", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
     }
 }
