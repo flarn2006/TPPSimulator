@@ -137,11 +137,11 @@ namespace TPPSimulator
 
         private void MainForm_Load(object sender, EventArgs e)
         {
-            if (MessageBox.Show(@"I haven't actually implemented the code to simulate inputs yet, but you can move around manually using WASD.
+            /*if (MessageBox.Show(@"I haven't actually implemented the code to simulate inputs yet, but you can move around manually using WASD.
 In the mean time, enjoy this preview!", "Welcome!", MessageBoxButtons.OKCancel, MessageBoxIcon.Information) == DialogResult.Cancel) {
                 MessageBox.Show("If you're not going to enjoy it, I'll save you the trouble of quitting. Kappa", "Fine then.");
                 Application.Exit();
-            }
+            }*/
         }
 
         private void tsbResetCount_Click(object sender, EventArgs e)

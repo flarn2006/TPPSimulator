@@ -23,6 +23,7 @@ namespace TPPSimulator
         private MenuState state = null;
         private Dictionary<string, MenuState> stateTable;
         private string mainStateID = "main_0";
+        private int delay;
 
         public Menu()
         {
@@ -72,11 +73,12 @@ namespace TPPSimulator
             set
             {
                 state = value;
+                OnStateChanged();
                 if (state != null) {
                     if (state.StateID.StartsWith("main_")) mainStateID = state.StateID;
                     PerformAction(state.Action);
+                    delay = state.Delay;
                 }
-                OnStateChanged();
             }
         }
 
@@ -123,7 +125,11 @@ namespace TPPSimulator
 
         public void Input(Input input)
         {
-            StateID = State.StateIDForInput(input);
+            if (delay == 0) {
+                StateID = State.StateIDForInput(input);
+            } else {
+                delay--;
+            }
         }
 
         public void Open()
