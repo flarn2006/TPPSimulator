@@ -56,6 +56,7 @@ namespace TPPSimulator
         }
 
         public event EventHandler StateChanged;
+        public event EventHandler Cut;
 
         protected virtual void OnStateChanged(EventArgs e)
         {
@@ -65,6 +66,16 @@ namespace TPPSimulator
         protected void OnStateChanged()
         {
             OnStateChanged(EventArgs.Empty);
+        }
+
+        protected virtual void OnCut(EventArgs e)
+        {
+            if (Cut != null) Cut(this, e);
+        }
+
+        protected void OnCut()
+        {
+            OnCut(EventArgs.Empty);
         }
 
         public MenuState State
@@ -120,6 +131,10 @@ namespace TPPSimulator
                 State = null;
             } else if (action.Equals("cry")) {
                 SoundPlayer.Play((rng.Next(20) == 0) ? Properties.Resources.kricketune : Properties.Resources.bulbasaur);
+            } else if (action.Equals("cut")) {
+                OnCut();
+            } else if (action.Equals("cry_charmander")) {
+                SoundPlayer.Play(Properties.Resources.charmander);
             }
         }
 

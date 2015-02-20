@@ -150,11 +150,21 @@ namespace TPPSimulator
             return grid[y, x];
         }
 
+        public TileType GetTile(Point location)
+        {
+            return grid[location.Y, location.X];
+        }
+
         public void SetTile(int x, int y, TileType tile)
         {
             grid[y, x] = tile;
             DrawTile(Graphics.FromImage(bmp), x, y);
             OnGridChanged();
+        }
+
+        public void SetTile(Point location, TileType tile)
+        {
+            SetTile(location.X, location.Y, tile);
         }
 
         public void LoadMap(string filename)

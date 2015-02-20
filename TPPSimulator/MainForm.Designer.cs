@@ -41,6 +41,7 @@
             this.tsbSpinnerStop = new System.Windows.Forms.ToolStripButton();
             this.toolStripContainer1 = new System.Windows.Forms.ToolStripContainer();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.tileGrid = new TPPSimulator.TileGrid();
             this.menu = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.newToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -52,6 +53,10 @@
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.controlsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsStandard = new System.Windows.Forms.ToolStrip();
+            this.newToolStripButton = new System.Windows.Forms.ToolStripButton();
+            this.openToolStripButton = new System.Windows.Forms.ToolStripButton();
+            this.saveToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.tsSimulation = new System.Windows.Forms.ToolStrip();
             this.tsbAutorun = new System.Windows.Forms.ToolStripButton();
             this.tsbStep = new System.Windows.Forms.ToolStripButton();
@@ -65,12 +70,8 @@
             this.tsbStopSpinning = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.tsbResizeMap = new System.Windows.Forms.ToolStripButton();
-            this.tsStandard = new System.Windows.Forms.ToolStrip();
-            this.newToolStripButton = new System.Windows.Forms.ToolStripButton();
-            this.openToolStripButton = new System.Windows.Forms.ToolStripButton();
-            this.saveToolStripButton = new System.Windows.Forms.ToolStripButton();
-            this.tileGrid = new TPPSimulator.TileGrid();
             this.docMgr = new TPPSimulator.DocumentManager(this.components);
+            this.tsbShrub = new System.Windows.Forms.ToolStripButton();
             this.tsTools.SuspendLayout();
             this.toolStripContainer1.ContentPanel.SuspendLayout();
             this.toolStripContainer1.LeftToolStripPanel.SuspendLayout();
@@ -78,9 +79,9 @@
             this.toolStripContainer1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.menu.SuspendLayout();
+            this.tsStandard.SuspendLayout();
             this.tsSimulation.SuspendLayout();
             this.tsMisc.SuspendLayout();
-            this.tsStandard.SuspendLayout();
             this.SuspendLayout();
             // 
             // tsTools
@@ -95,10 +96,11 @@
             this.tsbSpinnerS,
             this.tsbSpinnerW,
             this.tsbSpinnerE,
-            this.tsbSpinnerStop});
+            this.tsbSpinnerStop,
+            this.tsbShrub});
             this.tsTools.Location = new System.Drawing.Point(0, 3);
             this.tsTools.Name = "tsTools";
-            this.tsTools.Size = new System.Drawing.Size(24, 218);
+            this.tsTools.Size = new System.Drawing.Size(32, 260);
             this.tsTools.TabIndex = 0;
             this.tsTools.Text = "Tools";
             this.tsTools.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.toolStrip1_ItemClicked);
@@ -111,7 +113,7 @@
             this.tsbPlayer.Image = global::TPPSimulator.Properties.Resources.player_s;
             this.tsbPlayer.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsbPlayer.Name = "tsbPlayer";
-            this.tsbPlayer.Size = new System.Drawing.Size(22, 20);
+            this.tsbPlayer.Size = new System.Drawing.Size(30, 20);
             this.tsbPlayer.Text = "Player";
             this.tsbPlayer.Click += new System.EventHandler(this.tsbPlayer_Click);
             // 
@@ -121,7 +123,7 @@
             this.tsbGoal.Image = global::TPPSimulator.Properties.Resources.goal;
             this.tsbGoal.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsbGoal.Name = "tsbGoal";
-            this.tsbGoal.Size = new System.Drawing.Size(22, 20);
+            this.tsbGoal.Size = new System.Drawing.Size(30, 20);
             this.tsbGoal.Text = "Goal";
             this.tsbGoal.Click += new System.EventHandler(this.tsbGoal_Click);
             // 
@@ -131,7 +133,7 @@
             this.tsbWall.Image = global::TPPSimulator.Properties.Resources.wall;
             this.tsbWall.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsbWall.Name = "tsbWall";
-            this.tsbWall.Size = new System.Drawing.Size(22, 20);
+            this.tsbWall.Size = new System.Drawing.Size(30, 20);
             this.tsbWall.Text = "Wall";
             this.tsbWall.Click += new System.EventHandler(this.tsbWall_Click);
             // 
@@ -141,7 +143,7 @@
             this.tsbLedge.Image = global::TPPSimulator.Properties.Resources.ledge;
             this.tsbLedge.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsbLedge.Name = "tsbLedge";
-            this.tsbLedge.Size = new System.Drawing.Size(22, 20);
+            this.tsbLedge.Size = new System.Drawing.Size(30, 20);
             this.tsbLedge.Text = "Ledge";
             this.tsbLedge.Click += new System.EventHandler(this.tsbLedge_Click);
             // 
@@ -151,7 +153,7 @@
             this.tsbSpinnerN.Image = global::TPPSimulator.Properties.Resources.spinner_n;
             this.tsbSpinnerN.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsbSpinnerN.Name = "tsbSpinnerN";
-            this.tsbSpinnerN.Size = new System.Drawing.Size(22, 20);
+            this.tsbSpinnerN.Size = new System.Drawing.Size(30, 20);
             this.tsbSpinnerN.Text = "Spinner (N)";
             this.tsbSpinnerN.Click += new System.EventHandler(this.tsbSpinnerN_Click);
             // 
@@ -161,7 +163,7 @@
             this.tsbSpinnerS.Image = global::TPPSimulator.Properties.Resources.spinner_s;
             this.tsbSpinnerS.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsbSpinnerS.Name = "tsbSpinnerS";
-            this.tsbSpinnerS.Size = new System.Drawing.Size(22, 20);
+            this.tsbSpinnerS.Size = new System.Drawing.Size(30, 20);
             this.tsbSpinnerS.Text = "Spinner (S)";
             this.tsbSpinnerS.Click += new System.EventHandler(this.tsbSpinnerS_Click);
             // 
@@ -171,7 +173,7 @@
             this.tsbSpinnerW.Image = global::TPPSimulator.Properties.Resources.spinner_w;
             this.tsbSpinnerW.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsbSpinnerW.Name = "tsbSpinnerW";
-            this.tsbSpinnerW.Size = new System.Drawing.Size(22, 20);
+            this.tsbSpinnerW.Size = new System.Drawing.Size(30, 20);
             this.tsbSpinnerW.Text = "Spinner (W)";
             this.tsbSpinnerW.Click += new System.EventHandler(this.tsbSpinnerW_Click);
             // 
@@ -181,7 +183,7 @@
             this.tsbSpinnerE.Image = global::TPPSimulator.Properties.Resources.spinner_e;
             this.tsbSpinnerE.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsbSpinnerE.Name = "tsbSpinnerE";
-            this.tsbSpinnerE.Size = new System.Drawing.Size(22, 20);
+            this.tsbSpinnerE.Size = new System.Drawing.Size(30, 20);
             this.tsbSpinnerE.Text = "Spinner (E)";
             this.tsbSpinnerE.Click += new System.EventHandler(this.tsbSpinnerE_Click);
             // 
@@ -191,7 +193,7 @@
             this.tsbSpinnerStop.Image = global::TPPSimulator.Properties.Resources.spinner_stop;
             this.tsbSpinnerStop.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsbSpinnerStop.Name = "tsbSpinnerStop";
-            this.tsbSpinnerStop.Size = new System.Drawing.Size(22, 20);
+            this.tsbSpinnerStop.Size = new System.Drawing.Size(30, 20);
             this.tsbSpinnerStop.Text = "Spinner (Stop)";
             this.tsbSpinnerStop.Click += new System.EventHandler(this.tsbSpinnerStop_Click);
             // 
@@ -201,7 +203,7 @@
             // toolStripContainer1.ContentPanel
             // 
             this.toolStripContainer1.ContentPanel.Controls.Add(this.panel1);
-            this.toolStripContainer1.ContentPanel.Size = new System.Drawing.Size(797, 519);
+            this.toolStripContainer1.ContentPanel.Size = new System.Drawing.Size(789, 494);
             this.toolStripContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
             // 
             // toolStripContainer1.LeftToolStripPanel
@@ -227,8 +229,21 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(797, 519);
+            this.panel1.Size = new System.Drawing.Size(789, 494);
             this.panel1.TabIndex = 0;
+            // 
+            // tileGrid
+            // 
+            this.tileGrid.Columns = 40;
+            this.tileGrid.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tileGrid.LeftClickTile = null;
+            this.tileGrid.Location = new System.Drawing.Point(0, 0);
+            this.tileGrid.Name = "tileGrid";
+            this.tileGrid.Rows = 30;
+            this.tileGrid.Size = new System.Drawing.Size(785, 490);
+            this.tileGrid.TabIndex = 0;
+            this.tileGrid.Text = "tileGrid1";
+            this.tileGrid.GridChanged += new System.EventHandler(this.tileGrid_GridChanged);
             // 
             // menu
             // 
@@ -321,6 +336,49 @@
             this.aboutToolStripMenuItem.Text = "&About";
             this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
             // 
+            // tsStandard
+            // 
+            this.tsStandard.Dock = System.Windows.Forms.DockStyle.None;
+            this.tsStandard.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.newToolStripButton,
+            this.openToolStripButton,
+            this.saveToolStripButton});
+            this.tsStandard.Location = new System.Drawing.Point(3, 24);
+            this.tsStandard.Name = "tsStandard";
+            this.tsStandard.Size = new System.Drawing.Size(81, 25);
+            this.tsStandard.TabIndex = 3;
+            this.tsStandard.Text = "Standard";
+            // 
+            // newToolStripButton
+            // 
+            this.newToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.newToolStripButton.Image = ((System.Drawing.Image)(resources.GetObject("newToolStripButton.Image")));
+            this.newToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.newToolStripButton.Name = "newToolStripButton";
+            this.newToolStripButton.Size = new System.Drawing.Size(23, 22);
+            this.newToolStripButton.Text = "&New";
+            this.newToolStripButton.Click += new System.EventHandler(this.newToolStripMenuItem_Click);
+            // 
+            // openToolStripButton
+            // 
+            this.openToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.openToolStripButton.Image = ((System.Drawing.Image)(resources.GetObject("openToolStripButton.Image")));
+            this.openToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.openToolStripButton.Name = "openToolStripButton";
+            this.openToolStripButton.Size = new System.Drawing.Size(23, 22);
+            this.openToolStripButton.Text = "&Open";
+            this.openToolStripButton.Click += new System.EventHandler(this.openToolStripMenuItem_Click);
+            // 
+            // saveToolStripButton
+            // 
+            this.saveToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.saveToolStripButton.Image = ((System.Drawing.Image)(resources.GetObject("saveToolStripButton.Image")));
+            this.saveToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.saveToolStripButton.Name = "saveToolStripButton";
+            this.saveToolStripButton.Size = new System.Drawing.Size(23, 22);
+            this.saveToolStripButton.Text = "&Save";
+            this.saveToolStripButton.Click += new System.EventHandler(this.saveToolStripMenuItem_Click);
+            // 
             // tsSimulation
             // 
             this.tsSimulation.Dock = System.Windows.Forms.DockStyle.None;
@@ -395,9 +453,9 @@
             this.tsbStopSpinning,
             this.toolStripSeparator2,
             this.tsbResizeMap});
-            this.tsMisc.Location = new System.Drawing.Point(388, 24);
+            this.tsMisc.Location = new System.Drawing.Point(3, 49);
             this.tsMisc.Name = "tsMisc";
-            this.tsMisc.Size = new System.Drawing.Size(381, 25);
+            this.tsMisc.Size = new System.Drawing.Size(350, 25);
             this.tsMisc.TabIndex = 2;
             // 
             // tsbGen1Movement
@@ -440,62 +498,6 @@
             this.tsbResizeMap.Text = "Resize Map...";
             this.tsbResizeMap.Click += new System.EventHandler(this.tsbResizeMap_Click);
             // 
-            // tsStandard
-            // 
-            this.tsStandard.Dock = System.Windows.Forms.DockStyle.None;
-            this.tsStandard.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.newToolStripButton,
-            this.openToolStripButton,
-            this.saveToolStripButton});
-            this.tsStandard.Location = new System.Drawing.Point(3, 24);
-            this.tsStandard.Name = "tsStandard";
-            this.tsStandard.Size = new System.Drawing.Size(81, 25);
-            this.tsStandard.TabIndex = 3;
-            this.tsStandard.Text = "Standard";
-            // 
-            // newToolStripButton
-            // 
-            this.newToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.newToolStripButton.Image = ((System.Drawing.Image)(resources.GetObject("newToolStripButton.Image")));
-            this.newToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.newToolStripButton.Name = "newToolStripButton";
-            this.newToolStripButton.Size = new System.Drawing.Size(23, 22);
-            this.newToolStripButton.Text = "&New";
-            this.newToolStripButton.Click += new System.EventHandler(this.newToolStripMenuItem_Click);
-            // 
-            // openToolStripButton
-            // 
-            this.openToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.openToolStripButton.Image = ((System.Drawing.Image)(resources.GetObject("openToolStripButton.Image")));
-            this.openToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.openToolStripButton.Name = "openToolStripButton";
-            this.openToolStripButton.Size = new System.Drawing.Size(23, 22);
-            this.openToolStripButton.Text = "&Open";
-            this.openToolStripButton.Click += new System.EventHandler(this.openToolStripMenuItem_Click);
-            // 
-            // saveToolStripButton
-            // 
-            this.saveToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.saveToolStripButton.Image = ((System.Drawing.Image)(resources.GetObject("saveToolStripButton.Image")));
-            this.saveToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.saveToolStripButton.Name = "saveToolStripButton";
-            this.saveToolStripButton.Size = new System.Drawing.Size(23, 22);
-            this.saveToolStripButton.Text = "&Save";
-            this.saveToolStripButton.Click += new System.EventHandler(this.saveToolStripMenuItem_Click);
-            // 
-            // tileGrid
-            // 
-            this.tileGrid.Columns = 40;
-            this.tileGrid.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tileGrid.LeftClickTile = null;
-            this.tileGrid.Location = new System.Drawing.Point(0, 0);
-            this.tileGrid.Name = "tileGrid";
-            this.tileGrid.Rows = 30;
-            this.tileGrid.Size = new System.Drawing.Size(793, 515);
-            this.tileGrid.TabIndex = 0;
-            this.tileGrid.Text = "tileGrid1";
-            this.tileGrid.GridChanged += new System.EventHandler(this.tileGrid_GridChanged);
-            // 
             // docMgr
             // 
             this.docMgr.AppTitle = "TPP Simulator PREVIEW";
@@ -504,6 +506,16 @@
             this.docMgr.AttemptOpenFile += new System.EventHandler<TPPSimulator.DocumentManager.AttemptOpenFileEventArgs>(this.docMgr_AttemptOpenFile);
             this.docMgr.AttemptSaveFile += new System.EventHandler<TPPSimulator.DocumentManager.AttemptOpenFileEventArgs>(this.docMgr_AttemptSaveFile);
             this.docMgr.TitleChanged += new System.EventHandler(this.saveMgr_TitleChanged);
+            // 
+            // tsbShrub
+            // 
+            this.tsbShrub.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.tsbShrub.Image = global::TPPSimulator.Properties.Resources.shrub;
+            this.tsbShrub.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsbShrub.Name = "tsbShrub";
+            this.tsbShrub.Size = new System.Drawing.Size(30, 20);
+            this.tsbShrub.Text = "toolStripButton1";
+            this.tsbShrub.Click += new System.EventHandler(this.tsbShrub_Click);
             // 
             // MainForm
             // 
@@ -530,12 +542,12 @@
             this.panel1.ResumeLayout(false);
             this.menu.ResumeLayout(false);
             this.menu.PerformLayout();
+            this.tsStandard.ResumeLayout(false);
+            this.tsStandard.PerformLayout();
             this.tsSimulation.ResumeLayout(false);
             this.tsSimulation.PerformLayout();
             this.tsMisc.ResumeLayout(false);
             this.tsMisc.PerformLayout();
-            this.tsStandard.ResumeLayout(false);
-            this.tsStandard.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -584,6 +596,7 @@
         private System.Windows.Forms.ToolStripButton newToolStripButton;
         private System.Windows.Forms.ToolStripButton openToolStripButton;
         private System.Windows.Forms.ToolStripButton saveToolStripButton;
+        private System.Windows.Forms.ToolStripButton tsbShrub;
 
     }
 }

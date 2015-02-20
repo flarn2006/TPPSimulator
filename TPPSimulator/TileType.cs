@@ -73,7 +73,7 @@ namespace TPPSimulator
         private Passability passable;
         private Image image;
 
-        private static TileType empty, wall, ledge, spinnerN, spinnerS, spinnerW, spinnerE, spinnerStop;
+        private static TileType empty, wall, ledge, spinnerN, spinnerS, spinnerW, spinnerE, spinnerStop, shrub;
 
         static TileType()
         {
@@ -91,6 +91,7 @@ namespace TPPSimulator
             spinnerW.Step += spinnerW_Step;
             spinnerE.Step += spinnerE_Step;
             spinnerStop.Step += spinnerStop_Step;
+            shrub = new TileType { Passable = new Passability(false), Image = Properties.Resources.shrub };
         }
 
         static void spinnerStop_Step(object sender, TileType.StepEventArgs e)
@@ -164,5 +165,6 @@ namespace TPPSimulator
         public static TileType SpinnerW { get { return spinnerW; } }
         public static TileType SpinnerE { get { return spinnerE; } }
         public static TileType SpinnerStop { get { return spinnerStop; } }
+        public static TileType Shrub { get { return shrub; } }
     }
 }

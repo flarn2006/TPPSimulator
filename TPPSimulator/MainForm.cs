@@ -107,6 +107,14 @@ namespace TPPSimulator
             tileGrid.LeftClickTile = TileType.SpinnerStop;
         }
 
+        private void tsbShrub_Click(object sender, EventArgs e)
+        {
+            DeselectAllTools();
+            tsbShrub.Checked = true;
+            tileGrid.ClickMode = TileGrid.LeftClickMode.Tile;
+            tileGrid.LeftClickTile = TileType.Shrub;
+        }
+
         #endregion
 
         private void MainForm_KeyDown(object sender, KeyEventArgs e)

@@ -173,6 +173,7 @@
     <None Include="Resources\arrow_out.png" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Images\shrub.png" />
     <Content Include="Menu\cursor.png" />
     <Content Include="Menu\item.png" />
     <Content Include="Menu\item_dome.png" />
@@ -203,6 +204,7 @@
     <Content Include="Menu\saved.png" />
     <Content Include="Menu\saving.png" />
     <Content Include="Sounds\bulbasaur.wav" />
+    <Content Include="Sounds\charmander.wav" />
     <Content Include="Sounds\kricketune.wav" />
     <Content Include="Menu\trainer.png" />
   </ItemGroup>

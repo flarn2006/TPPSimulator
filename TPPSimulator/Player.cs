@@ -22,9 +22,20 @@ namespace TPPSimulator
             tileGrid = grid;
             menu = new Menu();
             menu.StateChanged += menu_StateChanged;
+            menu.Cut += menu_Cut;
         }
 
-        void menu_StateChanged(object sender, EventArgs e)
+        private void menu_Cut(object sender, EventArgs e)
+        {
+            if (tileGrid.GetTile(location.Move(facing)) == TileType.Shrub) {
+                menu.StateID = "pokemon_cut_success";
+                tileGrid.SetTile(location.Move(facing), TileType.Empty);
+            } else {
+                menu.StateID = "pokemon_cut_fail";
+            }
+        }
+
+        private void menu_StateChanged(object sender, EventArgs e)
         {
             OnNeedsTileGridRedraw();
         }
