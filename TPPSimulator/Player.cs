@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Drawing;
+using System.Windows.Forms;
 
 namespace TPPSimulator
 {
@@ -20,9 +21,22 @@ namespace TPPSimulator
         public Player(TileGrid grid)
         {
             tileGrid = grid;
-            menu = new Menu();
-            menu.StateChanged += menu_StateChanged;
-            menu.Cut += menu_Cut;
+
+            bool cantLoad = false;
+            try {
+                menu = new Menu();
+                menu.StateChanged += menu_StateChanged;
+                menu.Cut += menu_Cut;
+            } catch (System.IO.FileNotFoundException) {
+                cantLoad = true;
+            } catch (System.IO.DirectoryNotFoundException) {
+                cantLoad = true;
+            }
+
+            if (cantLoad) {
+                MessageBox.Show("Error loading menu data! Make sure the Menu folder is in the same directory as the application.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Application.Exit();
+            }
         }
 
         private void menu_Cut(object sender, EventArgs e)
