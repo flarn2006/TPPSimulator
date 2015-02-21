@@ -41,9 +41,17 @@ namespace TPPSimulator
 
         private void menu_Cut(object sender, EventArgs e)
         {
-            if (tileGrid.GetTile(location.Move(facing)) == TileType.Shrub) {
+            bool canCut = false;
+            Point cutTile = location.Move(facing);
+            if (cutTile.X >= 0 && cutTile.X < tileGrid.Columns && cutTile.Y >= 0 && cutTile.Y < tileGrid.Rows) {
+                if (tileGrid.GetTile(cutTile) == TileType.Shrub) {
+                    canCut = true;
+                }
+            }
+
+            if (canCut) {
                 menu.StateID = "pokemon_cut_success";
-                tileGrid.SetTile(location.Move(facing), TileType.Empty);
+                tileGrid.SetTile(cutTile, TileType.Empty);
             } else {
                 menu.StateID = "pokemon_cut_fail";
             }
