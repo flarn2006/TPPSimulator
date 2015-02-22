@@ -155,6 +155,7 @@ namespace TPPSimulator
         private static void ledge_Step(object sender, StepEventArgs e)
         {
             e.Player.AttemptStep(Direction.Down);
+            SoundPlayer.Play(Properties.Resources.ledge_snd);
         }
 
         public static TileType Empty { get { return empty; } }

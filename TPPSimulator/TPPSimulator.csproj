@@ -176,6 +176,8 @@
     <Content Include="Sounds\bulbasaur.wav" />
     <Content Include="Sounds\charmander.wav" />
     <Content Include="Sounds\kricketune.wav" />
+    <Content Include="Sounds\ledge.wav" />
+    <Content Include="Sounds\wall.wav" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

@@ -138,6 +138,15 @@ namespace TPPSimulator.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized resource of type System.IO.UnmanagedMemoryStream similar to System.IO.MemoryStream.
+        /// </summary>
+        internal static System.IO.UnmanagedMemoryStream ledge_snd {
+            get {
+                return ResourceManager.GetStream("ledge_snd", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
         internal static System.Drawing.Bitmap player_e {
@@ -264,6 +273,15 @@ namespace TPPSimulator.Properties {
             get {
                 object obj = ResourceManager.GetObject("wall", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.IO.UnmanagedMemoryStream similar to System.IO.MemoryStream.
+        /// </summary>
+        internal static System.IO.UnmanagedMemoryStream wall_snd {
+            get {
+                return ResourceManager.GetStream("wall_snd", resourceCulture);
             }
         }
     }

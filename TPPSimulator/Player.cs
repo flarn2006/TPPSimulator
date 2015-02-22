@@ -161,7 +161,7 @@ namespace TPPSimulator
                             case TPPSimulator.Input.Right:
                                 Direction dir = button.ToDirection();
                                 if (Facing != dir.Opposite() || Gen1Movement) {
-                                    AttemptStep(dir);
+                                    if (!AttemptStep(dir)) SoundPlayer.Play(Properties.Resources.wall_snd);
                                 } else {
                                     Facing = dir;
                                 }
