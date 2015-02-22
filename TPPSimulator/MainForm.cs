@@ -293,5 +293,10 @@ L = A", "Manual Input Controls", MessageBoxButtons.OK, MessageBoxIcon.Informatio
         {
             SoundPlayer.Enabled = !tsbMute.Checked;
         }
+
+        private void tsbSimOptions_Click(object sender, EventArgs e)
+        {
+            inputGen.Visible = tsbSimOptions.Checked;
+        }
     }
 }

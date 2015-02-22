@@ -31,7 +31,6 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.tsTools = new System.Windows.Forms.ToolStrip();
             this.toolStripContainer1 = new System.Windows.Forms.ToolStripContainer();
-            this.panel1 = new System.Windows.Forms.Panel();
             this.menu = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.newToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -51,9 +50,8 @@
             this.tsMisc = new System.Windows.Forms.ToolStrip();
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
-            this.tileGrid = new TPPSimulator.TileGrid();
-            this.docMgr = new TPPSimulator.DocumentManager(this.components);
             this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
             this.tsbPlayer = new System.Windows.Forms.ToolStripButton();
             this.tsbGoal = new System.Windows.Forms.ToolStripButton();
             this.tsbWall = new System.Windows.Forms.ToolStripButton();
@@ -69,21 +67,26 @@
             this.saveToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.tsbAutorun = new System.Windows.Forms.ToolStripButton();
             this.tsbStep = new System.Windows.Forms.ToolStripButton();
+            this.tsbSimOptions = new System.Windows.Forms.ToolStripButton();
             this.tsbResetCount = new System.Windows.Forms.ToolStripButton();
             this.tsbGen1Movement = new System.Windows.Forms.ToolStripButton();
             this.tsbStopSpinning = new System.Windows.Forms.ToolStripButton();
             this.tsbResizeMap = new System.Windows.Forms.ToolStripButton();
             this.tsbMute = new System.Windows.Forms.ToolStripButton();
+            this.docMgr = new TPPSimulator.DocumentManager(this.components);
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.tileGrid = new TPPSimulator.TileGrid();
+            this.inputGen = new TPPSimulator.InputGenerator();
             this.tsTools.SuspendLayout();
             this.toolStripContainer1.ContentPanel.SuspendLayout();
             this.toolStripContainer1.LeftToolStripPanel.SuspendLayout();
             this.toolStripContainer1.TopToolStripPanel.SuspendLayout();
             this.toolStripContainer1.SuspendLayout();
-            this.panel1.SuspendLayout();
             this.menu.SuspendLayout();
             this.tsStandard.SuspendLayout();
             this.tsSimulation.SuspendLayout();
             this.tsMisc.SuspendLayout();
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // tsTools
@@ -112,8 +115,9 @@
             // 
             // toolStripContainer1.ContentPanel
             // 
+            this.toolStripContainer1.ContentPanel.Controls.Add(this.inputGen);
             this.toolStripContainer1.ContentPanel.Controls.Add(this.panel1);
-            this.toolStripContainer1.ContentPanel.Size = new System.Drawing.Size(797, 494);
+            this.toolStripContainer1.ContentPanel.Size = new System.Drawing.Size(831, 494);
             this.toolStripContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
             // 
             // toolStripContainer1.LeftToolStripPanel
@@ -121,7 +125,7 @@
             this.toolStripContainer1.LeftToolStripPanel.Controls.Add(this.tsTools);
             this.toolStripContainer1.Location = new System.Drawing.Point(0, 0);
             this.toolStripContainer1.Name = "toolStripContainer1";
-            this.toolStripContainer1.Size = new System.Drawing.Size(821, 568);
+            this.toolStripContainer1.Size = new System.Drawing.Size(855, 568);
             this.toolStripContainer1.TabIndex = 1;
             this.toolStripContainer1.Text = "toolStripContainer1";
             // 
@@ -132,16 +136,6 @@
             this.toolStripContainer1.TopToolStripPanel.Controls.Add(this.tsSimulation);
             this.toolStripContainer1.TopToolStripPanel.Controls.Add(this.tsMisc);
             // 
-            // panel1
-            // 
-            this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.panel1.Controls.Add(this.tileGrid);
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel1.Location = new System.Drawing.Point(0, 0);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(797, 494);
-            this.panel1.TabIndex = 0;
-            // 
             // menu
             // 
             this.menu.Dock = System.Windows.Forms.DockStyle.None;
@@ -150,7 +144,7 @@
             this.helpToolStripMenuItem});
             this.menu.Location = new System.Drawing.Point(0, 0);
             this.menu.Name = "menu";
-            this.menu.Size = new System.Drawing.Size(821, 24);
+            this.menu.Size = new System.Drawing.Size(855, 24);
             this.menu.TabIndex = 0;
             this.menu.Text = "menuStrip1";
             // 
@@ -253,12 +247,14 @@
             this.tsbAutorun,
             this.tsbStep,
             this.toolStripSeparator1,
+            this.tsbSimOptions,
+            this.toolStripSeparator5,
             this.toolStripLabel1,
             this.inputCountText,
             this.tsbResetCount});
             this.tsSimulation.Location = new System.Drawing.Point(84, 24);
             this.tsSimulation.Name = "tsSimulation";
-            this.tsSimulation.Size = new System.Drawing.Size(304, 25);
+            this.tsSimulation.Size = new System.Drawing.Size(442, 25);
             this.tsSimulation.TabIndex = 1;
             this.tsSimulation.Text = "Simulation Controls";
             // 
@@ -294,7 +290,7 @@
             this.tsbMute});
             this.tsMisc.Location = new System.Drawing.Point(3, 49);
             this.tsMisc.Name = "tsMisc";
-            this.tsMisc.Size = new System.Drawing.Size(442, 25);
+            this.tsMisc.Size = new System.Drawing.Size(411, 25);
             this.tsMisc.TabIndex = 2;
             // 
             // toolStripSeparator3
@@ -307,32 +303,15 @@
             this.toolStripSeparator2.Name = "toolStripSeparator2";
             this.toolStripSeparator2.Size = new System.Drawing.Size(6, 25);
             // 
-            // tileGrid
-            // 
-            this.tileGrid.Columns = 40;
-            this.tileGrid.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tileGrid.LeftClickTile = null;
-            this.tileGrid.Location = new System.Drawing.Point(0, 0);
-            this.tileGrid.Name = "tileGrid";
-            this.tileGrid.Rows = 30;
-            this.tileGrid.Size = new System.Drawing.Size(793, 490);
-            this.tileGrid.TabIndex = 0;
-            this.tileGrid.Text = "tileGrid1";
-            this.tileGrid.GridChanged += new System.EventHandler(this.tileGrid_GridChanged);
-            // 
-            // docMgr
-            // 
-            this.docMgr.AppTitle = "TPP Simulator PREVIEW";
-            this.docMgr.OpenFilter = "Map files (*.tppmap)|*.tppmap|All files (*.*)|*.*";
-            this.docMgr.SaveFilter = "Map files (*.tppmap)|*.tppmap|All files (*.*)|*.*";
-            this.docMgr.AttemptOpenFile += new System.EventHandler<TPPSimulator.DocumentManager.AttemptOpenFileEventArgs>(this.docMgr_AttemptOpenFile);
-            this.docMgr.AttemptSaveFile += new System.EventHandler<TPPSimulator.DocumentManager.AttemptOpenFileEventArgs>(this.docMgr_AttemptSaveFile);
-            this.docMgr.TitleChanged += new System.EventHandler(this.saveMgr_TitleChanged);
-            // 
             // toolStripSeparator4
             // 
             this.toolStripSeparator4.Name = "toolStripSeparator4";
             this.toolStripSeparator4.Size = new System.Drawing.Size(6, 25);
+            // 
+            // toolStripSeparator5
+            // 
+            this.toolStripSeparator5.Name = "toolStripSeparator5";
+            this.toolStripSeparator5.Size = new System.Drawing.Size(6, 25);
             // 
             // tsbPlayer
             // 
@@ -486,6 +465,18 @@
             this.tsbStep.Size = new System.Drawing.Size(23, 22);
             this.tsbStep.Text = "Step";
             // 
+            // tsbSimOptions
+            // 
+            this.tsbSimOptions.Checked = true;
+            this.tsbSimOptions.CheckOnClick = true;
+            this.tsbSimOptions.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.tsbSimOptions.Image = global::TPPSimulator.Properties.Resources.wrench;
+            this.tsbSimOptions.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsbSimOptions.Name = "tsbSimOptions";
+            this.tsbSimOptions.Size = new System.Drawing.Size(101, 22);
+            this.tsbSimOptions.Text = "Show Options";
+            this.tsbSimOptions.Click += new System.EventHandler(this.tsbSimOptions_Click);
+            // 
             // tsbResetCount
             // 
             this.tsbResetCount.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
@@ -536,11 +527,53 @@
             this.tsbMute.Text = "Mute";
             this.tsbMute.Click += new System.EventHandler(this.tsbMute_Click);
             // 
+            // docMgr
+            // 
+            this.docMgr.AppTitle = "TPP Simulator PREVIEW";
+            this.docMgr.OpenFilter = "Map files (*.tppmap)|*.tppmap|All files (*.*)|*.*";
+            this.docMgr.SaveFilter = "Map files (*.tppmap)|*.tppmap|All files (*.*)|*.*";
+            this.docMgr.AttemptOpenFile += new System.EventHandler<TPPSimulator.DocumentManager.AttemptOpenFileEventArgs>(this.docMgr_AttemptOpenFile);
+            this.docMgr.AttemptSaveFile += new System.EventHandler<TPPSimulator.DocumentManager.AttemptOpenFileEventArgs>(this.docMgr_AttemptSaveFile);
+            this.docMgr.TitleChanged += new System.EventHandler(this.saveMgr_TitleChanged);
+            // 
+            // panel1
+            // 
+            this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.panel1.Controls.Add(this.tileGrid);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel1.Location = new System.Drawing.Point(0, 0);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(831, 494);
+            this.panel1.TabIndex = 0;
+            // 
+            // tileGrid
+            // 
+            this.tileGrid.Columns = 40;
+            this.tileGrid.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tileGrid.LeftClickTile = null;
+            this.tileGrid.Location = new System.Drawing.Point(0, 0);
+            this.tileGrid.Name = "tileGrid";
+            this.tileGrid.Rows = 30;
+            this.tileGrid.Size = new System.Drawing.Size(827, 490);
+            this.tileGrid.TabIndex = 0;
+            this.tileGrid.Text = "tileGrid1";
+            this.tileGrid.GridChanged += new System.EventHandler(this.tileGrid_GridChanged);
+            // 
+            // inputGen
+            // 
+            this.inputGen.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.inputGen.Dock = System.Windows.Forms.DockStyle.Right;
+            this.inputGen.Location = new System.Drawing.Point(657, 0);
+            this.inputGen.Name = "inputGen";
+            this.inputGen.Size = new System.Drawing.Size(174, 494);
+            this.inputGen.StepInterval = 125;
+            this.inputGen.TabIndex = 1;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(821, 568);
+            this.ClientSize = new System.Drawing.Size(855, 568);
             this.Controls.Add(this.toolStripContainer1);
             this.KeyPreview = true;
             this.MainMenuStrip = this.menu;
@@ -558,7 +591,6 @@
             this.toolStripContainer1.TopToolStripPanel.PerformLayout();
             this.toolStripContainer1.ResumeLayout(false);
             this.toolStripContainer1.PerformLayout();
-            this.panel1.ResumeLayout(false);
             this.menu.ResumeLayout(false);
             this.menu.PerformLayout();
             this.tsStandard.ResumeLayout(false);
@@ -567,6 +599,7 @@
             this.tsSimulation.PerformLayout();
             this.tsMisc.ResumeLayout(false);
             this.tsMisc.PerformLayout();
+            this.panel1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -577,8 +610,6 @@
         private System.Windows.Forms.ToolStripButton tsbWall;
         private System.Windows.Forms.ToolStripButton tsbLedge;
         private System.Windows.Forms.ToolStripContainer toolStripContainer1;
-        private System.Windows.Forms.Panel panel1;
-        private TileGrid tileGrid;
         private System.Windows.Forms.ToolStripButton tsbPlayer;
         private System.Windows.Forms.ToolStripButton tsbGoal;
         private System.Windows.Forms.MenuStrip menu;
@@ -618,6 +649,11 @@
         private System.Windows.Forms.ToolStripButton tsbShrub;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
         private System.Windows.Forms.ToolStripButton tsbMute;
+        private System.Windows.Forms.ToolStripButton tsbSimOptions;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator5;
+        private InputGenerator inputGen;
+        private System.Windows.Forms.Panel panel1;
+        private TileGrid tileGrid;
 
     }
 }
