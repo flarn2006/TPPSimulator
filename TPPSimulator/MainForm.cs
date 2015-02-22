@@ -288,5 +288,10 @@ J = Start
 K = B
 L = A", "Manual Input Controls", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
+
+        private void tsbMute_Click(object sender, EventArgs e)
+        {
+            SoundPlayer.Enabled = !tsbMute.Checked;
+        }
     }
 }

@@ -11,6 +11,7 @@ namespace TPPSimulator
     static class SoundPlayer
     {
         private static System.Media.SoundPlayer player;
+        private static bool enabled = true;
 
         static SoundPlayer()
         {
@@ -19,8 +20,16 @@ namespace TPPSimulator
 
         public static void Play(Stream stream)
         {
-            player.Stream = stream;
-            player.Play();
+            if (enabled) {
+                player.Stream = stream;
+                player.Play();
+            }
+        }
+
+        public static bool Enabled
+        {
+            get { return enabled; }
+            set { enabled = value; }
         }
     }
 }
