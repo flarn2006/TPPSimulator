@@ -298,5 +298,32 @@ L = A", "Manual Input Controls", MessageBoxButtons.OK, MessageBoxIcon.Informatio
         {
             inputGen.Visible = tsbSimOptions.Checked;
         }
+
+        private void DoStep()
+        {
+            Input input = inputGen.GetNextInput();
+            tileGrid.Player.Input(input);
+            if (input != Input.None) InputCount++;
+        }
+
+        private void tsbStep_Click(object sender, EventArgs e)
+        {
+            DoStep();
+        }
+
+        private void stepTimer_Tick(object sender, EventArgs e)
+        {
+            DoStep();
+        }
+
+        private void inputGen_StepIntervalChanged(object sender, EventArgs e)
+        {
+            stepTimer.Interval = inputGen.StepInterval;
+        }
+
+        private void tsbAutorun_Click(object sender, EventArgs e)
+        {
+            stepTimer.Enabled = tsbAutorun.Checked;
+        }
     }
 }

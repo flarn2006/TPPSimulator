@@ -29,7 +29,7 @@ pokemon_stats2a,pokemon_stats2a.png,-1,-1,0,-,-,-,-,-,pokemon_0a,pokemon_0a,-,-
 pokemon_stats1b,pokemon_stats1b.png,-1,-1,0,cry,-,-,-,-,pokemon_stats2b,pokemon_stats2b,-,-
 pokemon_stats2b,pokemon_stats2b.png,-1,-1,0,-,-,-,-,-,pokemon_1b,pokemon_1b,-,-
 item_0,item.png,5,4,0,-,-,item_1,-,-,item_helix_0,main_2,-,-
-item_1,item.png,5,6,0,-,item_0,item_2,-,-,item_dome_0,main_2,,
+item_1,item.png,5,6,0,-,item_0,item_2,-,-,item_dome_0,main_2,-,-
 item_2,item.png,5,8,0,-,item_1,-,-,-,main_2,main_2,-,-
 item_helix_0,item_helix.png,14,11,0,-,-,item_helix_1,-,-,item_helix_consult1,item_0,-,-
 item_helix_1,item_helix.png,14,13,0,-,item_helix_0,-,-,-,item_helix_toss,item_0,-,-

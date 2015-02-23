@@ -142,8 +142,8 @@
   <data name="resultset_last" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\resultset_last.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="spinner_s" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Images\spinner_s.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="wrench" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\wrench.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="kricketune" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Sounds\kricketune.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -181,11 +181,14 @@
   <data name="player_w" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Images\player_w.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="goal" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Images\goal.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="sound_mute" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\sound_mute.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="goal" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Images\goal.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="spinner_s" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Images\spinner_s.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="ledge_snd" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Sounds\ledge.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -193,7 +196,7 @@
   <data name="charmander" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Sounds\charmander.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="wrench" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\wrench.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="time_go" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\time_go.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>
