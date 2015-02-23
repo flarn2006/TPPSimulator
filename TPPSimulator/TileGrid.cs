@@ -126,6 +126,7 @@ namespace TPPSimulator
                 pe.Graphics.DrawImage(Properties.Resources.goal, goalLocation.X * tileSize, goalLocation.Y * tileSize);
                 if (player != null) {
                     pe.Graphics.DrawImage(player.CurrentImage, player.Location.X * tileSize, player.Location.Y * tileSize);
+                    pe.Graphics.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.NearestNeighbor;
                     pe.Graphics.DrawImage(player.Menu.Image, ClientRectangle);
                 }
             }
