@@ -85,7 +85,7 @@ namespace TPPSimulator
                 btnFillQueue.Enabled = false;
             } else {
                 queueBar.Maximum = (int)udStreamDelay.Value;
-                queueBar.Value = inputQueue.Count;
+                queueBar.Value = Math.Min(inputQueue.Count, queueBar.Maximum);
                 btnClearQueue.Enabled = (inputQueue.Count > 0);
                 btnFillQueue.Enabled = (inputQueue.Count < udStreamDelay.Value);
             }
