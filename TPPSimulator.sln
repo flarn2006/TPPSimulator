@@ -5,6 +5,8 @@ VisualStudioVersion = 12.0.21005.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TPPSimulator", "TPPSimulator\TPPSimulator.csproj", "{08FAEC22-21C5-49A6-BE83-01E0FCB61E7E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GraphUtils", "GraphUtils\GraphUtils.csproj", "{54F12D42-CA8B-4C83-967A-80D5B17F0037}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{08FAEC22-21C5-49A6-BE83-01E0FCB61E7E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{08FAEC22-21C5-49A6-BE83-01E0FCB61E7E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{08FAEC22-21C5-49A6-BE83-01E0FCB61E7E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{54F12D42-CA8B-4C83-967A-80D5B17F0037}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{54F12D42-CA8B-4C83-967A-80D5B17F0037}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{54F12D42-CA8B-4C83-967A-80D5B17F0037}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{54F12D42-CA8B-4C83-967A-80D5B17F0037}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
