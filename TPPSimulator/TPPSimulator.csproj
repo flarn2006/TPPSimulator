@@ -195,6 +195,12 @@
     <Content Include="Sounds\ledge.wav" />
     <Content Include="Sounds\wall.wav" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\GraphUtils\GraphUtils.csproj">
+      <Project>{54f12d42-ca8b-4c83-967a-80d5b17f0037}</Project>
+      <Name>GraphUtils</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>if not exist $(ProjectDir)$(OutDir)Menu mkdir $(ProjectDir)$(OutDir)Menu
