@@ -53,4 +53,16 @@ namespace GraphUtils
           System.Runtime.Serialization.StreamingContext context)
             : base(info, context) { }
     }
+
+    [Serializable]
+    public class NodeNotFoundException : Exception
+    {
+        public NodeNotFoundException() { }
+        public NodeNotFoundException(string message) : base(message) { }
+        public NodeNotFoundException(string message, Exception inner) : base(message, inner) { }
+        protected NodeNotFoundException(
+          System.Runtime.Serialization.SerializationInfo info,
+          System.Runtime.Serialization.StreamingContext context)
+            : base(info, context) { }
+    }
 }

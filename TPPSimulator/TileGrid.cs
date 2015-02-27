@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using GraphUtils;
 
 namespace TPPSimulator
 {
@@ -22,6 +23,7 @@ namespace TPPSimulator
         private TileType leftClickTile = null;
         private LeftClickMode leftClickMode = LeftClickMode.Player;
         private Point goalLocation = Point.Empty;
+        /* TODO: remove test code */ private Graph<Point> graph;
 
         public enum LeftClickMode { Player, Goal, Tile }
 
@@ -37,6 +39,26 @@ namespace TPPSimulator
                 player.NeedsTileGridRedraw += player_Moved;
             }
             DoubleBuffered = true;
+
+            // TODO: remove test code starting here
+            graph = new Graph<Point>(100);
+
+            for (int y = 0; y < 10; y++) {
+                for (int x = 0; x < 10; x++) {
+                    graph.AddNode(new Point(x, y));
+                }
+            }
+
+            for (int y = 0; y < 10; y++) {
+                for (int x = 0; x < 10; x++) {
+                    Point pt = new Point(x, y);
+                    Node<Point> node = graph.GetNode(pt);
+                    if (x > 0) node.ConnectToNode(pt.Move(Direction.Left));
+                    if (x < 9) node.ConnectToNode(pt.Move(Direction.Right));
+                    if (y > 0) node.ConnectToNode(pt.Move(Direction.Up));
+                    if (y < 9) node.ConnectToNode(pt.Move(Direction.Down));
+                }
+            }
         }
 
         public event EventHandler GridChanged;
@@ -128,6 +150,11 @@ namespace TPPSimulator
                     pe.Graphics.DrawImage(player.CurrentImage, player.Location.X * tileSize, player.Location.Y * tileSize);
                     pe.Graphics.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.NearestNeighbor;
                     pe.Graphics.DrawImage(player.Menu.Image, ClientRectangle);
+                    // TODO: remove test code starting here
+                    Point[] points = graph.GetNode(player.Location).FindPath(goalLocation).Select(node => new Point(node.Data.X * 16 + 8, node.Data.Y * 16 + 8)).ToArray();
+                    if (points.Length >= 2) {
+                        pe.Graphics.DrawLines(Pens.Red, points);
+                    }
                 }
             }
         }

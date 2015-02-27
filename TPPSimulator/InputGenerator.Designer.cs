@@ -32,7 +32,9 @@
             this.streamDelayLabel = new System.Windows.Forms.Label();
             this.queueBar = new System.Windows.Forms.ProgressBar();
             this.btnClearQueue = new System.Windows.Forms.Button();
+            this.vdlStreamDelay = new TPPSimulator.ValueDragLabel();
             this.udStreamDelay = new System.Windows.Forms.NumericUpDown();
+            this.vdlStepInterval = new TPPSimulator.ValueDragLabel();
             this.udStepInterval = new System.Windows.Forms.NumericUpDown();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
@@ -56,8 +58,6 @@
             this.label2 = new System.Windows.Forms.Label();
             this.tbPath = new System.Windows.Forms.TrackBar();
             this.pathLink = new System.Windows.Forms.LinkLabel();
-            this.vdlStreamDelay = new TPPSimulator.ValueDragLabel();
-            this.vdlStepInterval = new TPPSimulator.ValueDragLabel();
             this.lastInputs = new System.Windows.Forms.ListBox();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.udStreamDelay)).BeginInit();
@@ -136,6 +136,17 @@
             this.btnClearQueue.UseVisualStyleBackColor = true;
             this.btnClearQueue.Click += new System.EventHandler(this.clearQueueBtn_Click);
             // 
+            // vdlStreamDelay
+            // 
+            this.vdlStreamDelay.AutoSize = true;
+            this.vdlStreamDelay.Cursor = System.Windows.Forms.Cursors.SizeWE;
+            this.vdlStreamDelay.Location = new System.Drawing.Point(63, 47);
+            this.vdlStreamDelay.Name = "vdlStreamDelay";
+            this.vdlStreamDelay.Size = new System.Drawing.Size(94, 13);
+            this.vdlStreamDelay.TabIndex = 3;
+            this.vdlStreamDelay.Text = "steps stream delay";
+            this.vdlStreamDelay.ValueDrag += new System.EventHandler<TPPSimulator.ValueDragLabel.ValueDragEventArgs>(this.vdlStreamDelay_ValueDrag);
+            // 
             // udStreamDelay
             // 
             this.udStreamDelay.Location = new System.Drawing.Point(6, 45);
@@ -148,6 +159,17 @@
             this.udStreamDelay.Size = new System.Drawing.Size(51, 20);
             this.udStreamDelay.TabIndex = 2;
             this.udStreamDelay.ValueChanged += new System.EventHandler(this.udStreamDelay_ValueChanged);
+            // 
+            // vdlStepInterval
+            // 
+            this.vdlStepInterval.AutoSize = true;
+            this.vdlStepInterval.Cursor = System.Windows.Forms.Cursors.SizeWE;
+            this.vdlStepInterval.Location = new System.Drawing.Point(63, 21);
+            this.vdlStepInterval.Name = "vdlStepInterval";
+            this.vdlStepInterval.Size = new System.Drawing.Size(92, 13);
+            this.vdlStepInterval.TabIndex = 1;
+            this.vdlStepInterval.Text = "ms between steps";
+            this.vdlStepInterval.ValueDrag += new System.EventHandler<TPPSimulator.ValueDragLabel.ValueDragEventArgs>(this.vdlStepInterval_ValueDrag);
             // 
             // udStepInterval
             // 
@@ -451,28 +473,6 @@
             this.pathLink.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.pathLink.UseCompatibleTextRendering = true;
             this.pathLink.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.pathLink_LinkClicked);
-            // 
-            // vdlStreamDelay
-            // 
-            this.vdlStreamDelay.AutoSize = true;
-            this.vdlStreamDelay.Cursor = System.Windows.Forms.Cursors.SizeWE;
-            this.vdlStreamDelay.Location = new System.Drawing.Point(63, 47);
-            this.vdlStreamDelay.Name = "vdlStreamDelay";
-            this.vdlStreamDelay.Size = new System.Drawing.Size(94, 13);
-            this.vdlStreamDelay.TabIndex = 3;
-            this.vdlStreamDelay.Text = "steps stream delay";
-            this.vdlStreamDelay.ValueDrag += new System.EventHandler<TPPSimulator.ValueDragLabel.ValueDragEventArgs>(this.vdlStreamDelay_ValueDrag);
-            // 
-            // vdlStepInterval
-            // 
-            this.vdlStepInterval.AutoSize = true;
-            this.vdlStepInterval.Cursor = System.Windows.Forms.Cursors.SizeWE;
-            this.vdlStepInterval.Location = new System.Drawing.Point(63, 21);
-            this.vdlStepInterval.Name = "vdlStepInterval";
-            this.vdlStepInterval.Size = new System.Drawing.Size(92, 13);
-            this.vdlStepInterval.TabIndex = 1;
-            this.vdlStepInterval.Text = "ms between steps";
-            this.vdlStepInterval.ValueDrag += new System.EventHandler<TPPSimulator.ValueDragLabel.ValueDragEventArgs>(this.vdlStepInterval_ValueDrag);
             // 
             // lastInputs
             // 

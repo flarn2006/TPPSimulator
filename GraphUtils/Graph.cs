@@ -12,6 +12,7 @@ namespace GraphUtils
         private Edge<TNodeData>[,] edges;
         private uint nodeCount = 0, maxNodes;
         private Dictionary<TNodeData, uint> nodeIndices;
+        private int traversalID = -1;
 
         public Graph(uint maxNodes)
         {
@@ -39,13 +40,13 @@ namespace GraphUtils
             return node;
         }
 
-        internal Edge<TNodeData> AddEdge(Node<TNodeData> startNode, Node<TNodeData> endNode)
+        internal Edge<TNodeData> AddEdge(Node<TNodeData> startNode, Node<TNodeData> endNode, int weight)
         {
             if (GetEdge(startNode, endNode) != null) {
                 throw new DuplicateEdgeException("Can't create edge; nodes are already connected in this direction");
             }
 
-            Edge<TNodeData> edge = new Edge<TNodeData>(startNode, endNode);
+            Edge<TNodeData> edge = new Edge<TNodeData>(startNode, endNode, weight);
             edges[nodeIndices[startNode.Data], nodeIndices[endNode.Data]] = edge;
 
             return edge;
@@ -53,7 +54,12 @@ namespace GraphUtils
 
         public Node<TNodeData> GetNode(TNodeData data)
         {
-            return nodes[nodeIndices[data]];
+            uint index;
+            if (nodeIndices.TryGetValue(data, out index)) {
+                return nodes[index];
+            } else {
+                return null;
+            }
         }
 
         public Edge<TNodeData> GetEdge(TNodeData startNode, TNodeData endNode)
@@ -88,6 +94,25 @@ namespace GraphUtils
                 Edge<TNodeData> edge = edges[nodeIndex, i];
                 if (edge != null) {
                     yield return edge.EndNode;
+                }
+            }
+        }
+
+        internal IEnumerable<Node<TNodeData>> FindPath(Node<TNodeData> startNode, Node<TNodeData> endNode, bool newTraversal = true)
+        {
+            if (newTraversal) traversalID++;
+
+            if (startNode == endNode) {
+                yield return startNode;
+            } else {
+                yield return startNode;
+                foreach (Node<TNodeData> node in startNode.GetConnectedNodes()) {
+                    if (node.traversalID != traversalID) {
+                        node.traversalID = traversalID;
+                        foreach (Node<TNodeData> pathNode in FindPath(node, endNode, false)) {
+                            yield return pathNode;
+                        }
+                    }
                 }
             }
         }

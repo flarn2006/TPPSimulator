@@ -9,11 +9,13 @@ namespace GraphUtils
     public class Edge<TNodeData>
     {
         private Node<TNodeData> start, end;
+        private int weight;
 
-        internal Edge(Node<TNodeData> startNode, Node<TNodeData> endNode)
+        internal Edge(Node<TNodeData> startNode, Node<TNodeData> endNode, int weight)
         {
             start = startNode;
             end = endNode;
+            this.weight = weight;
         }
 
         public Node<TNodeData> StartNode

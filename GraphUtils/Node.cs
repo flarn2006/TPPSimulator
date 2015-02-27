@@ -10,6 +10,7 @@ namespace GraphUtils
     {
         private Graph<TData> graph;
         private TData data;
+        internal int traversalID = -1;
         
         internal Node(Graph<TData> graph, TData data)
         {
@@ -32,13 +33,49 @@ namespace GraphUtils
             return graph.GetConnectedNodes(this);
         }
 
-        public Edge<TData> ConnectToNode(Node<TData> otherNode)
+        public Edge<TData> ConnectToNode(Node<TData> endNode, int edgeWeight = 1)
         {
-            if (otherNode.graph != graph) {
+            if (endNode.graph != graph) {
                 throw new IncorrectGraphException("Cannot connect two nodes in different graphs.");
             }
 
-            return graph.AddEdge(this, otherNode);
+            return graph.AddEdge(this, endNode, edgeWeight);
+        }
+
+        public Edge<TData> ConnectToNode(TData endNodeData, int edgeWeight = 1)
+        {
+            Node<TData> endNode = graph.GetNode(endNodeData);
+
+            if (endNode == null) {
+                throw new NodeNotFoundException(String.Format("This node's graph does not contain a node with data \"{0}\".", endNodeData));
+            }
+
+            return graph.AddEdge(this, endNode, edgeWeight);
+        }
+
+        public IEnumerable<Node<TData>> FindPath(Node<TData> endNode)
+        {
+            if (endNode.graph != graph) {
+                throw new IncorrectGraphException("Cannot find a path between two nodes in different graphs.");
+            }
+
+            return graph.FindPath(this, endNode);
+        }
+
+        public IEnumerable<Node<TData>> FindPath(TData endNodeData)
+        {
+            Node<TData> endNode = graph.GetNode(endNodeData);
+
+            if (endNode == null) {
+                throw new NodeNotFoundException(String.Format("This node's graph does not contain a node with data \"{0}\".", endNodeData));
+            }
+
+            return graph.FindPath(this, endNode);
+        }
+
+        public override string ToString()
+        {
+            return data.ToString();
         }
     }
 }
