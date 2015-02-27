@@ -51,7 +51,8 @@ namespace TPPSimulator
 
         public Input GetPathInput()
         {
-            throw new NotImplementedException();
+            MessageBox.Show(graph.GetNode(tileGrid.Player.Location).Predecessor.Data.ToString());
+            return Input.None;
         }
 
         public Input GetNextInputForQueue()
@@ -204,6 +205,7 @@ This function is not yet implemented.", "Explanation", MessageBoxButtons.OK, Mes
                 tileGrid = value;
                 tileGrid.GridChanged += tileGrid_GridChanged;
                 tileGrid.PlayerOrGoalMoved += tileGrid_PlayerOrGoalMoved;
+                if (tileGrid.Player != null) UpdateGraph();
             }
         }
 
@@ -214,7 +216,7 @@ This function is not yet implemented.", "Explanation", MessageBoxButtons.OK, Mes
 
         private void tileGrid_GridChanged(object sender, EventArgs e)
         {
-            UpdateGraph();
+            //UpdateGraph();
         }
 
         public void UpdateGraph(bool recalculatePath = true)
@@ -235,12 +237,15 @@ This function is not yet implemented.", "Explanation", MessageBoxButtons.OK, Mes
                         Point adjacent = pt.Move(dir);
                         if (adjacent.X >= 0 && adjacent.X < tileGrid.Columns && adjacent.Y >= 0 && adjacent.Y < tileGrid.Rows) {
                             if (tileGrid.GetTile(adjacent).Passable.IsPassableFrom(dir.Opposite())) {
-                                graph.GetNode(pt).ConnectToNode(adjacent);
+                                // Note: edges are reversed, as the player moves much more often than the goal does!
+                                graph.GetNode(adjacent).ConnectToNode(pt);
                             }
                         }
                     }
                 }
             }
+
+            graph.BuildPathfindingData(graph.GetNode(tileGrid.GoalLocation));
 
             if (recalculatePath) RecalculatePath();
         }
@@ -248,8 +253,10 @@ This function is not yet implemented.", "Explanation", MessageBoxButtons.OK, Mes
         public void RecalculatePath()
         {
             if (graph == null) UpdateGraph(false);
-            path = graph.GetNode(tileGrid.Player.Location).FindPath(tileGrid.GoalLocation).Select(node => node.Data);
-            if (drawPath) tileGrid.PathToDraw = path.Select(p => new Point(16 * p.X + 8, 16 * p.Y + 8)).ToArray();
+            if (drawPath) {
+                path = graph.GetNode(tileGrid.GoalLocation).FindPath(tileGrid.Player.Location).Select(node => node.Data);
+                tileGrid.PathToDraw = path.Select(p => new Point(16 * p.X + 8, 16 * p.Y + 8)).ToArray();
+            }
         }
 
         [DefaultValue(false), Category("Appearance"), Description("Indicates whether or not to draw the calculated path on the tile grid.")]
@@ -265,6 +272,17 @@ This function is not yet implemented.", "Explanation", MessageBoxButtons.OK, Mes
                     tileGrid.PathToDraw = null;
                 }
             }
+        }
+
+        private void btnRebuildGraph_Click(object sender, EventArgs e)
+        {
+            UpdateGraph();
+        }
+
+        [Browsable(false)]
+        public Graph<Point> Graph
+        {
+            get { return graph; }
         }
     }
 }

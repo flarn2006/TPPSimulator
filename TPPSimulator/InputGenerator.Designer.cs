@@ -59,6 +59,7 @@
             this.tbPath = new System.Windows.Forms.TrackBar();
             this.pathLink = new System.Windows.Forms.LinkLabel();
             this.lastInputs = new System.Windows.Forms.ListBox();
+            this.btnRebuildGraph = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.udStreamDelay)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.udStepInterval)).BeginInit();
@@ -199,7 +200,7 @@
             this.groupBox2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox2.Controls.Add(this.tableLayoutPanel1);
-            this.groupBox2.Location = new System.Drawing.Point(3, 156);
+            this.groupBox2.Location = new System.Drawing.Point(3, 195);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(168, 311);
             this.groupBox2.TabIndex = 1;
@@ -450,7 +451,6 @@
             // tbPath
             // 
             this.tbPath.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tbPath.Enabled = false;
             this.tbPath.Location = new System.Drawing.Point(51, 3);
             this.tbPath.Maximum = 1000;
             this.tbPath.Name = "tbPath";
@@ -485,22 +485,35 @@
             this.lastInputs.FormattingEnabled = true;
             this.lastInputs.IntegralHeight = false;
             this.lastInputs.ItemHeight = 23;
-            this.lastInputs.Location = new System.Drawing.Point(3, 473);
+            this.lastInputs.Location = new System.Drawing.Point(3, 509);
             this.lastInputs.Name = "lastInputs";
             this.lastInputs.SelectionMode = System.Windows.Forms.SelectionMode.None;
-            this.lastInputs.Size = new System.Drawing.Size(168, 137);
+            this.lastInputs.Size = new System.Drawing.Size(168, 129);
             this.lastInputs.TabIndex = 2;
+            // 
+            // btnRebuildGraph
+            // 
+            this.btnRebuildGraph.Image = global::TPPSimulator.Properties.Resources.chart_organisation;
+            this.btnRebuildGraph.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnRebuildGraph.Location = new System.Drawing.Point(3, 156);
+            this.btnRebuildGraph.Name = "btnRebuildGraph";
+            this.btnRebuildGraph.Size = new System.Drawing.Size(168, 33);
+            this.btnRebuildGraph.TabIndex = 3;
+            this.btnRebuildGraph.Text = "Recompile Map";
+            this.btnRebuildGraph.UseVisualStyleBackColor = true;
+            this.btnRebuildGraph.Click += new System.EventHandler(this.btnRebuildGraph_Click);
             // 
             // InputGenerator
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.Controls.Add(this.btnRebuildGraph);
             this.Controls.Add(this.lastInputs);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Name = "InputGenerator";
-            this.Size = new System.Drawing.Size(174, 613);
+            this.Size = new System.Drawing.Size(174, 641);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.udStreamDelay)).EndInit();
@@ -556,6 +569,7 @@
         private System.Windows.Forms.TrackBar tbLeft;
         private System.Windows.Forms.TrackBar tbDown;
         private System.Windows.Forms.ListBox lastInputs;
+        private System.Windows.Forms.Button btnRebuildGraph;
 
     }
 }

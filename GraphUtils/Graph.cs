@@ -105,61 +105,79 @@ namespace GraphUtils
             return node.edges.Select(edge => edge.EndNode);
         }
 
-        internal IEnumerable<Node<TNodeData>> FindPath(Node<TNodeData> startNode, Node<TNodeData> endNode)
+        public void BuildPathfindingData(Node<TNodeData> startNode)
         {
             if (lastPathfindingStartNode != startNode) {
-                // Dijkstra's algorithm
-                // Adapted from Wikipedia <https://en.wikipedia.org/w/index.php?title=Dijkstra%27s_algorithm&oldid=648542472#Pseudocode>
+                // Bellman-Ford algorithm
+                // Adapted from Wikipedia <https://en.wikipedia.org/w/index.php?title=Bellman%E2%80%93Ford_algorithm&oldid=642360089#Algorithm>
 
                 distance = new long[nodeCount];
                 predecessor = new Node<TNodeData>[nodeCount];
 
-                List<uint> unvisited = new List<uint>();
-
                 uint startNodeIndex = nodeIndices[startNode.Data];
-                distance[startNodeIndex] = 0;
                 for (uint v = 0; v < nodeCount; v++) {
-                    if (v != startNodeIndex) {
-                        distance[v] = Int64.MaxValue;
-                    }
+                    distance[v] = (v == startNodeIndex) ? 0 : Int64.MaxValue;
                     predecessor[v] = null;
-                    unvisited.Add(v);
                 }
 
-                while (unvisited.Count > 0) {
-                    bool first = true;
-                    uint u = 0;
-                    foreach (uint index in unvisited) {
-                        if (first) {
-                            u = index;
-                            first = false;
-                        } else if (distance[index] < distance[u]) {
-                            u = index;
+                for (uint i = 1; i < nodeCount; i++) {
+                    foreach (Edge<TNodeData> edge in edgeList) {
+                        uint u = edge.startIndex, v = edge.endIndex;
+                        if (distance[u] + edge.Weight < distance[v]) {
+                            distance[v] = distance[u] + edge.Weight;
+                            predecessor[v] = nodes[u];
                         }
                     }
-                    unvisited.Remove(u);
+                }
 
-                    foreach (Edge<TNodeData> edge in nodes[u].edges) {
-                        long alt = distance[u] + edge.Weight;
-                        if (alt < distance[edge.endIndex]) {
-                            distance[edge.endIndex] = alt;
-                            predecessor[edge.endIndex] = nodes[u];
-                        }
+                foreach (Edge<TNodeData> edge in edgeList) {
+                    if (distance[edge.startIndex] + edge.Weight < distance[edge.endIndex]) {
+                        throw new NegativeWeightCycleException("Graph contains a negative-weight cycle");
                     }
                 }
 
                 lastPathfindingStartNode = startNode;
             }
+        }
 
-            List<Node<TNodeData>> path = new List<Node<TNodeData>>();
+        internal IEnumerable<Node<TNodeData>> FindPath(Node<TNodeData> startNode, Node<TNodeData> endNode)
+        {
+            BuildPathfindingData(startNode);
+
             Node<TNodeData> currentNode = endNode;
-            while (currentNode != startNode) {
-                path.Add(currentNode);
+            int i = 0;
+            while (currentNode != startNode && i++ < 1000) {
+                yield return currentNode;
                 currentNode = predecessor[nodeIndices[currentNode.Data]];
             }
-            path.Reverse();
+        }
 
-            return path;
+        internal Node<TNodeData> GetPathPredecessor(Node<TNodeData> node)
+        {
+            return predecessor[nodeIndices[node.Data]];
+        }
+
+        public void ExportTGF(System.IO.StreamWriter streamWriter)
+        {
+            for (int i = 0; i < nodeCount; i++) {
+                streamWriter.WriteLine(String.Format("{0} {1}", i, nodes[i].Data));
+            }
+
+            streamWriter.WriteLine("#");
+
+            foreach (Edge<TNodeData> edge in edgeList) {
+                streamWriter.WriteLine(String.Format("{0} {1} weight:{2}", edge.startIndex, edge.endIndex, edge.Weight));
+            }
+        }
+
+        public IEnumerable<Node<TNodeData>> AllNodes
+        {
+            get { return nodes; }
+        }
+
+        public IEnumerable<Edge<TNodeData>> AllEdges
+        {
+            get { return edgeList; }
         }
     }
 }

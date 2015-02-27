@@ -55,6 +55,8 @@
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.controlsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.debugToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.exportGraphToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tsStandard = new System.Windows.Forms.ToolStrip();
             this.newToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.openToolStripButton = new System.Windows.Forms.ToolStripButton();
@@ -80,6 +82,7 @@
             this.tsbDrawPath = new System.Windows.Forms.ToolStripButton();
             this.stepTimer = new System.Windows.Forms.Timer(this.components);
             this.docMgr = new TPPSimulator.DocumentManager(this.components);
+            this.displayGraphToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tsTools.SuspendLayout();
             this.toolStripContainer1.ContentPanel.SuspendLayout();
             this.toolStripContainer1.LeftToolStripPanel.SuspendLayout();
@@ -281,7 +284,8 @@
             this.menu.Dock = System.Windows.Forms.DockStyle.None;
             this.menu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.fileToolStripMenuItem,
-            this.helpToolStripMenuItem});
+            this.helpToolStripMenuItem,
+            this.debugToolStripMenuItem});
             this.menu.Location = new System.Drawing.Point(0, 0);
             this.menu.Name = "menu";
             this.menu.Size = new System.Drawing.Size(855, 24);
@@ -366,6 +370,23 @@
             this.aboutToolStripMenuItem.Size = new System.Drawing.Size(119, 22);
             this.aboutToolStripMenuItem.Text = "&About";
             this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
+            // 
+            // debugToolStripMenuItem
+            // 
+            this.debugToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.exportGraphToolStripMenuItem,
+            this.displayGraphToolStripMenuItem});
+            this.debugToolStripMenuItem.Name = "debugToolStripMenuItem";
+            this.debugToolStripMenuItem.Size = new System.Drawing.Size(54, 20);
+            this.debugToolStripMenuItem.Text = "&Debug";
+            this.debugToolStripMenuItem.Visible = false;
+            // 
+            // exportGraphToolStripMenuItem
+            // 
+            this.exportGraphToolStripMenuItem.Name = "exportGraphToolStripMenuItem";
+            this.exportGraphToolStripMenuItem.Size = new System.Drawing.Size(156, 22);
+            this.exportGraphToolStripMenuItem.Text = "&Export Graph...";
+            this.exportGraphToolStripMenuItem.Click += new System.EventHandler(this.exportGraphToolStripMenuItem_Click);
             // 
             // tsStandard
             // 
@@ -596,6 +617,13 @@
             this.docMgr.AttemptSaveFile += new System.EventHandler<TPPSimulator.DocumentManager.AttemptOpenFileEventArgs>(this.docMgr_AttemptSaveFile);
             this.docMgr.TitleChanged += new System.EventHandler(this.saveMgr_TitleChanged);
             // 
+            // displayGraphToolStripMenuItem
+            // 
+            this.displayGraphToolStripMenuItem.Name = "displayGraphToolStripMenuItem";
+            this.displayGraphToolStripMenuItem.Size = new System.Drawing.Size(156, 22);
+            this.displayGraphToolStripMenuItem.Text = "&Display Graph...";
+            this.displayGraphToolStripMenuItem.Click += new System.EventHandler(this.displayGraphToolStripMenuItem_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -684,6 +712,9 @@
         private System.Windows.Forms.Timer stepTimer;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator6;
         private System.Windows.Forms.ToolStripButton tsbDrawPath;
+        private System.Windows.Forms.ToolStripMenuItem debugToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem exportGraphToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem displayGraphToolStripMenuItem;
 
     }
 }

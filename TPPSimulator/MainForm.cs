@@ -119,6 +119,13 @@ namespace TPPSimulator
 
         private void MainForm_KeyDown(object sender, KeyEventArgs e)
         {
+            if (e.Control && e.Shift) {
+                if (e.KeyCode == Keys.D) {
+                    debugToolStripMenuItem.Visible = true;
+                }
+                return;
+            }
+
             Input input = Input.None;
 
             switch (e.KeyCode) {
@@ -330,6 +337,22 @@ L = A", "Manual Input Controls", MessageBoxButtons.OK, MessageBoxIcon.Informatio
         private void tsbDrawPath_Click(object sender, EventArgs e)
         {
             inputGen.DrawPath = tsbDrawPath.Checked;
+        }
+
+        private void exportGraphToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            SaveFileDialog dlg = new SaveFileDialog();
+            dlg.Filter = "Trivial Graph Format (*.tgf)|*.tgf|All files (*.*)|*.*";
+            if (dlg.ShowDialog() == DialogResult.OK) {
+                StreamWriter sw = new StreamWriter(dlg.FileName, false);
+                inputGen.Graph.ExportTGF(sw);
+                sw.Close();
+            }
+        }
+
+        private void displayGraphToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            DebugShowGraphForm.DisplayGraph(inputGen.Graph, tileGrid.Columns, tileGrid.Rows);
         }
     }
 }
