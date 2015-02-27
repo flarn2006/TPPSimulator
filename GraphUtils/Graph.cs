@@ -10,15 +10,20 @@ namespace GraphUtils
     {
         private Node<TNodeData>[] nodes;
         private Edge<TNodeData>[,] edges;
+        private List<Edge<TNodeData>> edgeList;
         private uint nodeCount = 0, maxNodes;
         private Dictionary<TNodeData, uint> nodeIndices;
-        private int traversalID = -1;
+
+        private long[] distance;
+        private Node<TNodeData>[] predecessor;
+        Node<TNodeData> lastPathfindingStartNode = null;
 
         public Graph(uint maxNodes)
         {
             this.maxNodes = maxNodes;
             nodes = new Node<TNodeData>[maxNodes];
             edges = new Edge<TNodeData>[maxNodes, maxNodes];
+            edgeList = new List<Edge<TNodeData>>();
             nodeIndices = new Dictionary<TNodeData, uint>();
         }
 
@@ -37,6 +42,7 @@ namespace GraphUtils
             nodeIndices.Add(data, nodeCount);
             nodeCount++;
 
+            lastPathfindingStartNode = null;
             return node;
         }
 
@@ -48,7 +54,9 @@ namespace GraphUtils
 
             Edge<TNodeData> edge = new Edge<TNodeData>(startNode, endNode, weight);
             edges[nodeIndices[startNode.Data], nodeIndices[endNode.Data]] = edge;
+            edgeList.Add(edge);
 
+            lastPathfindingStartNode = null;
             return edge;
         }
 
@@ -98,23 +106,50 @@ namespace GraphUtils
             }
         }
 
-        internal IEnumerable<Node<TNodeData>> FindPath(Node<TNodeData> startNode, Node<TNodeData> endNode, bool newTraversal = true)
+        internal IEnumerable<Node<TNodeData>> FindPath(Node<TNodeData> startNode, Node<TNodeData> endNode)
         {
-            if (newTraversal) traversalID++;
+            if (lastPathfindingStartNode != startNode) {
+                // Bellman-Ford algorithm
+                // Adapted from Wikipedia <https://en.wikipedia.org/w/index.php?title=Bellman%E2%80%93Ford_algorithm&oldid=642360089#Algorithm>
 
-            if (startNode == endNode) {
-                yield return startNode;
-            } else {
-                yield return startNode;
-                foreach (Node<TNodeData> node in startNode.GetConnectedNodes()) {
-                    if (node.traversalID != traversalID) {
-                        node.traversalID = traversalID;
-                        foreach (Node<TNodeData> pathNode in FindPath(node, endNode, false)) {
-                            yield return pathNode;
+                distance = new long[nodeCount];
+                predecessor = new Node<TNodeData>[nodeCount];
+
+                uint startNodeIndex = nodeIndices[startNode.Data];
+                for (uint v = 0; v < nodeCount; v++) {
+                    distance[v] = (v == startNodeIndex) ? 0 : Int64.MaxValue;
+                    predecessor[v] = null;
+                }
+
+                for (uint i = 0; i < nodeCount; i++) {
+                    foreach (Edge<TNodeData> edge in edgeList) {
+                        uint u = nodeIndices[edge.StartNode.Data];
+                        uint v = nodeIndices[edge.EndNode.Data];
+                        if (distance[u] + edge.Weight < distance[v]) {
+                            distance[v] = distance[u] + edge.Weight;
+                            predecessor[v] = nodes[u];
                         }
                     }
                 }
+
+                foreach (Edge<TNodeData> edge in edgeList) {
+                    if (distance[nodeIndices[edge.StartNode.Data]] + edge.Weight < distance[nodeIndices[edge.EndNode.Data]]) {
+                        throw new NegativeWeightCycleException("Graph contains a negative-weight cycle");
+                    }
+                }
+
+                lastPathfindingStartNode = startNode;
             }
+
+            List<Node<TNodeData>> path = new List<Node<TNodeData>>();
+            Node<TNodeData> currentNode = endNode;
+            while (currentNode != startNode) {
+                path.Add(currentNode);
+                currentNode = predecessor[nodeIndices[currentNode.Data]];
+            }
+            path.Reverse();
+
+            return path;
         }
     }
 }

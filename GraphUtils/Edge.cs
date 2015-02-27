@@ -27,5 +27,11 @@ namespace GraphUtils
         {
             get { return end; }
         }
+
+        public int Weight
+        {
+            get { return weight; }
+            set { weight = value; }
+        }
     }
 }

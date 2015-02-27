@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using GraphUtils;
 
 namespace TPPSimulator
 {
@@ -25,6 +26,10 @@ namespace TPPSimulator
         }
 
         private Queue<Input> inputQueue;
+        private TileGrid tileGrid = null;
+        private Graph<Point> graph;
+        private IEnumerable<Point> path = null;
+        private bool drawPath = false;
 
         public InputGenerator()
         {
@@ -184,6 +189,82 @@ This function is not yet implemented.", "Explanation", MessageBoxButtons.OK, Mes
         {
             inputQueue.Clear();
             UpdateProgressBar();
+        }
+
+        [DefaultValue(null), Category("Behavior"), Description("The tile grid for which the inputs are generated.")]
+        public TileGrid TileGrid
+        {
+            get { return tileGrid; }
+            set
+            {
+                if (tileGrid != null) {
+                    tileGrid.GridChanged -= tileGrid_GridChanged;
+                    tileGrid.PlayerOrGoalMoved -= tileGrid_PlayerOrGoalMoved;
+                }
+                tileGrid = value;
+                tileGrid.GridChanged += tileGrid_GridChanged;
+                tileGrid.PlayerOrGoalMoved += tileGrid_PlayerOrGoalMoved;
+            }
+        }
+
+        private void tileGrid_PlayerOrGoalMoved(object sender, EventArgs e)
+        {
+            RecalculatePath();
+        }
+
+        private void tileGrid_GridChanged(object sender, EventArgs e)
+        {
+            UpdateGraph();
+        }
+
+        public void UpdateGraph(bool recalculatePath = true)
+        {
+            graph = new Graph<Point>((uint)(tileGrid.Rows * tileGrid.Columns));
+
+            for (int y = 0; y < tileGrid.Rows; y++) {
+                for (int x = 0; x < tileGrid.Columns; x++) {
+                    graph.AddNode(new Point(x, y));
+                }
+            }
+
+            for (int y = 0; y < tileGrid.Rows; y++) {
+                for (int x = 0; x < tileGrid.Columns; x++) {
+                    Point pt = new Point(x, y);
+                    Direction[] directions = new Direction[] { Direction.Up, Direction.Down, Direction.Left, Direction.Right };
+                    foreach (Direction dir in directions) {
+                        Point adjacent = pt.Move(dir);
+                        if (adjacent.X >= 0 && adjacent.X < tileGrid.Columns && adjacent.Y >= 0 && adjacent.Y < tileGrid.Rows) {
+                            if (tileGrid.GetTile(adjacent).Passable.IsPassableFrom(dir.Opposite())) {
+                                graph.GetNode(pt).ConnectToNode(adjacent);
+                            }
+                        }
+                    }
+                }
+            }
+
+            if (recalculatePath) RecalculatePath();
+        }
+
+        public void RecalculatePath()
+        {
+            if (graph == null) UpdateGraph(false);
+            path = graph.GetNode(tileGrid.Player.Location).FindPath(tileGrid.GoalLocation).Select(node => node.Data);
+            if (drawPath) tileGrid.PathToDraw = path.Select(p => new Point(16 * p.X + 8, 16 * p.Y + 8)).ToArray();
+        }
+
+        [DefaultValue(false), Category("Appearance"), Description("Indicates whether or not to draw the calculated path on the tile grid.")]
+        public bool DrawPath
+        {
+            get { return drawPath; }
+            set
+            {
+                drawPath = value;
+                if (drawPath) {
+                    RecalculatePath();
+                } else {
+                    tileGrid.PathToDraw = null;
+                }
+            }
         }
     }
 }

@@ -64,6 +64,7 @@ namespace TPPSimulator
 
         public event EventHandler NeedsTileGridRedraw;
         public event EventHandler InputWhileFrozen;
+        public event EventHandler Moved;
 
         #region Event methods
 
@@ -87,12 +88,22 @@ namespace TPPSimulator
             OnInputWhileFrozen(EventArgs.Empty);
         }
 
+        protected virtual void OnMoved(EventArgs e)
+        {
+            if (Moved != null) Moved(this, e);
+        }
+
+        protected void OnMoved()
+        {
+            OnMoved(EventArgs.Empty);
+        }
+
         #endregion
 
         public Point Location
         {
             get { return location; }
-            set { location = value; OnNeedsTileGridRedraw(); }
+            set { location = value; OnMoved(); OnNeedsTileGridRedraw(); }
         }
 
         public Direction Facing

@@ -199,6 +199,7 @@ In the mean time, enjoy this preview!", "Welcome!", MessageBoxButtons.OKCancel, 
                     else if (tile == TileType.SpinnerW) ch = '<';
                     else if (tile == TileType.SpinnerE) ch = '>';
                     else if (tile == TileType.SpinnerStop) ch = 'X';
+                    else if (tile == TileType.Shrub) ch = 'S';
                     sw.Write(ch);
                 }
                 sw.WriteLine();
@@ -324,6 +325,11 @@ L = A", "Manual Input Controls", MessageBoxButtons.OK, MessageBoxIcon.Informatio
         private void tsbAutorun_Click(object sender, EventArgs e)
         {
             stepTimer.Enabled = tsbAutorun.Checked;
+        }
+
+        private void tsbDrawPath_Click(object sender, EventArgs e)
+        {
+            inputGen.DrawPath = tsbDrawPath.Checked;
         }
     }
 }

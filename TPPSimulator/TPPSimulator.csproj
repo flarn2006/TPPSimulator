@@ -189,6 +189,7 @@
     <None Include="Resources\joystick_delete.png" />
     <None Include="Resources\wrench.png" />
     <None Include="Resources\time_go.png" />
+    <None Include="Resources\pencil_go.png" />
     <Content Include="Sounds\bulbasaur.wav" />
     <Content Include="Sounds\charmander.wav" />
     <Content Include="Sounds\kricketune.wav" />

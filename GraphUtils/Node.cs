@@ -10,7 +10,6 @@ namespace GraphUtils
     {
         private Graph<TData> graph;
         private TData data;
-        internal int traversalID = -1;
         
         internal Node(Graph<TData> graph, TData data)
         {

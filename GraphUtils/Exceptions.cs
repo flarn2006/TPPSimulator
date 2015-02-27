@@ -65,4 +65,16 @@ namespace GraphUtils
           System.Runtime.Serialization.StreamingContext context)
             : base(info, context) { }
     }
+
+    [Serializable]
+    public class NegativeWeightCycleException : Exception
+    {
+        public NegativeWeightCycleException() { }
+        public NegativeWeightCycleException(string message) : base(message) { }
+        public NegativeWeightCycleException(string message, Exception inner) : base(message, inner) { }
+        protected NegativeWeightCycleException(
+          System.Runtime.Serialization.SerializationInfo info,
+          System.Runtime.Serialization.StreamingContext context)
+            : base(info, context) { }
+    }
 }

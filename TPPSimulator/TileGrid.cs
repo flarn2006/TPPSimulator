@@ -23,7 +23,7 @@ namespace TPPSimulator
         private TileType leftClickTile = null;
         private LeftClickMode leftClickMode = LeftClickMode.Player;
         private Point goalLocation = Point.Empty;
-        /* TODO: remove test code */ private Graph<Point> graph;
+        private Point[] pathToDraw = null;
 
         public enum LeftClickMode { Player, Goal, Tile }
 
@@ -36,32 +36,19 @@ namespace TPPSimulator
                 // Unfortunately it's the only way to check for runtime vs. design time. this.DesignMode doesn't work.
                 // Don't worry, no DRM here.
                 player = new Player(this);
-                player.NeedsTileGridRedraw += player_Moved;
+                player.NeedsTileGridRedraw += player_NeedsTileGridRedraw;
+                player.Moved += player_Moved;
             }
             DoubleBuffered = true;
+        }
 
-            // TODO: remove test code starting here
-            graph = new Graph<Point>(100);
-
-            for (int y = 0; y < 10; y++) {
-                for (int x = 0; x < 10; x++) {
-                    graph.AddNode(new Point(x, y));
-                }
-            }
-
-            for (int y = 0; y < 10; y++) {
-                for (int x = 0; x < 10; x++) {
-                    Point pt = new Point(x, y);
-                    Node<Point> node = graph.GetNode(pt);
-                    if (x > 0) node.ConnectToNode(pt.Move(Direction.Left));
-                    if (x < 9) node.ConnectToNode(pt.Move(Direction.Right));
-                    if (y > 0) node.ConnectToNode(pt.Move(Direction.Up));
-                    if (y < 9) node.ConnectToNode(pt.Move(Direction.Down));
-                }
-            }
+        private void player_Moved(object sender, EventArgs e)
+        {
+            OnPlayerOrGoalMoved();
         }
 
         public event EventHandler GridChanged;
+        public event EventHandler PlayerOrGoalMoved;
 
         protected virtual void OnGridChanged(EventArgs e)
         {
@@ -73,7 +60,17 @@ namespace TPPSimulator
             OnGridChanged(EventArgs.Empty);
         }
 
-        private void player_Moved(object sender, EventArgs e)
+        protected virtual void OnPlayerOrGoalMoved(EventArgs e)
+        {
+            if (PlayerOrGoalMoved != null) PlayerOrGoalMoved(this, e);
+        }
+
+        protected void OnPlayerOrGoalMoved()
+        {
+            OnPlayerOrGoalMoved(EventArgs.Empty);
+        }
+
+        private void player_NeedsTileGridRedraw(object sender, EventArgs e)
         {
             Invalidate();
         }
@@ -115,7 +112,7 @@ namespace TPPSimulator
         public Point GoalLocation
         {
             get { return goalLocation; }
-            set { goalLocation = value; Invalidate(); OnGridChanged(); }
+            set { goalLocation = value; OnPlayerOrGoalMoved(); Invalidate(); }
         }
 
         private void FullImageUpdate()
@@ -143,6 +140,7 @@ namespace TPPSimulator
         {
             base.OnPaint(pe);
             pe.Graphics.FillRectangle(SystemBrushes.AppWorkspace, pe.ClipRectangle);
+
             if (grid != null) {
                 pe.Graphics.DrawImage(bmp, Point.Empty);
                 pe.Graphics.DrawImage(Properties.Resources.goal, goalLocation.X * tileSize, goalLocation.Y * tileSize);
@@ -150,11 +148,12 @@ namespace TPPSimulator
                     pe.Graphics.DrawImage(player.CurrentImage, player.Location.X * tileSize, player.Location.Y * tileSize);
                     pe.Graphics.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.NearestNeighbor;
                     pe.Graphics.DrawImage(player.Menu.Image, ClientRectangle);
-                    // TODO: remove test code starting here
-                    Point[] points = graph.GetNode(player.Location).FindPath(goalLocation).Select(node => new Point(node.Data.X * 16 + 8, node.Data.Y * 16 + 8)).ToArray();
-                    if (points.Length >= 2) {
-                        pe.Graphics.DrawLines(Pens.Red, points);
-                    }
+                }
+            }
+
+            if (pathToDraw != null) {
+                if (pathToDraw.Length >= 2) {
+                    pe.Graphics.DrawLines(Pens.Red, pathToDraw);
                 }
             }
         }
@@ -249,6 +248,7 @@ namespace TPPSimulator
                             case '<': tile = TileType.SpinnerW; break;
                             case '>': tile = TileType.SpinnerE; break;
                             case 'X': tile = TileType.SpinnerStop; break;
+                            case 'S': tile = TileType.Shrub; break;
                         }
                         grid[row, col] = tile;
                     }
@@ -324,6 +324,13 @@ namespace TPPSimulator
         {
             base.OnResize(e);
             Invalidate();
+        }
+
+        [Browsable(false)]
+        public Point[] PathToDraw
+        {
+            get { return pathToDraw; }
+            set { pathToDraw = value; Invalidate(); }
         }
     }
 }

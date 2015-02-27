@@ -159,6 +159,16 @@ namespace TPPSimulator.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap pencil_go {
+            get {
+                object obj = ResourceManager.GetObject("pencil_go", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap player_e {
             get {
                 object obj = ResourceManager.GetObject("player_e", resourceCulture);
