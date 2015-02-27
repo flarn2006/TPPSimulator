@@ -53,8 +53,12 @@ namespace GraphUtils
             }
 
             Edge<TNodeData> edge = new Edge<TNodeData>(startNode, endNode, weight);
-            edges[nodeIndices[startNode.Data], nodeIndices[endNode.Data]] = edge;
+            uint startNodeIndex = nodeIndices[startNode.Data], endNodeIndex = nodeIndices[endNode.Data];
+            edges[startNodeIndex, endNodeIndex] = edge;
+            edge.startIndex = startNodeIndex;
+            edge.endIndex = endNodeIndex;
             edgeList.Add(edge);
+            endNode.edges.Add(edge);
 
             lastPathfindingStartNode = null;
             return edge;
@@ -98,43 +102,49 @@ namespace GraphUtils
         internal IEnumerable<Node<TNodeData>> GetConnectedNodes(Node<TNodeData> node)
         {
             uint nodeIndex = nodeIndices[node.Data];
-            for (int i = 0; i < nodeCount; i++) {
-                Edge<TNodeData> edge = edges[nodeIndex, i];
-                if (edge != null) {
-                    yield return edge.EndNode;
-                }
-            }
+            return node.edges.Select(edge => edge.EndNode);
         }
 
         internal IEnumerable<Node<TNodeData>> FindPath(Node<TNodeData> startNode, Node<TNodeData> endNode)
         {
             if (lastPathfindingStartNode != startNode) {
-                // Bellman-Ford algorithm
-                // Adapted from Wikipedia <https://en.wikipedia.org/w/index.php?title=Bellman%E2%80%93Ford_algorithm&oldid=642360089#Algorithm>
+                // Dijkstra's algorithm
+                // Adapted from Wikipedia <https://en.wikipedia.org/w/index.php?title=Dijkstra%27s_algorithm&oldid=648542472#Pseudocode>
 
                 distance = new long[nodeCount];
                 predecessor = new Node<TNodeData>[nodeCount];
 
+                List<uint> unvisited = new List<uint>();
+
                 uint startNodeIndex = nodeIndices[startNode.Data];
+                distance[startNodeIndex] = 0;
                 for (uint v = 0; v < nodeCount; v++) {
-                    distance[v] = (v == startNodeIndex) ? 0 : Int64.MaxValue;
+                    if (v != startNodeIndex) {
+                        distance[v] = Int64.MaxValue;
+                    }
                     predecessor[v] = null;
+                    unvisited.Add(v);
                 }
 
-                for (uint i = 0; i < nodeCount; i++) {
-                    foreach (Edge<TNodeData> edge in edgeList) {
-                        uint u = nodeIndices[edge.StartNode.Data];
-                        uint v = nodeIndices[edge.EndNode.Data];
-                        if (distance[u] + edge.Weight < distance[v]) {
-                            distance[v] = distance[u] + edge.Weight;
-                            predecessor[v] = nodes[u];
+                while (unvisited.Count > 0) {
+                    bool first = true;
+                    uint u = 0;
+                    foreach (uint index in unvisited) {
+                        if (first) {
+                            u = index;
+                            first = false;
+                        } else if (distance[index] < distance[u]) {
+                            u = index;
                         }
                     }
-                }
+                    unvisited.Remove(u);
 
-                foreach (Edge<TNodeData> edge in edgeList) {
-                    if (distance[nodeIndices[edge.StartNode.Data]] + edge.Weight < distance[nodeIndices[edge.EndNode.Data]]) {
-                        throw new NegativeWeightCycleException("Graph contains a negative-weight cycle");
+                    foreach (Edge<TNodeData> edge in nodes[u].edges) {
+                        long alt = distance[u] + edge.Weight;
+                        if (alt < distance[edge.endIndex]) {
+                            distance[edge.endIndex] = alt;
+                            predecessor[edge.endIndex] = nodes[u];
+                        }
                     }
                 }
 

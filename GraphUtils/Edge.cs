@@ -9,6 +9,7 @@ namespace GraphUtils
     public class Edge<TNodeData>
     {
         private Node<TNodeData> start, end;
+        internal uint startIndex, endIndex;
         private int weight;
 
         internal Edge(Node<TNodeData> startNode, Node<TNodeData> endNode, int weight)

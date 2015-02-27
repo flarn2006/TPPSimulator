@@ -10,11 +10,13 @@ namespace GraphUtils
     {
         private Graph<TData> graph;
         private TData data;
+        internal List<Edge<TData>> edges;
         
         internal Node(Graph<TData> graph, TData data)
         {
             this.graph = graph;
             this.data = data;
+            edges = new List<Edge<TData>>();
         }
 
         public Graph<TData> Graph
