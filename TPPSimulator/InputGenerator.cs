@@ -200,16 +200,16 @@ This function is not yet implemented.", "Explanation", MessageBoxButtons.OK, Mes
             {
                 if (tileGrid != null) {
                     tileGrid.GridChanged -= tileGrid_GridChanged;
-                    tileGrid.PlayerOrGoalMoved -= tileGrid_PlayerOrGoalMoved;
+                    tileGrid.GoalMoved -= tileGrid_GoalMoved;
                 }
                 tileGrid = value;
                 tileGrid.GridChanged += tileGrid_GridChanged;
-                tileGrid.PlayerOrGoalMoved += tileGrid_PlayerOrGoalMoved;
+                tileGrid.GoalMoved += tileGrid_GoalMoved;
                 if (tileGrid.Player != null) UpdateGraph();
             }
         }
 
-        private void tileGrid_PlayerOrGoalMoved(object sender, EventArgs e)
+        private void tileGrid_GoalMoved(object sender, EventArgs e)
         {
             RecalculatePath();
         }

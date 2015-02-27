@@ -44,11 +44,12 @@ namespace TPPSimulator
 
         private void player_Moved(object sender, EventArgs e)
         {
-            OnPlayerOrGoalMoved();
+            OnPlayerMoved();
         }
 
         public event EventHandler GridChanged;
-        public event EventHandler PlayerOrGoalMoved;
+        public event EventHandler PlayerMoved;
+        public event EventHandler GoalMoved;
 
         protected virtual void OnGridChanged(EventArgs e)
         {
@@ -60,14 +61,24 @@ namespace TPPSimulator
             OnGridChanged(EventArgs.Empty);
         }
 
-        protected virtual void OnPlayerOrGoalMoved(EventArgs e)
+        protected virtual void OnPlayerMoved(EventArgs e)
         {
-            if (PlayerOrGoalMoved != null) PlayerOrGoalMoved(this, e);
+            if (PlayerMoved != null) PlayerMoved(this, e);
         }
 
-        protected void OnPlayerOrGoalMoved()
+        protected void OnPlayerMoved()
         {
-            OnPlayerOrGoalMoved(EventArgs.Empty);
+            OnPlayerMoved(EventArgs.Empty);
+        }
+
+        protected virtual void OnGoalMoved(EventArgs e)
+        {
+            if (GoalMoved != null) GoalMoved(this, e);
+        }
+
+        protected void OnGoalMoved()
+        {
+            OnGoalMoved(EventArgs.Empty);
         }
 
         private void player_NeedsTileGridRedraw(object sender, EventArgs e)
@@ -112,7 +123,7 @@ namespace TPPSimulator
         public Point GoalLocation
         {
             get { return goalLocation; }
-            set { goalLocation = value; OnPlayerOrGoalMoved(); Invalidate(); }
+            set { goalLocation = value; OnGoalMoved(); Invalidate(); }
         }
 
         private void FullImageUpdate()
