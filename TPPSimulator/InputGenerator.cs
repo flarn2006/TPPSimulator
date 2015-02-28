@@ -52,18 +52,53 @@ namespace TPPSimulator
         public Input GetPathInput()
         {
             if (tileGrid.Player.Menu.State != null) {
+                lblAIMonitor.Text = "Spam B! Get out of the menu!";
                 return Input.B;
             } else {
+                // Get the predecessor of the player's node (remember, the path is reversed) and a few before that, and pick a random one
                 Direction[] directions = new Direction[] { Direction.Up, Direction.Down, Direction.Left, Direction.Right };
-                Point pt = tileGrid.Player.Location;
-                Node<Point> predecessor = graph.GetNode(pt).PathPredecessor;
-                if (predecessor == null) return Input.None;
-                foreach (Direction dir in directions) {
-                    if (pt.Move(dir).Equals(predecessor.Data)) {
-                        return dir.ToInput();
+
+                Node<Point> node = graph.GetNode(tileGrid.Player.Location);
+                if (node.PathPredecessor == null) {
+                    if (tileGrid.Player.Location.Equals(tileGrid.GoalLocation)) {
+                        lblAIMonitor.Text = "TEH URN!";
+                    } else {
+                        lblAIMonitor.Text = "This is impossible!\r\nヽ༼ຈل͜ຈ༽ﾉ RIOT ヽ༼ຈل͜ຈ༽ﾉ";
                     }
+                    return Input.None;
                 }
-                return Input.None;
+
+                List<Direction> choices = new List<Direction>();
+
+                for (int i = 0; i < 5; i++) {
+                    if (node.PathPredecessor == null) break;
+
+                    // Determine which direction it went
+                    foreach (Direction dir in directions) {
+                        if (node.Data.Move(dir).Equals(node.PathPredecessor.Data)) {
+                            choices.Add(dir);
+                        }
+                    }
+
+                    // Now set the current node to its predecessor for the next step
+                    node = node.PathPredecessor;
+                    if (node == null) break;
+                }
+
+                if (choices.Count == 0) {
+                    return Input.None;
+                } else {
+                    StringBuilder sb = new StringBuilder("Next steps are:\r\n");
+                    for (int i = 0; i < choices.Count; i++) {
+                        sb.Append(choices[i]);
+                        if (i < choices.Count - 1) sb.Append(", ");
+                    }
+                    sb.Append("\r\n\r\nI'll go ");
+                    Direction choice = choices[rng.Next(choices.Count)];
+                    sb.Append(choice);
+                    lblAIMonitor.Text = sb.ToString();
+                    return choice.ToInput();
+                }
             }
         }
 
@@ -211,16 +246,19 @@ Note that this slider's maximum is 10 times more than the others.", "Explanation
             {
                 if (tileGrid != null) {
                     tileGrid.GridChanged -= tileGrid_GridChanged;
-                    tileGrid.GoalMoved -= tileGrid_GoalMoved;
+                    tileGrid.GoalMoved -= tileGrid_PlayerOrGoalMoved;
+                    tileGrid.PlayerMoved -= tileGrid_PlayerOrGoalMoved;
+
                 }
                 tileGrid = value;
                 tileGrid.GridChanged += tileGrid_GridChanged;
-                tileGrid.GoalMoved += tileGrid_GoalMoved;
+                tileGrid.GoalMoved += tileGrid_PlayerOrGoalMoved;
+                tileGrid.PlayerMoved += tileGrid_PlayerOrGoalMoved;
                 if (tileGrid.Player != null) UpdateGraph();
             }
         }
 
-        private void tileGrid_GoalMoved(object sender, EventArgs e)
+        private void tileGrid_PlayerOrGoalMoved(object sender, EventArgs e)
         {
             RecalculatePath();
         }

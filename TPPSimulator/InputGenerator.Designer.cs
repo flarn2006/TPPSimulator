@@ -60,6 +60,10 @@
             this.pathLink = new System.Windows.Forms.LinkLabel();
             this.lastInputs = new System.Windows.Forms.ListBox();
             this.btnRebuildGraph = new System.Windows.Forms.Button();
+            this.tabControl1 = new System.Windows.Forms.TabControl();
+            this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.lblAIMonitor = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.udStreamDelay)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.udStepInterval)).BeginInit();
@@ -75,6 +79,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.tbDown)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tbUp)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tbPath)).BeginInit();
+            this.tabControl1.SuspendLayout();
+            this.tabPage1.SuspendLayout();
+            this.tabPage2.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -477,19 +484,17 @@
             // 
             // lastInputs
             // 
-            this.lastInputs.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.lastInputs.BackColor = System.Drawing.Color.Black;
+            this.lastInputs.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lastInputs.Font = new System.Drawing.Font("Courier New", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lastInputs.ForeColor = System.Drawing.Color.White;
             this.lastInputs.FormattingEnabled = true;
             this.lastInputs.IntegralHeight = false;
             this.lastInputs.ItemHeight = 23;
-            this.lastInputs.Location = new System.Drawing.Point(3, 509);
+            this.lastInputs.Location = new System.Drawing.Point(3, 3);
             this.lastInputs.Name = "lastInputs";
             this.lastInputs.SelectionMode = System.Windows.Forms.SelectionMode.None;
-            this.lastInputs.Size = new System.Drawing.Size(168, 129);
+            this.lastInputs.Size = new System.Drawing.Size(154, 120);
             this.lastInputs.TabIndex = 2;
             // 
             // btnRebuildGraph
@@ -504,17 +509,64 @@
             this.btnRebuildGraph.UseVisualStyleBackColor = true;
             this.btnRebuildGraph.Click += new System.EventHandler(this.btnRebuildGraph_Click);
             // 
+            // tabControl1
+            // 
+            this.tabControl1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.tabControl1.Controls.Add(this.tabPage1);
+            this.tabControl1.Controls.Add(this.tabPage2);
+            this.tabControl1.Location = new System.Drawing.Point(3, 509);
+            this.tabControl1.Name = "tabControl1";
+            this.tabControl1.SelectedIndex = 0;
+            this.tabControl1.Size = new System.Drawing.Size(168, 152);
+            this.tabControl1.TabIndex = 4;
+            // 
+            // tabPage1
+            // 
+            this.tabPage1.Controls.Add(this.lastInputs);
+            this.tabPage1.Location = new System.Drawing.Point(4, 22);
+            this.tabPage1.Name = "tabPage1";
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage1.Size = new System.Drawing.Size(160, 126);
+            this.tabPage1.TabIndex = 0;
+            this.tabPage1.Text = "Input Log";
+            this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // tabPage2
+            // 
+            this.tabPage2.Controls.Add(this.lblAIMonitor);
+            this.tabPage2.Location = new System.Drawing.Point(4, 22);
+            this.tabPage2.Name = "tabPage2";
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage2.Size = new System.Drawing.Size(160, 126);
+            this.tabPage2.TabIndex = 1;
+            this.tabPage2.Text = "AI Monitor";
+            this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // lblAIMonitor
+            // 
+            this.lblAIMonitor.BackColor = System.Drawing.Color.Black;
+            this.lblAIMonitor.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.lblAIMonitor.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblAIMonitor.ForeColor = System.Drawing.Color.Lime;
+            this.lblAIMonitor.Location = new System.Drawing.Point(3, 3);
+            this.lblAIMonitor.Name = "lblAIMonitor";
+            this.lblAIMonitor.Size = new System.Drawing.Size(154, 120);
+            this.lblAIMonitor.TabIndex = 0;
+            this.lblAIMonitor.Text = "Inputs are broken!\r\nヽ༼ຈل͜ຈ༽ﾉ RIOT ヽ༼ຈل͜ຈ༽ﾉ";
+            // 
             // InputGenerator
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.btnRebuildGraph);
-            this.Controls.Add(this.lastInputs);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Name = "InputGenerator";
-            this.Size = new System.Drawing.Size(174, 641);
+            this.Size = new System.Drawing.Size(174, 664);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.udStreamDelay)).EndInit();
@@ -532,6 +584,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.tbDown)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.tbUp)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.tbPath)).EndInit();
+            this.tabControl1.ResumeLayout(false);
+            this.tabPage1.ResumeLayout(false);
+            this.tabPage2.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -571,6 +626,10 @@
         private System.Windows.Forms.TrackBar tbDown;
         private System.Windows.Forms.ListBox lastInputs;
         private System.Windows.Forms.Button btnRebuildGraph;
+        private System.Windows.Forms.TabControl tabControl1;
+        private System.Windows.Forms.TabPage tabPage1;
+        private System.Windows.Forms.TabPage tabPage2;
+        private System.Windows.Forms.Label lblAIMonitor;
 
     }
 }
