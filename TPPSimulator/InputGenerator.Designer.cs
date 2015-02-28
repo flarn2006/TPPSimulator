@@ -457,6 +457,7 @@
             this.tbPath.Size = new System.Drawing.Size(108, 23);
             this.tbPath.TabIndex = 10;
             this.tbPath.TickFrequency = 50;
+            this.tbPath.Value = 500;
             // 
             // pathLink
             // 

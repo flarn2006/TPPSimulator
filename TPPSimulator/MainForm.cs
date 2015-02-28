@@ -240,6 +240,7 @@ In the mean time, enjoy this preview!", "Welcome!", MessageBoxButtons.OKCancel, 
         private void tileGrid_GridChanged(object sender, EventArgs e)
         {
             docMgr.Dirty = true;
+            inputGen.RebuildGraphEnabled = true;
         }
 
         private void tsbGen1Movement_Click(object sender, EventArgs e)
@@ -282,7 +283,9 @@ In the mean time, enjoy this preview!", "Welcome!", MessageBoxButtons.OKCancel, 
 
         private void tsbResizeMap_Click(object sender, EventArgs e)
         {
-            ResizeMapDialog.PromptToResize(tileGrid);
+            if (ResizeMapDialog.PromptToResize(tileGrid) == DialogResult.OK) {
+                inputGen.UpdateGraph();
+            }
         }
 
         private void controlsToolStripMenuItem_Click(object sender, EventArgs e)
@@ -332,6 +335,9 @@ L = A", "Manual Input Controls", MessageBoxButtons.OK, MessageBoxIcon.Informatio
         private void tsbAutorun_Click(object sender, EventArgs e)
         {
             stepTimer.Enabled = tsbAutorun.Checked;
+            if (tsbAutorun.Checked) {
+                inputGen.UpdateGraph();
+            }
         }
 
         private void tsbDrawPath_Click(object sender, EventArgs e)
@@ -353,6 +359,11 @@ L = A", "Manual Input Controls", MessageBoxButtons.OK, MessageBoxIcon.Informatio
         private void displayGraphToolStripMenuItem_Click(object sender, EventArgs e)
         {
             DebugShowGraphForm.DisplayGraph(inputGen.Graph, tileGrid.Columns, tileGrid.Rows);
+        }
+
+        private void inputGen_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

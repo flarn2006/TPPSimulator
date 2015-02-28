@@ -57,6 +57,7 @@
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.debugToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exportGraphToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.displayGraphToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tsStandard = new System.Windows.Forms.ToolStrip();
             this.newToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.openToolStripButton = new System.Windows.Forms.ToolStripButton();
@@ -82,7 +83,6 @@
             this.tsbDrawPath = new System.Windows.Forms.ToolStripButton();
             this.stepTimer = new System.Windows.Forms.Timer(this.components);
             this.docMgr = new TPPSimulator.DocumentManager(this.components);
-            this.displayGraphToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tsTools.SuspendLayout();
             this.toolStripContainer1.ContentPanel.SuspendLayout();
             this.toolStripContainer1.LeftToolStripPanel.SuspendLayout();
@@ -225,7 +225,7 @@
             // 
             this.toolStripContainer1.ContentPanel.Controls.Add(this.panel1);
             this.toolStripContainer1.ContentPanel.Controls.Add(this.inputGen);
-            this.toolStripContainer1.ContentPanel.Size = new System.Drawing.Size(831, 494);
+            this.toolStripContainer1.ContentPanel.Size = new System.Drawing.Size(1003, 627);
             this.toolStripContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
             // 
             // toolStripContainer1.LeftToolStripPanel
@@ -233,7 +233,7 @@
             this.toolStripContainer1.LeftToolStripPanel.Controls.Add(this.tsTools);
             this.toolStripContainer1.Location = new System.Drawing.Point(0, 0);
             this.toolStripContainer1.Name = "toolStripContainer1";
-            this.toolStripContainer1.Size = new System.Drawing.Size(855, 568);
+            this.toolStripContainer1.Size = new System.Drawing.Size(1027, 701);
             this.toolStripContainer1.TabIndex = 1;
             this.toolStripContainer1.Text = "toolStripContainer1";
             // 
@@ -251,7 +251,7 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(657, 494);
+            this.panel1.Size = new System.Drawing.Size(829, 627);
             this.panel1.TabIndex = 0;
             // 
             // tileGrid
@@ -263,7 +263,7 @@
             this.tileGrid.Name = "tileGrid";
             this.tileGrid.PathToDraw = null;
             this.tileGrid.Rows = 30;
-            this.tileGrid.Size = new System.Drawing.Size(653, 490);
+            this.tileGrid.Size = new System.Drawing.Size(825, 623);
             this.tileGrid.TabIndex = 0;
             this.tileGrid.Text = "tileGrid1";
             this.tileGrid.GridChanged += new System.EventHandler(this.tileGrid_GridChanged);
@@ -272,12 +272,13 @@
             // 
             this.inputGen.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.inputGen.Dock = System.Windows.Forms.DockStyle.Right;
-            this.inputGen.Location = new System.Drawing.Point(657, 0);
+            this.inputGen.Location = new System.Drawing.Point(829, 0);
             this.inputGen.Name = "inputGen";
-            this.inputGen.Size = new System.Drawing.Size(174, 494);
+            this.inputGen.Size = new System.Drawing.Size(174, 627);
             this.inputGen.TabIndex = 1;
             this.inputGen.TileGrid = this.tileGrid;
             this.inputGen.StepIntervalChanged += new System.EventHandler(this.inputGen_StepIntervalChanged);
+            this.inputGen.Load += new System.EventHandler(this.inputGen_Load);
             // 
             // menu
             // 
@@ -288,7 +289,7 @@
             this.debugToolStripMenuItem});
             this.menu.Location = new System.Drawing.Point(0, 0);
             this.menu.Name = "menu";
-            this.menu.Size = new System.Drawing.Size(855, 24);
+            this.menu.Size = new System.Drawing.Size(1027, 24);
             this.menu.TabIndex = 0;
             this.menu.Text = "menuStrip1";
             // 
@@ -387,6 +388,13 @@
             this.exportGraphToolStripMenuItem.Size = new System.Drawing.Size(156, 22);
             this.exportGraphToolStripMenuItem.Text = "&Export Graph...";
             this.exportGraphToolStripMenuItem.Click += new System.EventHandler(this.exportGraphToolStripMenuItem_Click);
+            // 
+            // displayGraphToolStripMenuItem
+            // 
+            this.displayGraphToolStripMenuItem.Name = "displayGraphToolStripMenuItem";
+            this.displayGraphToolStripMenuItem.Size = new System.Drawing.Size(156, 22);
+            this.displayGraphToolStripMenuItem.Text = "&Display Graph...";
+            this.displayGraphToolStripMenuItem.Click += new System.EventHandler(this.displayGraphToolStripMenuItem_Click);
             // 
             // tsStandard
             // 
@@ -610,30 +618,23 @@
             // 
             // docMgr
             // 
-            this.docMgr.AppTitle = "TPP Simulator PREVIEW";
+            this.docMgr.AppTitle = "TPP Simulator BETA";
             this.docMgr.OpenFilter = "Map files (*.tppmap)|*.tppmap|All files (*.*)|*.*";
             this.docMgr.SaveFilter = "Map files (*.tppmap)|*.tppmap|All files (*.*)|*.*";
             this.docMgr.AttemptOpenFile += new System.EventHandler<TPPSimulator.DocumentManager.AttemptOpenFileEventArgs>(this.docMgr_AttemptOpenFile);
             this.docMgr.AttemptSaveFile += new System.EventHandler<TPPSimulator.DocumentManager.AttemptOpenFileEventArgs>(this.docMgr_AttemptSaveFile);
             this.docMgr.TitleChanged += new System.EventHandler(this.saveMgr_TitleChanged);
             // 
-            // displayGraphToolStripMenuItem
-            // 
-            this.displayGraphToolStripMenuItem.Name = "displayGraphToolStripMenuItem";
-            this.displayGraphToolStripMenuItem.Size = new System.Drawing.Size(156, 22);
-            this.displayGraphToolStripMenuItem.Text = "&Display Graph...";
-            this.displayGraphToolStripMenuItem.Click += new System.EventHandler(this.displayGraphToolStripMenuItem_Click);
-            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(855, 568);
+            this.ClientSize = new System.Drawing.Size(1027, 701);
             this.Controls.Add(this.toolStripContainer1);
             this.KeyPreview = true;
             this.MainMenuStrip = this.menu;
             this.Name = "MainForm";
-            this.Text = "Untitled - TPP Simulator PREVIEW";
+            this.Text = "Untitled - TPP Simulator BETA";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
             this.Load += new System.EventHandler(this.MainForm_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.MainForm_KeyDown);

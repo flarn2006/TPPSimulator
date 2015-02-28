@@ -29,6 +29,10 @@ namespace TPPSimulator
 
             if (result == DialogResult.OK) {
                 tileGrid.ResizeGrid((int)dlg.udWidth.Value, (int)dlg.udHeight.Value);
+                if (tileGrid.Player.Location.X > tileGrid.Columns || tileGrid.Player.Location.Y > tileGrid.Rows)
+                    tileGrid.Player.Location = Point.Empty;
+                if (tileGrid.GoalLocation.X > tileGrid.Columns || tileGrid.GoalLocation.Y > tileGrid.Rows)
+                    tileGrid.GoalLocation = Point.Empty;
             }
 
             return result;
@@ -44,6 +48,12 @@ namespace TPPSimulator
             }
 
             if (proceed) DialogResult = DialogResult.OK;
+        }
+
+        private void udWidthHeight_Enter(object sender, EventArgs e)
+        {
+            NumericUpDown s = (NumericUpDown)sender;
+            s.Select(0, s.Value.ToString().Length);
         }
     }
 }

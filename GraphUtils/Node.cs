@@ -74,9 +74,14 @@ namespace GraphUtils
             return graph.FindPath(this, endNode);
         }
 
-        public Node<TData> Predecessor
+        public Node<TData> PathPredecessor
         {
             get { return graph.GetPathPredecessor(this); }
+        }
+
+        public long PathDistance
+        {
+            get { return graph.GetPathDistance(this); }
         }
 
         public override string ToString()

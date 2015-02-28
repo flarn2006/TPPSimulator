@@ -67,6 +67,7 @@
             0,
             0,
             0});
+            this.udWidth.Enter += new System.EventHandler(this.udWidthHeight_Enter);
             // 
             // udHeight
             // 
@@ -90,6 +91,7 @@
             0,
             0,
             0});
+            this.udHeight.Enter += new System.EventHandler(this.udWidthHeight_Enter);
             // 
             // label2
             // 

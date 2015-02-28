@@ -51,8 +51,20 @@ namespace TPPSimulator
 
         public Input GetPathInput()
         {
-            MessageBox.Show(graph.GetNode(tileGrid.Player.Location).Predecessor.Data.ToString());
-            return Input.None;
+            if (tileGrid.Player.Menu.State != null) {
+                return Input.B;
+            } else {
+                Direction[] directions = new Direction[] { Direction.Up, Direction.Down, Direction.Left, Direction.Right };
+                Point pt = tileGrid.Player.Location;
+                Node<Point> predecessor = graph.GetNode(pt).PathPredecessor;
+                if (predecessor == null) return Input.None;
+                foreach (Direction dir in directions) {
+                    if (pt.Move(dir).Equals(predecessor.Data)) {
+                        return dir.ToInput();
+                    }
+                }
+                return Input.None;
+            }
         }
 
         public Input GetNextInputForQueue()
@@ -248,6 +260,15 @@ This function is not yet implemented.", "Explanation", MessageBoxButtons.OK, Mes
             graph.BuildPathfindingData(graph.GetNode(tileGrid.GoalLocation));
 
             if (recalculatePath) RecalculatePath();
+
+            btnRebuildGraph.Enabled = false;
+        }
+
+        [DefaultValue(true), Category("Appearance"), Description("Indicates whether the \"Recompile Map\" button can be selected.")]
+        public bool RebuildGraphEnabled
+        {
+            get { return btnRebuildGraph.Enabled; }
+            set { btnRebuildGraph.Enabled = value; }
         }
 
         public void RecalculatePath()

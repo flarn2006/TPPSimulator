@@ -124,8 +124,10 @@ namespace GraphUtils
                     foreach (Edge<TNodeData> edge in edgeList) {
                         uint u = edge.startIndex, v = edge.endIndex;
                         if (distance[u] + edge.Weight < distance[v]) {
-                            distance[v] = distance[u] + edge.Weight;
-                            predecessor[v] = nodes[u];
+                            if (distance[u] < Int64.MaxValue) {
+                                distance[v] = distance[u] + edge.Weight;
+                                predecessor[v] = nodes[u];
+                            }
                         }
                     }
                 }
@@ -155,6 +157,11 @@ namespace GraphUtils
         internal Node<TNodeData> GetPathPredecessor(Node<TNodeData> node)
         {
             return predecessor[nodeIndices[node.Data]];
+        }
+
+        internal long GetPathDistance(Node<TNodeData> node)
+        {
+            return distance[nodeIndices[node.Data]];
         }
 
         public void ExportTGF(System.IO.StreamWriter streamWriter)
