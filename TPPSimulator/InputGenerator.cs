@@ -186,8 +186,7 @@ namespace TPPSimulator
         private void pathLink_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             MessageBox.Show(@"This controls the weight to give whatever input is determined to be ""best"" according to a pathfinding algorithm.
-Note that this slider's maximum is 10 times more than the others.
-This function is not yet implemented.", "Explanation", MessageBoxButtons.OK, MessageBoxIcon.Information);
+Note that this slider's maximum is 10 times more than the others.", "Explanation", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         private void btnFillQueue_Click(object sender, EventArgs e)
