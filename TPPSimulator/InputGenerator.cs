@@ -275,8 +275,13 @@ This function is not yet implemented.", "Explanation", MessageBoxButtons.OK, Mes
         {
             if (graph == null) UpdateGraph(false);
             if (drawPath) {
-                path = graph.GetNode(tileGrid.GoalLocation).FindPath(tileGrid.Player.Location).Select(node => node.Data);
-                tileGrid.PathToDraw = path.Select(p => new Point(16 * p.X + 8, 16 * p.Y + 8)).ToArray();
+                try {
+                    path = graph.GetNode(tileGrid.GoalLocation).FindPath(tileGrid.Player.Location).Select(node => node.Data);
+                    tileGrid.PathToDraw = path.Select(p => new Point(16 * p.X + 8, 16 * p.Y + 8)).ToArray();
+                } catch (NullReferenceException) {
+                    MessageBox.Show("Not even Democracy would make this map possible. (Unless it's cause of a tree; it doesn't know about those yet.)", "Impossible!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    tileGrid.PathToDraw = null;
+                }
             }
         }
 
