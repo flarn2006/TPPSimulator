@@ -51,53 +51,72 @@ namespace TPPSimulator
 
         public Input GetPathInput()
         {
-            if (tileGrid.Player.Menu.State != null) {
-                lblAIMonitor.Text = "Spam B! Get out of the menu!";
-                return Input.B;
+            // First, check if there's a shrub nearby. If so, do Start and A.
+            bool foundShrub = false;
+            Node<Point> node = graph.GetNode(tileGrid.Player.Location);
+            for (int i = 0; i < 3; i++) {
+                if (node == null) break;
+                if (tileGrid.GetTile(node.Data) == TileType.Shrub) {
+                    foundShrub = true;
+                    break;
+                }
+                node = node.PathPredecessor;
+            }
+
+            if (foundShrub) {
+                // Try to use Cut
+                lblAIMonitor.Text = "Spam Start and A to use Cut!\r\n(Also, a little up, down, and B.)";
+                Input[] choices = new Input[] { Input.Start, Input.Start, Input.Start, Input.Start, Input.Start, Input.A, Input.A, Input.A, Input.A, Input.A, Input.Up, Input.Down, Input.B };
+                return choices[rng.Next(choices.Length)];
             } else {
-                // Get the predecessor of the player's node (remember, the path is reversed) and a few before that, and pick a random one
-                Direction[] directions = new Direction[] { Direction.Up, Direction.Down, Direction.Left, Direction.Right };
-
-                Node<Point> node = graph.GetNode(tileGrid.Player.Location);
-                if (node.PathPredecessor == null) {
-                    if (tileGrid.Player.Location.Equals(tileGrid.GoalLocation)) {
-                        lblAIMonitor.Text = "TEH URN!";
-                    } else {
-                        lblAIMonitor.Text = "This is impossible!\r\nヽ༼ຈل͜ຈ༽ﾉ RIOT ヽ༼ຈل͜ຈ༽ﾉ";
-                    }
-                    return Input.None;
-                }
-
-                List<Direction> choices = new List<Direction>();
-
-                for (int i = 0; i < 5; i++) {
-                    if (node.PathPredecessor == null) break;
-
-                    // Determine which direction it went
-                    foreach (Direction dir in directions) {
-                        if (node.Data.Move(dir).Equals(node.PathPredecessor.Data)) {
-                            choices.Add(dir);
-                        }
-                    }
-
-                    // Now set the current node to its predecessor for the next step
-                    node = node.PathPredecessor;
-                    if (node == null) break;
-                }
-
-                if (choices.Count == 0) {
-                    return Input.None;
+                if (tileGrid.Player.Menu.State != null) {
+                    lblAIMonitor.Text = "Spam B! Get out of the menu!";
+                    return Input.B;
                 } else {
-                    StringBuilder sb = new StringBuilder("Next steps are:\r\n");
-                    for (int i = 0; i < choices.Count; i++) {
-                        sb.Append(choices[i]);
-                        if (i < choices.Count - 1) sb.Append(", ");
+                    // Get the predecessor of the player's node (remember, the path is reversed) and a few before that, and pick a random one
+                    Direction[] directions = new Direction[] { Direction.Up, Direction.Down, Direction.Left, Direction.Right };
+
+                    node = graph.GetNode(tileGrid.Player.Location);
+                    if (node.PathPredecessor == null) {
+                        if (tileGrid.Player.Location.Equals(tileGrid.GoalLocation)) {
+                            lblAIMonitor.Text = "TEH URN!";
+                        } else {
+                            lblAIMonitor.Text = "This is impossible!\r\nヽ༼ຈل͜ຈ༽ﾉ RIOT ヽ༼ຈل͜ຈ༽ﾉ";
+                        }
+                        return Input.None;
                     }
-                    sb.Append("\r\n\r\nI'll go ");
-                    Direction choice = choices[rng.Next(choices.Count)];
-                    sb.Append(choice);
-                    lblAIMonitor.Text = sb.ToString();
-                    return choice.ToInput();
+
+                    List<Direction> choices = new List<Direction>();
+
+                    for (int i = 0; i < 5; i++) {
+                        if (node.PathPredecessor == null) break;
+
+                        // Determine which direction it went
+                        foreach (Direction dir in directions) {
+                            if (node.Data.Move(dir).Equals(node.PathPredecessor.Data)) {
+                                choices.Add(dir);
+                            }
+                        }
+
+                        // Now set the current node to its predecessor for the next step
+                        node = node.PathPredecessor;
+                        if (node == null) break;
+                    }
+
+                    if (choices.Count == 0) {
+                        return Input.None;
+                    } else {
+                        StringBuilder sb = new StringBuilder("Next steps are:\r\n");
+                        for (int i = 0; i < choices.Count; i++) {
+                            sb.Append(choices[i]);
+                            if (i < choices.Count - 1) sb.Append(", ");
+                        }
+                        sb.Append("\r\n\r\nI'll go ");
+                        Direction choice = choices[rng.Next(choices.Count)];
+                        sb.Append(choice);
+                        lblAIMonitor.Text = sb.ToString();
+                        return choice.ToInput();
+                    }
                 }
             }
         }
@@ -268,6 +287,35 @@ Note that this slider's maximum is 10 times more than the others.", "Explanation
             //UpdateGraph();
         }
 
+        private Point GetSpinDestination(Point tile, Direction spinDir = Direction.None)
+        {
+            // First, check if we're on a spinner tile, and change the direction accordingly.
+            TileType tileType = tileGrid.GetTile(tile);
+            if (tileType == TileType.SpinnerN) spinDir = Direction.Up;
+            else if (tileType == TileType.SpinnerS) spinDir = Direction.Down;
+            else if (tileType == TileType.SpinnerW) spinDir = Direction.Left;
+            else if (tileType == TileType.SpinnerE) spinDir = Direction.Right;
+            else if (tileType == TileType.SpinnerStop) spinDir = Direction.None;
+
+            // If we're no longer spinning, we're at the end, so return that point.
+            if (spinDir == Direction.None) return tile;
+
+            // If the spinning will take us off the map or into a wall, that also means we're done.
+            Point nextTile = tile.Move(spinDir);
+            if (nextTile.X < 0 || nextTile.X >= tileGrid.Columns || nextTile.Y < 0 || nextTile.Y >= tileGrid.Rows) return tile;
+            TileType nextTileType = tileGrid.GetTile(nextTile);
+            if (!nextTileType.Passable.IsPassableFrom(spinDir.Opposite())) return tile;
+
+            // If we're about to land on another spin tile, just return that as the end.
+            // This serves two purposes: to prevent infinite recursion, and so the "draw path" function looks correct.
+            if (nextTileType == TileType.SpinnerN || nextTileType == TileType.SpinnerS || nextTileType == TileType.SpinnerW || nextTileType == TileType.SpinnerE) {
+                return nextTile;
+            }
+
+            // But if we're still spinning, call the function on the next tile.
+            return GetSpinDestination(nextTile, spinDir);
+        }
+
         public void UpdateGraph(bool recalculatePath = true)
         {
             graph = new Graph<Point>((uint)(tileGrid.Rows * tileGrid.Columns));
@@ -281,13 +329,22 @@ Note that this slider's maximum is 10 times more than the others.", "Explanation
             for (int y = 0; y < tileGrid.Rows; y++) {
                 for (int x = 0; x < tileGrid.Columns; x++) {
                     Point pt = new Point(x, y);
-                    Direction[] directions = new Direction[] { Direction.Up, Direction.Down, Direction.Left, Direction.Right };
-                    foreach (Direction dir in directions) {
-                        Point adjacent = pt.Move(dir);
-                        if (adjacent.X >= 0 && adjacent.X < tileGrid.Columns && adjacent.Y >= 0 && adjacent.Y < tileGrid.Rows) {
-                            if (tileGrid.GetTile(adjacent).Passable.IsPassableFrom(dir.Opposite())) {
-                                // Note: edges are reversed, as the player moves much more often than the goal does!
-                                graph.GetNode(adjacent).ConnectToNode(pt);
+                    TileType thisTileType = tileGrid.GetTile(pt);
+
+                    if (thisTileType == TileType.SpinnerN || thisTileType == TileType.SpinnerS || thisTileType == TileType.SpinnerW || thisTileType == TileType.SpinnerE) {
+                        // If this is a spinner tile, just connect it to (well, from) its destination, because you can't just get off. (don't forget, you're here forever!)
+                        graph.GetNode(GetSpinDestination(pt)).ConnectToNode(pt, 10);
+                    } else {
+                        // Otherwise, just connect it "to" its adjacent tiles depending on what can be reached.
+                        Direction[] directions = new Direction[] { Direction.Up, Direction.Down, Direction.Left, Direction.Right };
+                        foreach (Direction dir in directions) {
+                            Point adjacent = pt.Move(dir);
+                            if (adjacent.X >= 0 && adjacent.X < tileGrid.Columns && adjacent.Y >= 0 && adjacent.Y < tileGrid.Rows) {
+                                TileType adjacentTileType = tileGrid.GetTile(adjacent);
+                                if (adjacentTileType.Passable.IsPassableFrom(dir.Opposite()) || adjacentTileType == TileType.Shrub) {
+                                    // Note: edges are reversed, as the player moves much more often than the goal does!
+                                    graph.GetNode(adjacent).ConnectToNode(pt, adjacentTileType == TileType.Shrub ? 100 : 1);
+                                }
                             }
                         }
                     }
@@ -316,7 +373,7 @@ Note that this slider's maximum is 10 times more than the others.", "Explanation
                     path = graph.GetNode(tileGrid.GoalLocation).FindPath(tileGrid.Player.Location).Select(node => node.Data);
                     tileGrid.PathToDraw = path.Select(p => new Point(16 * p.X + 8, 16 * p.Y + 8)).ToArray();
                 } catch (NullReferenceException) {
-                    MessageBox.Show("Not even Democracy would make this map possible. (Unless it's cause of a tree; it doesn't know about those yet.)", "Impossible!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBox.Show("Not even Democracy would make this map possible.", "Impossible!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     tileGrid.PathToDraw = null;
                 }
             }
