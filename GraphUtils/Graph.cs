@@ -132,11 +132,11 @@ namespace GraphUtils
                     }
                 }
 
-                foreach (Edge<TNodeData> edge in edgeList) {
+                /*foreach (Edge<TNodeData> edge in edgeList) {
                     if (distance[edge.startIndex] + edge.Weight < distance[edge.endIndex]) {
                         throw new NegativeWeightCycleException("Graph contains a negative-weight cycle");
                     }
-                }
+                }*/
 
                 lastPathfindingStartNode = startNode;
             }
