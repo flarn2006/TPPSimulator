@@ -32,9 +32,7 @@
             this.streamDelayLabel = new System.Windows.Forms.Label();
             this.queueBar = new System.Windows.Forms.ProgressBar();
             this.btnClearQueue = new System.Windows.Forms.Button();
-            this.vdlStreamDelay = new TPPSimulator.ValueDragLabel();
             this.udStreamDelay = new System.Windows.Forms.NumericUpDown();
-            this.vdlStepInterval = new TPPSimulator.ValueDragLabel();
             this.udStepInterval = new System.Windows.Forms.NumericUpDown();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
@@ -64,6 +62,10 @@
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.lblAIMonitor = new System.Windows.Forms.Label();
+            this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.pieChart = new TPPSimulator.PieChart.PieChart();
+            this.vdlStreamDelay = new TPPSimulator.ValueDragLabel();
+            this.vdlStepInterval = new TPPSimulator.ValueDragLabel();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.udStreamDelay)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.udStepInterval)).BeginInit();
@@ -82,6 +84,7 @@
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
+            this.tabPage3.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -144,17 +147,6 @@
             this.btnClearQueue.UseVisualStyleBackColor = true;
             this.btnClearQueue.Click += new System.EventHandler(this.clearQueueBtn_Click);
             // 
-            // vdlStreamDelay
-            // 
-            this.vdlStreamDelay.AutoSize = true;
-            this.vdlStreamDelay.Cursor = System.Windows.Forms.Cursors.SizeWE;
-            this.vdlStreamDelay.Location = new System.Drawing.Point(63, 47);
-            this.vdlStreamDelay.Name = "vdlStreamDelay";
-            this.vdlStreamDelay.Size = new System.Drawing.Size(94, 13);
-            this.vdlStreamDelay.TabIndex = 3;
-            this.vdlStreamDelay.Text = "steps stream delay";
-            this.vdlStreamDelay.ValueDrag += new System.EventHandler<TPPSimulator.ValueDragLabel.ValueDragEventArgs>(this.vdlStreamDelay_ValueDrag);
-            // 
             // udStreamDelay
             // 
             this.udStreamDelay.Location = new System.Drawing.Point(6, 45);
@@ -167,17 +159,6 @@
             this.udStreamDelay.Size = new System.Drawing.Size(51, 20);
             this.udStreamDelay.TabIndex = 2;
             this.udStreamDelay.ValueChanged += new System.EventHandler(this.udStreamDelay_ValueChanged);
-            // 
-            // vdlStepInterval
-            // 
-            this.vdlStepInterval.AutoSize = true;
-            this.vdlStepInterval.Cursor = System.Windows.Forms.Cursors.SizeWE;
-            this.vdlStepInterval.Location = new System.Drawing.Point(63, 21);
-            this.vdlStepInterval.Name = "vdlStepInterval";
-            this.vdlStepInterval.Size = new System.Drawing.Size(92, 13);
-            this.vdlStepInterval.TabIndex = 1;
-            this.vdlStepInterval.Text = "ms between steps";
-            this.vdlStepInterval.ValueDrag += new System.EventHandler<TPPSimulator.ValueDragLabel.ValueDragEventArgs>(this.vdlStepInterval_ValueDrag);
             // 
             // udStepInterval
             // 
@@ -267,6 +248,9 @@
             this.tbNone.TabIndex = 20;
             this.tbNone.TickFrequency = 10;
             this.tbNone.Value = 10;
+            this.tbNone.Scroll += new System.EventHandler(this.inputSliders_Scroll);
+            this.tbNone.MouseEnter += new System.EventHandler(this.inputSliders_MouseEnter);
+            this.tbNone.MouseLeave += new System.EventHandler(this.inputSliders_MouseLeave);
             // 
             // tbStart
             // 
@@ -278,6 +262,9 @@
             this.tbStart.TabIndex = 19;
             this.tbStart.TickFrequency = 10;
             this.tbStart.Value = 50;
+            this.tbStart.Scroll += new System.EventHandler(this.inputSliders_Scroll);
+            this.tbStart.MouseEnter += new System.EventHandler(this.inputSliders_MouseEnter);
+            this.tbStart.MouseLeave += new System.EventHandler(this.inputSliders_MouseLeave);
             // 
             // tbSelect
             // 
@@ -289,6 +276,9 @@
             this.tbSelect.TabIndex = 18;
             this.tbSelect.TickFrequency = 10;
             this.tbSelect.Value = 50;
+            this.tbSelect.Scroll += new System.EventHandler(this.inputSliders_Scroll);
+            this.tbSelect.MouseEnter += new System.EventHandler(this.inputSliders_MouseEnter);
+            this.tbSelect.MouseLeave += new System.EventHandler(this.inputSliders_MouseLeave);
             // 
             // tbB
             // 
@@ -300,6 +290,9 @@
             this.tbB.TabIndex = 17;
             this.tbB.TickFrequency = 10;
             this.tbB.Value = 50;
+            this.tbB.Scroll += new System.EventHandler(this.inputSliders_Scroll);
+            this.tbB.MouseEnter += new System.EventHandler(this.inputSliders_MouseEnter);
+            this.tbB.MouseLeave += new System.EventHandler(this.inputSliders_MouseLeave);
             // 
             // tbA
             // 
@@ -311,6 +304,9 @@
             this.tbA.TabIndex = 16;
             this.tbA.TickFrequency = 10;
             this.tbA.Value = 50;
+            this.tbA.Scroll += new System.EventHandler(this.inputSliders_Scroll);
+            this.tbA.MouseEnter += new System.EventHandler(this.inputSliders_MouseEnter);
+            this.tbA.MouseLeave += new System.EventHandler(this.inputSliders_MouseLeave);
             // 
             // tbRight
             // 
@@ -322,6 +318,9 @@
             this.tbRight.TabIndex = 15;
             this.tbRight.TickFrequency = 10;
             this.tbRight.Value = 50;
+            this.tbRight.Scroll += new System.EventHandler(this.inputSliders_Scroll);
+            this.tbRight.MouseEnter += new System.EventHandler(this.inputSliders_MouseEnter);
+            this.tbRight.MouseLeave += new System.EventHandler(this.inputSliders_MouseLeave);
             // 
             // tbLeft
             // 
@@ -333,6 +332,9 @@
             this.tbLeft.TabIndex = 14;
             this.tbLeft.TickFrequency = 10;
             this.tbLeft.Value = 50;
+            this.tbLeft.Scroll += new System.EventHandler(this.inputSliders_Scroll);
+            this.tbLeft.MouseEnter += new System.EventHandler(this.inputSliders_MouseEnter);
+            this.tbLeft.MouseLeave += new System.EventHandler(this.inputSliders_MouseLeave);
             // 
             // tbDown
             // 
@@ -344,6 +346,9 @@
             this.tbDown.TabIndex = 13;
             this.tbDown.TickFrequency = 10;
             this.tbDown.Value = 50;
+            this.tbDown.Scroll += new System.EventHandler(this.inputSliders_Scroll);
+            this.tbDown.MouseEnter += new System.EventHandler(this.inputSliders_MouseEnter);
+            this.tbDown.MouseLeave += new System.EventHandler(this.inputSliders_MouseLeave);
             // 
             // tbUp
             // 
@@ -355,6 +360,9 @@
             this.tbUp.TabIndex = 11;
             this.tbUp.TickFrequency = 10;
             this.tbUp.Value = 50;
+            this.tbUp.Scroll += new System.EventHandler(this.inputSliders_Scroll);
+            this.tbUp.MouseEnter += new System.EventHandler(this.inputSliders_MouseEnter);
+            this.tbUp.MouseLeave += new System.EventHandler(this.inputSliders_MouseLeave);
             // 
             // label10
             // 
@@ -459,12 +467,15 @@
             // 
             this.tbPath.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tbPath.Location = new System.Drawing.Point(51, 3);
-            this.tbPath.Maximum = 1000;
+            this.tbPath.Maximum = 900;
             this.tbPath.Name = "tbPath";
             this.tbPath.Size = new System.Drawing.Size(108, 23);
             this.tbPath.TabIndex = 10;
             this.tbPath.TickFrequency = 50;
             this.tbPath.Value = 500;
+            this.tbPath.Scroll += new System.EventHandler(this.inputSliders_Scroll);
+            this.tbPath.MouseEnter += new System.EventHandler(this.inputSliders_MouseEnter);
+            this.tbPath.MouseLeave += new System.EventHandler(this.inputSliders_MouseLeave);
             // 
             // pathLink
             // 
@@ -516,6 +527,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Controls.Add(this.tabPage2);
+            this.tabControl1.Controls.Add(this.tabPage3);
             this.tabControl1.Location = new System.Drawing.Point(3, 509);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
@@ -530,7 +542,7 @@
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
             this.tabPage1.Size = new System.Drawing.Size(160, 126);
             this.tabPage1.TabIndex = 0;
-            this.tabPage1.Text = "Input Log";
+            this.tabPage1.Text = "Inputs";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
             // tabPage2
@@ -556,6 +568,49 @@
             this.lblAIMonitor.TabIndex = 0;
             this.lblAIMonitor.Text = "Inputs are broken!\r\nヽ༼ຈل͜ຈ༽ﾉ RIOT ヽ༼ຈل͜ຈ༽ﾉ";
             // 
+            // tabPage3
+            // 
+            this.tabPage3.Controls.Add(this.pieChart);
+            this.tabPage3.Location = new System.Drawing.Point(4, 22);
+            this.tabPage3.Name = "tabPage3";
+            this.tabPage3.Size = new System.Drawing.Size(160, 126);
+            this.tabPage3.TabIndex = 2;
+            this.tabPage3.Text = "Pie";
+            this.tabPage3.UseVisualStyleBackColor = true;
+            // 
+            // pieChart
+            // 
+            this.pieChart.BackColor = System.Drawing.Color.White;
+            this.pieChart.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pieChart.Location = new System.Drawing.Point(0, 0);
+            this.pieChart.Name = "pieChart";
+            this.pieChart.PieMargin = 0;
+            this.pieChart.Size = new System.Drawing.Size(160, 126);
+            this.pieChart.TabIndex = 0;
+            this.pieChart.Text = "pieChart1";
+            // 
+            // vdlStreamDelay
+            // 
+            this.vdlStreamDelay.AutoSize = true;
+            this.vdlStreamDelay.Cursor = System.Windows.Forms.Cursors.SizeWE;
+            this.vdlStreamDelay.Location = new System.Drawing.Point(63, 47);
+            this.vdlStreamDelay.Name = "vdlStreamDelay";
+            this.vdlStreamDelay.Size = new System.Drawing.Size(94, 13);
+            this.vdlStreamDelay.TabIndex = 3;
+            this.vdlStreamDelay.Text = "steps stream delay";
+            this.vdlStreamDelay.ValueDrag += new System.EventHandler<TPPSimulator.ValueDragLabel.ValueDragEventArgs>(this.vdlStreamDelay_ValueDrag);
+            // 
+            // vdlStepInterval
+            // 
+            this.vdlStepInterval.AutoSize = true;
+            this.vdlStepInterval.Cursor = System.Windows.Forms.Cursors.SizeWE;
+            this.vdlStepInterval.Location = new System.Drawing.Point(63, 21);
+            this.vdlStepInterval.Name = "vdlStepInterval";
+            this.vdlStepInterval.Size = new System.Drawing.Size(92, 13);
+            this.vdlStepInterval.TabIndex = 1;
+            this.vdlStepInterval.Text = "ms between steps";
+            this.vdlStepInterval.ValueDrag += new System.EventHandler<TPPSimulator.ValueDragLabel.ValueDragEventArgs>(this.vdlStepInterval_ValueDrag);
+            // 
             // InputGenerator
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -567,6 +622,7 @@
             this.Controls.Add(this.groupBox1);
             this.Name = "InputGenerator";
             this.Size = new System.Drawing.Size(174, 664);
+            this.Load += new System.EventHandler(this.InputGenerator_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.udStreamDelay)).EndInit();
@@ -587,6 +643,7 @@
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.tabPage2.ResumeLayout(false);
+            this.tabPage3.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -630,6 +687,8 @@
         private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.TabPage tabPage2;
         private System.Windows.Forms.Label lblAIMonitor;
+        private System.Windows.Forms.TabPage tabPage3;
+        private PieChart.PieChart pieChart;
 
     }
 }

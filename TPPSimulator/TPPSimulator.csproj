@@ -79,6 +79,14 @@
     </Compile>
     <Compile Include="Menu.cs" />
     <Compile Include="MenuState.cs" />
+    <Compile Include="PieChart\PieChart.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="PieChart\PieChart.Designer.cs">
+      <DependentUpon>PieChart.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PieChart\PieSlice.cs" />
+    <Compile Include="PieChart\PieSliceCollection.cs" />
     <Compile Include="Player.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -113,6 +121,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PieChart\PieChart.resx">
+      <DependentUpon>PieChart.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

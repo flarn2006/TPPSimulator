@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using GraphUtils;
+using TPPSimulator.PieChart;
 
 namespace TPPSimulator
 {
@@ -30,11 +31,17 @@ namespace TPPSimulator
         private Graph<Point> graph;
         private IEnumerable<Point> path = null;
         private bool drawPath = false;
+        TrackBar[] sliders;
+        Color[] pieSliceColors;
+        Dictionary<TrackBar, PieSlice> pieSlices;
 
         public InputGenerator()
         {
             InitializeComponent();
             inputQueue = new Queue<Input>();
+            sliders = new TrackBar[] { tbPath, tbUp, tbDown, tbLeft, tbRight, tbA, tbB, tbSelect, tbStart, tbNone };
+            pieSliceColors = new Color[] { Color.Gray, Color.Blue, Color.FromArgb(0, 0, 192), Color.Navy, Color.FromArgb(0, 0, 64), Color.Green, Color.Red, Color.Magenta, Color.Orange, Color.Black };
+            pieSlices = new Dictionary<TrackBar, PieSlice>();
         }
 
         public event EventHandler StepIntervalChanged;
@@ -240,7 +247,7 @@ namespace TPPSimulator
         private void pathLink_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             MessageBox.Show(@"This controls the weight to give whatever input is determined to be ""best"" according to a pathfinding algorithm.
-Note that this slider's maximum is 10 times more than the others.", "Explanation", MessageBoxButtons.OK, MessageBoxIcon.Information);
+Note that this slider's maximum is 9 times more than the others.", "Explanation", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         private void btnFillQueue_Click(object sender, EventArgs e)
@@ -403,6 +410,34 @@ Note that this slider's maximum is 10 times more than the others.", "Explanation
         public Graph<Point> Graph
         {
             get { return graph; }
+        }
+
+        private void InputGenerator_Load(object sender, EventArgs e)
+        {
+            int i = 0;
+            foreach (TrackBar tb in sliders) {
+                PieSlice slice = pieChart.PieSlices.Add(tb.Value, pieSliceColors[i]);
+                pieSlices.Add(tb, slice);
+                i++;
+            }
+        }
+
+        private void inputSliders_Scroll(object sender, EventArgs e)
+        {
+            TrackBar tb = (TrackBar)sender;
+            pieSlices[tb].Value = tb.Value;
+        }
+
+        private void inputSliders_MouseEnter(object sender, EventArgs e)
+        {
+            TrackBar tb = (TrackBar)sender;
+            pieSlices[tb].BorderColor = pieSlices[tb].FillColor.Invert();
+        }
+
+        private void inputSliders_MouseLeave(object sender, EventArgs e)
+        {
+            TrackBar tb = (TrackBar)sender;
+            //pieSlices[tb].BorderColor = Color.Transparent;
         }
     }
 }
