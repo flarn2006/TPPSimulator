@@ -23,7 +23,10 @@ namespace TPPSimulator
             Image result;
             filename = System.IO.Path.Combine("Menu", filename);
             if (!imageCache.TryGetValue(filename, out result)) {
-                result = Image.FromFile(filename);
+                Bitmap original_bitmap = (Bitmap) Image.FromFile(filename);
+                result = new Bitmap(original_bitmap.Width, original_bitmap.Height);
+                Graphics graphics = Graphics.FromImage(result);
+                graphics.DrawImage(original_bitmap, 0, 0);
                 imageCache.Add(filename, result);
             }
             return result;

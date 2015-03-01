@@ -41,7 +41,6 @@
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
-    <Reference Include="System.Deployment" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
@@ -214,8 +213,14 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>if not exist $(ProjectDir)$(OutDir)Menu mkdir $(ProjectDir)$(OutDir)Menu
-xcopy /y /s $(ProjectDir)Menu $(ProjectDir)$(OutDir)Menu</PostBuildEvent>
+    <PostBuildEvent Condition="'$(OS)' == 'Windows_NT'">
+       if not exist $(ProjectDir)$(OutDir)Menu mkdir $(ProjectDir)$(OutDir)Menu
+         xcopy /y /s $(ProjectDir)Menu $(ProjectDir)$(OutDir)Menu
+    </PostBuildEvent>
+    <PostBuildEvent Condition="'$(OS)' != 'Windows_NT'">
+       mkdir -p $(ProjectDir)$(OutDir)Menu
+       cp -r $(ProjectDir)Menu $(ProjectDir)$(OutDir)
+    </PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

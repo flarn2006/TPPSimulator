@@ -29,7 +29,7 @@ namespace TPPSimulator
         {
             stateTable = new Dictionary<string,MenuState>();
             try {
-                StreamReader sr = new StreamReader("Menu/Menu.csv");
+                StreamReader sr = new StreamReader("Menu/menu.csv");
                 while (!sr.EndOfStream) {
                     string[] fields = sr.ReadLine().Split(',');
                     if (fields[0][0] == '#') continue;
