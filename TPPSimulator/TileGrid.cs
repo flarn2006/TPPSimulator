@@ -13,7 +13,7 @@ using GraphUtils;
 namespace TPPSimulator
 {
     [DefaultEvent("GridChanged")]
-    public partial class TileGrid : Control
+    public partial class TileGrid : ScrollableControl
     {
         private int cols = 1, rows = 1;
         private TileType[,] grid;
@@ -40,6 +40,7 @@ namespace TPPSimulator
                 player.Moved += player_Moved;
             }
             DoubleBuffered = true;
+            AutoScroll = true;
         }
 
         private void player_Moved(object sender, EventArgs e)
@@ -326,6 +327,8 @@ namespace TPPSimulator
                     grid[y, x] = oldGrid[y, x];
                 }
             }
+
+            AutoScrollMinSize = new Size(cols * tileSize, rows * tileSize);
 
             FullImageUpdate();
             OnGridChanged();
