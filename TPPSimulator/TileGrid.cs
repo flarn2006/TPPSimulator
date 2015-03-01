@@ -152,6 +152,7 @@ namespace TPPSimulator
         {
             base.OnPaint(pe);
             pe.Graphics.FillRectangle(SystemBrushes.AppWorkspace, pe.ClipRectangle);
+            pe.Graphics.TranslateTransform(AutoScrollPosition.X, AutoScrollPosition.Y);
 
             if (grid != null) {
                 pe.Graphics.DrawImage(bmp, Point.Empty);
