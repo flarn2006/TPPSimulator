@@ -7,7 +7,19 @@ using System.Threading.Tasks;
 namespace GraphUtils
 {
     [Serializable]
-    public class GraphFullException : Exception
+    public class GraphException : Exception
+    {
+        public GraphException() { }
+        public GraphException(string message) : base(message) { }
+        public GraphException(string message, Exception inner) : base(message, inner) { }
+        protected GraphException(
+          System.Runtime.Serialization.SerializationInfo info,
+          System.Runtime.Serialization.StreamingContext context)
+            : base(info, context) { }
+    }
+
+    [Serializable]
+    public class GraphFullException : GraphException
     {
         public GraphFullException() { }
         public GraphFullException(string message) : base(message) { }
@@ -19,7 +31,7 @@ namespace GraphUtils
     }
 
     [Serializable]
-    public class DuplicateNodeException : Exception
+    public class DuplicateNodeException : GraphException
     {
         public DuplicateNodeException() { }
         public DuplicateNodeException(string message) : base(message) { }
@@ -31,7 +43,7 @@ namespace GraphUtils
     }
 
     [Serializable]
-    public class DuplicateEdgeException : Exception
+    public class DuplicateEdgeException : GraphException
     {
         public DuplicateEdgeException() { }
         public DuplicateEdgeException(string message) : base(message) { }
@@ -43,7 +55,7 @@ namespace GraphUtils
     }
 
     [Serializable]
-    public class IncorrectGraphException : Exception
+    public class IncorrectGraphException : GraphException
     {
         public IncorrectGraphException() { }
         public IncorrectGraphException(string message) : base(message) { }
@@ -55,7 +67,7 @@ namespace GraphUtils
     }
 
     [Serializable]
-    public class NodeNotFoundException : Exception
+    public class NodeNotFoundException : GraphException
     {
         public NodeNotFoundException() { }
         public NodeNotFoundException(string message) : base(message) { }
@@ -67,7 +79,7 @@ namespace GraphUtils
     }
 
     [Serializable]
-    public class NegativeWeightCycleException : Exception
+    public class NegativeWeightCycleException : GraphException
     {
         public NegativeWeightCycleException() { }
         public NegativeWeightCycleException(string message) : base(message) { }

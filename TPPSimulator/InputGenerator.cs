@@ -56,6 +56,21 @@ namespace TPPSimulator
             OnStepIntervalChanged(EventArgs.Empty);
         }
 
+        private Direction GetNextDirection(Node<Point> node)
+        {
+            if (node.PathPredecessor != null) {
+                Direction[] directions = { Direction.Up, Direction.Down, Direction.Left, Direction.Right };
+                foreach (Direction dir in directions) {
+                    if (node.Data.Move(dir).Equals(node.PathPredecessor.Data)) {
+                        return dir;
+                    }
+                }
+                return Direction.None;
+            } else {
+                return Direction.None;
+            }
+        }
+
         public Input GetPathInput()
         {
             // First, check if there's a shrub nearby. If so, do Start and A.
@@ -72,8 +87,9 @@ namespace TPPSimulator
 
             if (foundShrub) {
                 // Try to use Cut
-                lblAIMonitor.Text = "Spam Start and A to use Cut!\r\n(Also, a little up, down, and B.)";
-                Input[] choices = new Input[] { Input.Start, Input.Start, Input.Start, Input.Start, Input.Start, Input.A, Input.A, Input.A, Input.A, Input.A, Input.Up, Input.Down, Input.B };
+                Direction nextDir = GetNextDirection(graph.GetNode(tileGrid.Player.Location));
+                lblAIMonitor.Text = "Spam Start and A to use Cut!\r\nAlso, a little up, down, and B.\r\nAnd " + nextDir.ToString() + " as well.";
+                Input[] choices = new Input[] { Input.Start, Input.Start, Input.Start, Input.Start, Input.Start, Input.A, Input.A, Input.A, Input.A, Input.A, Input.Up, Input.Down, Input.B, nextDir.ToInput(), nextDir.ToInput() };
                 return choices[rng.Next(choices.Length)];
             } else {
                 if (tileGrid.Player.Menu.State != null) {
@@ -81,8 +97,7 @@ namespace TPPSimulator
                     return Input.B;
                 } else {
                     // Get the predecessor of the player's node (remember, the path is reversed) and a few before that, and pick a random one
-                    Direction[] directions = new Direction[] { Direction.Up, Direction.Down, Direction.Left, Direction.Right };
-
+                    
                     node = graph.GetNode(tileGrid.Player.Location);
                     if (node.PathPredecessor == null) {
                         if (tileGrid.Player.Location.Equals(tileGrid.GoalLocation)) {
@@ -99,11 +114,8 @@ namespace TPPSimulator
                         if (node.PathPredecessor == null) break;
 
                         // Determine which direction it went
-                        foreach (Direction dir in directions) {
-                            if (node.Data.Move(dir).Equals(node.PathPredecessor.Data)) {
-                                choices.Add(dir);
-                            }
-                        }
+                        Direction nextDir = GetNextDirection(node);
+                        if (nextDir != Direction.None) choices.Add(nextDir);
 
                         // Now set the current node to its predecessor for the next step
                         node = node.PathPredecessor;
