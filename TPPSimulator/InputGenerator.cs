@@ -40,7 +40,7 @@ namespace TPPSimulator
             InitializeComponent();
             inputQueue = new Queue<Input>();
             sliders = new TrackBar[] { tbPath, tbUp, tbDown, tbLeft, tbRight, tbA, tbB, tbSelect, tbStart, tbNone };
-            pieSliceColors = new Color[] { Color.Gray, Color.Blue, Color.FromArgb(0, 0, 192), Color.Navy, Color.FromArgb(0, 0, 64), Color.Green, Color.Red, Color.Magenta, Color.Orange, Color.Black };
+            pieSliceColors = new Color[] { Color.Silver, Color.Blue, Color.FromArgb(0, 0, 192), Color.Navy, Color.FromArgb(0, 0, 64), Color.Green, Color.Red, Color.Magenta, Color.Orange, Color.Black };
             pieSlices = new Dictionary<TrackBar, PieSlice>();
         }
 
@@ -437,7 +437,7 @@ Note that this slider's maximum is 9 times more than the others.", "Explanation"
         private void inputSliders_MouseLeave(object sender, EventArgs e)
         {
             TrackBar tb = (TrackBar)sender;
-            //pieSlices[tb].BorderColor = Color.Transparent;
+            pieSlices[tb].BorderColor = Color.Transparent;
         }
     }
 }
