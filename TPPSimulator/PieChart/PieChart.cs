@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Drawing.Drawing2D;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -34,13 +35,28 @@ namespace TPPSimulator.PieChart
             }
 
             if (total > 0) {
+                pe.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
+
                 double angle = 0.0;
                 double angleFactor = 360.0 / total;
 
                 foreach (PieSlice slice in PieSlices) {
                     double sliceAngle = slice.Value * angleFactor;
                     pe.Graphics.FillPie(new SolidBrush(slice.FillColor), rect, (float)angle, (float)sliceAngle);
-                    pe.Graphics.DrawPie(new Pen(slice.BorderColor, 2.0f), rect, (float)angle, (float)sliceAngle);
+                    angle += sliceAngle;
+                }
+
+                angle = 0.0;
+
+                foreach (PieSlice slice in PieSlices) {
+                    double sliceAngle = slice.Value * angleFactor;
+
+                    if (slice.BorderColor.A > 0) {
+                        Pen borderPen = new Pen(slice.BorderColor, 2.0f);
+                        borderPen.Alignment = PenAlignment.Inset;
+                        pe.Graphics.DrawPie(new Pen(slice.BorderColor, 2.0f), rect, (float)angle, (float)sliceAngle);
+                    }
+
                     angle += sliceAngle;
                 }
             }
