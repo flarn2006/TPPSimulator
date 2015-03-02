@@ -203,6 +203,7 @@
     <None Include="Resources\arrow_out.png" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Images\empty2.png" />
     <Content Include="Images\shrub.png" />
     <None Include="Resources\sound_mute.png" />
     <None Include="Resources\joystick_delete.png" />

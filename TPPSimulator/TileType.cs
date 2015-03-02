@@ -71,13 +71,13 @@ namespace TPPSimulator
         }
 
         private Passability passable;
-        private Image image;
+        private Image image, imageAlt;
 
         private static TileType empty, wall, ledge, spinnerN, spinnerS, spinnerW, spinnerE, spinnerStop, shrub;
 
         static TileType()
         {
-            empty = new TileType { Passable = new Passability(true), Image = Properties.Resources.empty };
+            empty = new TileType { Passable = new Passability(true), Image = Properties.Resources.empty, ImageAlt = Properties.Resources.empty2 };
             wall = new TileType { Passable = new Passability(false), Image = Properties.Resources.wall };
             ledge = new TileType { Passable = new Passability(true, false, false, false), Image = Properties.Resources.ledge };
             ledge.Step += ledge_Step;
@@ -129,6 +129,12 @@ namespace TPPSimulator
         {
             get { return image; }
             set { image = value; }
+        }
+
+        public Image ImageAlt
+        {
+            get { return imageAlt; }
+            set { imageAlt = value; }
         }
 
         public event EventHandler<StepEventArgs> Step;

@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Security.Cryptography;
 using GraphUtils;
 
 namespace TPPSimulator
@@ -24,12 +25,14 @@ namespace TPPSimulator
         private LeftClickMode leftClickMode = LeftClickMode.Player;
         private Point goalLocation = Point.Empty;
         private Point[] pathToDraw = null;
+        private MD5 md5;
 
         public enum LeftClickMode { Player, Goal, Tile }
 
         public TileGrid()
         {
             InitializeComponent();
+            md5 = MD5.Create();
             InitializeGrid();
             if (LicenseManager.UsageMode != LicenseUsageMode.Designtime) {
                 // Ugh, LicenseManager...never thought I'd actually be using that part of the .NET Framework.
@@ -159,7 +162,13 @@ namespace TPPSimulator
         private void DrawTile(Graphics g, int tileX, int tileY)
         {
             if (grid[tileY, tileX] != null) {
-                g.DrawImage(grid[tileY, tileX].Image, tileSize * tileX, tileSize * tileY);
+                Image img = grid[tileY, tileX].Image;
+                if (grid[tileY, tileX].ImageAlt != null) {
+                    if (md5.ComputeHash(new byte[] { (byte)(tileX & 255), (byte)(tileY & 255) })[0] < 16) {
+                        img = grid[tileY, tileX].ImageAlt;
+                    }
+                }
+                g.DrawImage(img, tileSize * tileX, tileSize * tileY);
             } else {
                 g.FillRectangle(Brushes.Red, tileSize * tileX, tileSize * tileY, tileSize, tileSize);
             }
