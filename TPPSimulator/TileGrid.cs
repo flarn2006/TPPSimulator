@@ -46,11 +46,17 @@ namespace TPPSimulator
         private void player_Moved(object sender, EventArgs e)
         {
             OnPlayerMoved();
+            if (player.Location.Equals(goalLocation)) {
+                OnGoalReached();
+            }
         }
 
         public event EventHandler GridChanged;
         public event EventHandler PlayerMoved;
         public event EventHandler GoalMoved;
+        public event EventHandler GoalReached;
+
+        #region Event methods
 
         protected virtual void OnGridChanged(EventArgs e)
         {
@@ -81,6 +87,18 @@ namespace TPPSimulator
         {
             OnGoalMoved(EventArgs.Empty);
         }
+
+        protected virtual void OnGoalReached(EventArgs e)
+        {
+            if (GoalReached != null) GoalReached(this, e);
+        }
+
+        protected void OnGoalReached()
+        {
+            OnGoalReached(EventArgs.Empty);
+        }
+
+        #endregion
 
         private void player_NeedsTileGridRedraw(object sender, EventArgs e)
         {

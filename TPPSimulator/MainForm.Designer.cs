@@ -592,6 +592,8 @@
             // 
             // tileGrid
             // 
+            this.tileGrid.AutoScroll = true;
+            this.tileGrid.AutoScrollMinSize = new System.Drawing.Size(640, 480);
             this.tileGrid.Columns = 40;
             this.tileGrid.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tileGrid.LeftClickTile = null;
@@ -603,6 +605,7 @@
             this.tileGrid.TabIndex = 0;
             this.tileGrid.Text = "tileGrid1";
             this.tileGrid.GridChanged += new System.EventHandler(this.tileGrid_GridChanged);
+            this.tileGrid.GoalReached += new System.EventHandler(this.tileGrid_GoalReached);
             // 
             // inputGen
             // 

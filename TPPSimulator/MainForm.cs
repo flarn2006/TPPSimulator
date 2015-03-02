@@ -365,5 +365,12 @@ L = A", "Manual Input Controls", MessageBoxButtons.OK, MessageBoxIcon.Informatio
         {
 
         }
+
+        private void tileGrid_GoalReached(object sender, EventArgs e)
+        {
+            tsbAutorun.Checked = false;
+            stepTimer.Enabled = false;
+            SoundPlayer.Play(Properties.Resources.goal_snd);
+        }
     }
 }

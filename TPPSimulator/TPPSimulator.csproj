@@ -212,6 +212,7 @@
     <None Include="Resources\chart_organisation.png" />
     <Content Include="Sounds\bulbasaur.wav" />
     <Content Include="Sounds\charmander.wav" />
+    <Content Include="Sounds\goal.wav" />
     <Content Include="Sounds\kricketune.wav" />
     <Content Include="Sounds\ledge.wav" />
     <Content Include="Sounds\wall.wav" />
