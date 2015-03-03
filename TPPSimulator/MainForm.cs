@@ -227,9 +227,7 @@ In the mean time, enjoy this preview!", "Welcome!", MessageBoxButtons.OKCancel, 
 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (docMgr.PromptBeforeExit()) {
-                Application.Exit();
-            }
+            Application.Exit();
         }
 
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
