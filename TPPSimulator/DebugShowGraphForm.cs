@@ -60,13 +60,15 @@ namespace TPPSimulator
                 if (node.PathPredecessor != null) {
                     Point start = TranslateGraphPoint(node.Data);
                     Point end = TranslateGraphPoint(node.PathPredecessor.Data);
-                    Point mid;
+                    Point mid1, mid2;
                     if (start.X == end.X) {
-                        mid = new Point(start.X + 16, (start.Y + end.Y) / 2);
+                        mid1 = new Point(start.X + 32, start.Y);
+                        mid2 = new Point(start.X + 32, end.Y);
                     } else {
-                        mid = new Point((start.X + end.X) / 2, start.Y - 16);
+                        mid1 = new Point(start.X, start.Y - 32);
+                        mid2 = new Point(end.X, start.Y - 32);
                     }
-                    g.DrawCurve(predecessorPen, new Point[] { start, mid, end }, 1.0f);
+                    g.DrawBezier(predecessorPen, start, mid1, mid2, end);
                 }
 
                 g.DrawString((node.PathDistance == Int64.MaxValue ? "Inf" : node.PathDistance.ToString()), distanceFont, distanceBrush, TranslateGraphPoint(node.Data));
