@@ -111,7 +111,7 @@
             this.tsbShrub});
             this.tsTools.Location = new System.Drawing.Point(0, 3);
             this.tsTools.Name = "tsTools";
-            this.tsTools.Size = new System.Drawing.Size(32, 260);
+            this.tsTools.Size = new System.Drawing.Size(24, 241);
             this.tsTools.TabIndex = 0;
             this.tsTools.Text = "Tools";
             this.tsTools.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.toolStrip1_ItemClicked);
@@ -225,7 +225,7 @@
             // 
             this.toolStripContainer1.ContentPanel.Controls.Add(this.panel1);
             this.toolStripContainer1.ContentPanel.Controls.Add(this.inputGen);
-            this.toolStripContainer1.ContentPanel.Size = new System.Drawing.Size(995, 627);
+            this.toolStripContainer1.ContentPanel.Size = new System.Drawing.Size(1003, 627);
             this.toolStripContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
             // 
             // toolStripContainer1.LeftToolStripPanel
@@ -251,7 +251,7 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(821, 627);
+            this.panel1.Size = new System.Drawing.Size(829, 627);
             this.panel1.TabIndex = 0;
             // 
             // tileGrid
@@ -265,7 +265,7 @@
             this.tileGrid.Name = "tileGrid";
             this.tileGrid.PathToDraw = null;
             this.tileGrid.Rows = 30;
-            this.tileGrid.Size = new System.Drawing.Size(817, 623);
+            this.tileGrid.Size = new System.Drawing.Size(825, 623);
             this.tileGrid.TabIndex = 0;
             this.tileGrid.Text = "tileGrid1";
             this.tileGrid.GridChanged += new System.EventHandler(this.tileGrid_GridChanged);
@@ -275,7 +275,7 @@
             // 
             this.inputGen.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.inputGen.Dock = System.Windows.Forms.DockStyle.Right;
-            this.inputGen.Location = new System.Drawing.Point(821, 0);
+            this.inputGen.Location = new System.Drawing.Point(829, 0);
             this.inputGen.Name = "inputGen";
             this.inputGen.Size = new System.Drawing.Size(174, 627);
             this.inputGen.TabIndex = 1;

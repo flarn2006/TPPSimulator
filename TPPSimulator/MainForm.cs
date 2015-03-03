@@ -206,7 +206,7 @@ In the mean time, enjoy this preview!", "Welcome!", MessageBoxButtons.OKCancel, 
                     else if (tile == TileType.SpinnerW) ch = '<';
                     else if (tile == TileType.SpinnerE) ch = '>';
                     else if (tile == TileType.SpinnerStop) ch = 'X';
-                    else if (tile == TileType.Shrub) ch = 'S';
+                    else if (tile == TileType.Shrub || tile == TileType.ShrubRemoved) ch = 'S';
                     sw.Write(ch);
                 }
                 sw.WriteLine();

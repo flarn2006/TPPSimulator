@@ -268,6 +268,16 @@ namespace TPPSimulator.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap shrub_removed {
+            get {
+                object obj = ResourceManager.GetObject("shrub_removed", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap sound_mute {
             get {
                 object obj = ResourceManager.GetObject("sound_mute", resourceCulture);

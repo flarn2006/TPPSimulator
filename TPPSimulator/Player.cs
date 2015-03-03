@@ -51,7 +51,7 @@ namespace TPPSimulator
 
             if (canCut) {
                 menu.StateID = "pokemon_cut_success";
-                tileGrid.SetTile(cutTile, TileType.Empty);
+                tileGrid.SetTile(cutTile, TileType.ShrubRemoved);
             } else {
                 menu.StateID = "pokemon_cut_fail";
             }
