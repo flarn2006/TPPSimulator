@@ -49,7 +49,9 @@ namespace TPPSimulator
             PerformInitialization();
         }
 
+        [Category("Behavior"), Description("Occurs when a file should be opened. Set e.Cancel to true if it fails.")]
         public event EventHandler<AttemptOpenFileEventArgs> AttemptOpenFile;
+        [Category("Behavior"), Description("Occurs when a file should be saved. Set e.Cancel to true if it fails.")]
         public event EventHandler<AttemptOpenFileEventArgs> AttemptSaveFile;
 
         protected virtual void OnAttemptOpenFile(AttemptOpenFileEventArgs e)
@@ -81,14 +83,15 @@ namespace TPPSimulator
             OnTitleChanged();
         }
 
-        public event EventHandler TitleChanged;
+        [Category("Property Changed"), Description("Occurs when the window title should be updated from the WindowTitle property.")]
+        public event PropertyChangedEventHandler TitleChanged;
 
         protected void OnTitleChanged()
         {
-            OnTitleChanged(EventArgs.Empty);
+            OnTitleChanged(new PropertyChangedEventArgs("WindowTitle"));
         }
 
-        protected virtual void OnTitleChanged(EventArgs e)
+        protected virtual void OnTitleChanged(PropertyChangedEventArgs e)
         {
             if (TitleChanged != null) TitleChanged(this, e);
         }

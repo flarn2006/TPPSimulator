@@ -626,7 +626,7 @@
             this.docMgr.SaveFilter = "Map files (*.tppmap)|*.tppmap|All files (*.*)|*.*";
             this.docMgr.AttemptOpenFile += new System.EventHandler<TPPSimulator.DocumentManager.AttemptOpenFileEventArgs>(this.docMgr_AttemptOpenFile);
             this.docMgr.AttemptSaveFile += new System.EventHandler<TPPSimulator.DocumentManager.AttemptOpenFileEventArgs>(this.docMgr_AttemptSaveFile);
-            this.docMgr.TitleChanged += new System.EventHandler(this.saveMgr_TitleChanged);
+            this.docMgr.TitleChanged += new System.ComponentModel.PropertyChangedEventHandler(this.saveMgr_TitleChanged);
             // 
             // MainForm
             // 
