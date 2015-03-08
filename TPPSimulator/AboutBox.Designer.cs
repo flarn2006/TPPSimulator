@@ -68,7 +68,7 @@
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(231, 25);
             this.label1.TabIndex = 1;
-            this.label1.Text = "TPP Simulator (Beta 2)";
+            this.label1.Text = "TPP Simulator (Beta 3)";
             // 
             // groupBox1
             // 
