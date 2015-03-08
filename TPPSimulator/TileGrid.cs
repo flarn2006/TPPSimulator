@@ -18,7 +18,6 @@ namespace TPPSimulator
     {
         private int cols = 1, rows = 1;
         private TileType[,] grid;
-        private const int tileSize = 16;
         private Bitmap bmp;
         private Player player;
         private TileType leftClickTile = null;
@@ -28,6 +27,8 @@ namespace TPPSimulator
         private MD5 md5;
 
         public enum LeftClickMode { Player, Goal, Tile }
+
+        public const int TileSize = 16;
 
         public TileGrid()
         {
@@ -122,7 +123,7 @@ namespace TPPSimulator
                 }
             }
 
-            bmp = new Bitmap(tileSize * cols, tileSize * rows);
+            bmp = new Bitmap(TileSize * cols, TileSize * rows);
             FullImageUpdate();
             OnGridChanged();
         }
@@ -168,11 +169,20 @@ namespace TPPSimulator
                         img = grid[tileY, tileX].ImageAlt;
                     }
                 }
-                g.DrawImage(img, tileSize * tileX, tileSize * tileY);
+                g.DrawImage(img, TileSize * tileX, TileSize * tileY);
             } else {
-                g.FillRectangle(Brushes.Red, tileSize * tileX, tileSize * tileY, tileSize, tileSize);
+                g.FillRectangle(Brushes.Red, TileSize * tileX, TileSize * tileY, TileSize, TileSize);
             }
-            Invalidate(new Rectangle(tileX * tileSize, tileY * tileSize, tileSize, tileSize));
+            Invalidate(new Rectangle(tileX * TileSize, tileY * TileSize, TileSize, TileSize));
+        }
+
+        public void DrawMapImage(Graphics g)
+        {
+            g.DrawImage(bmp, Point.Empty);
+            g.DrawImage(Properties.Resources.goal, goalLocation.X * TileSize, goalLocation.Y * TileSize);
+            if (player != null) {
+                g.DrawImage(player.CurrentImage, player.Location.X * TileSize, player.Location.Y * TileSize);
+            }
         }
 
         protected override void OnPaint(PaintEventArgs pe)
@@ -182,10 +192,8 @@ namespace TPPSimulator
             pe.Graphics.TranslateTransform(AutoScrollPosition.X, AutoScrollPosition.Y);
 
             if (grid != null) {
-                pe.Graphics.DrawImage(bmp, Point.Empty);
-                pe.Graphics.DrawImage(Properties.Resources.goal, goalLocation.X * tileSize, goalLocation.Y * tileSize);
+                DrawMapImage(pe.Graphics);
                 if (player != null) {
-                    pe.Graphics.DrawImage(player.CurrentImage, player.Location.X * tileSize, player.Location.Y * tileSize);
                     pe.Graphics.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.NearestNeighbor;
                     pe.Graphics.DrawImage(player.Menu.Image, ClientRectangle);
                 }
@@ -305,13 +313,13 @@ namespace TPPSimulator
         {
             switch (leftClickMode) {
                 case LeftClickMode.Player:
-                    player.Location = new Point(e.X / tileSize, e.Y / tileSize);
+                    player.Location = new Point(e.X / TileSize, e.Y / TileSize);
                     break;
                 case LeftClickMode.Goal:
-                    GoalLocation = new Point(e.X / tileSize, e.Y / tileSize);
+                    GoalLocation = new Point(e.X / TileSize, e.Y / TileSize);
                     break;
                 case LeftClickMode.Tile:
-                    SetTile(e.X / tileSize, e.Y / tileSize, leftClickTile);
+                    SetTile(e.X / TileSize, e.Y / TileSize, leftClickTile);
                     break;
             }
         }
@@ -319,11 +327,11 @@ namespace TPPSimulator
         protected override void OnMouseDown(MouseEventArgs e)
         {
             base.OnMouseDown(e);
-            if (e.X < tileSize * cols && e.Y < tileSize * rows) {
+            if (e.X < TileSize * cols && e.Y < TileSize * rows) {
                 if (e.Button == MouseButtons.Left) {
                     PerformLeftClickAction(e);
                 } else if (e.Button == MouseButtons.Right) {
-                    SetTile(e.X / tileSize, e.Y / tileSize, TileType.Empty);
+                    SetTile(e.X / TileSize, e.Y / TileSize, TileType.Empty);
                 }
             }
         }
@@ -331,11 +339,11 @@ namespace TPPSimulator
         protected override void OnMouseMove(MouseEventArgs e)
         {
             base.OnMouseMove(e);
-            if (e.X < tileSize * cols && e.Y < tileSize * rows && e.X >= 0 && e.Y >= 0) {
+            if (e.X < TileSize * cols && e.Y < TileSize * rows && e.X >= 0 && e.Y >= 0) {
                 if ((MouseButtons & MouseButtons.Left) > 0) {
                     PerformLeftClickAction(e);
                 } else if ((MouseButtons & MouseButtons.Right) > 0) {
-                    SetTile(e.X / tileSize, e.Y / tileSize, TileType.Empty);
+                    SetTile(e.X / TileSize, e.Y / TileSize, TileType.Empty);
                 }
             }
         }
@@ -356,7 +364,7 @@ namespace TPPSimulator
                 }
             }
 
-            AutoScrollMinSize = new Size(cols * tileSize, rows * tileSize);
+            AutoScrollMinSize = new Size(cols * TileSize, rows * TileSize);
 
             FullImageUpdate();
             OnGridChanged();

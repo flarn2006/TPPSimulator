@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -369,6 +370,25 @@ L = A", "Manual Input Controls", MessageBoxButtons.OK, MessageBoxIcon.Informatio
             tsbAutorun.Checked = false;
             stepTimer.Enabled = false;
             SoundPlayer.Play(Properties.Resources.goal_snd);
+        }
+
+        private void exportImageToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Bitmap bmp = new Bitmap(tileGrid.Columns * TileGrid.TileSize, tileGrid.Rows * TileGrid.TileSize);
+            tileGrid.DrawMapImage(Graphics.FromImage(bmp));
+            if (exportImageDlg.ShowDialog() == DialogResult.OK) {
+                bool done = false;
+                while (!done) {
+                    try {
+                        bmp.Save(exportImageDlg.FileName, ImageFormat.Png);
+                        done = true;
+                    } catch (IOException ex) {
+                        if (MessageBox.Show(ex.Message, exportImageDlg.Title, MessageBoxButtons.RetryCancel, MessageBoxIcon.Error) == DialogResult.Cancel) {
+                            done = true;
+                        }
+                    }
+                }
+            }
         }
     }
 }

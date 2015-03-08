@@ -83,6 +83,8 @@
             this.tsbDrawPath = new System.Windows.Forms.ToolStripButton();
             this.stepTimer = new System.Windows.Forms.Timer(this.components);
             this.docMgr = new TPPSimulator.DocumentManager(this.components);
+            this.exportImageToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.exportImageDlg = new System.Windows.Forms.SaveFileDialog();
             this.tsTools.SuspendLayout();
             this.toolStripContainer1.ContentPanel.SuspendLayout();
             this.toolStripContainer1.LeftToolStripPanel.SuspendLayout();
@@ -124,7 +126,7 @@
             this.tsbPlayer.Image = global::TPPSimulator.Properties.Resources.player_s;
             this.tsbPlayer.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsbPlayer.Name = "tsbPlayer";
-            this.tsbPlayer.Size = new System.Drawing.Size(30, 20);
+            this.tsbPlayer.Size = new System.Drawing.Size(22, 20);
             this.tsbPlayer.Text = "Player";
             this.tsbPlayer.Click += new System.EventHandler(this.tsbPlayer_Click);
             // 
@@ -134,7 +136,7 @@
             this.tsbGoal.Image = global::TPPSimulator.Properties.Resources.goal;
             this.tsbGoal.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsbGoal.Name = "tsbGoal";
-            this.tsbGoal.Size = new System.Drawing.Size(30, 20);
+            this.tsbGoal.Size = new System.Drawing.Size(22, 20);
             this.tsbGoal.Text = "Goal";
             this.tsbGoal.Click += new System.EventHandler(this.tsbGoal_Click);
             // 
@@ -144,7 +146,7 @@
             this.tsbWall.Image = global::TPPSimulator.Properties.Resources.wall;
             this.tsbWall.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsbWall.Name = "tsbWall";
-            this.tsbWall.Size = new System.Drawing.Size(30, 20);
+            this.tsbWall.Size = new System.Drawing.Size(22, 20);
             this.tsbWall.Text = "Wall";
             this.tsbWall.Click += new System.EventHandler(this.tsbWall_Click);
             // 
@@ -154,7 +156,7 @@
             this.tsbLedge.Image = global::TPPSimulator.Properties.Resources.ledge;
             this.tsbLedge.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsbLedge.Name = "tsbLedge";
-            this.tsbLedge.Size = new System.Drawing.Size(30, 20);
+            this.tsbLedge.Size = new System.Drawing.Size(22, 20);
             this.tsbLedge.Text = "Ledge";
             this.tsbLedge.Click += new System.EventHandler(this.tsbLedge_Click);
             // 
@@ -164,7 +166,7 @@
             this.tsbSpinnerN.Image = global::TPPSimulator.Properties.Resources.spinner_n;
             this.tsbSpinnerN.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsbSpinnerN.Name = "tsbSpinnerN";
-            this.tsbSpinnerN.Size = new System.Drawing.Size(30, 20);
+            this.tsbSpinnerN.Size = new System.Drawing.Size(22, 20);
             this.tsbSpinnerN.Text = "Spinner (N)";
             this.tsbSpinnerN.Click += new System.EventHandler(this.tsbSpinnerN_Click);
             // 
@@ -174,7 +176,7 @@
             this.tsbSpinnerS.Image = global::TPPSimulator.Properties.Resources.spinner_s;
             this.tsbSpinnerS.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsbSpinnerS.Name = "tsbSpinnerS";
-            this.tsbSpinnerS.Size = new System.Drawing.Size(30, 20);
+            this.tsbSpinnerS.Size = new System.Drawing.Size(22, 20);
             this.tsbSpinnerS.Text = "Spinner (S)";
             this.tsbSpinnerS.Click += new System.EventHandler(this.tsbSpinnerS_Click);
             // 
@@ -184,7 +186,7 @@
             this.tsbSpinnerW.Image = global::TPPSimulator.Properties.Resources.spinner_w;
             this.tsbSpinnerW.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsbSpinnerW.Name = "tsbSpinnerW";
-            this.tsbSpinnerW.Size = new System.Drawing.Size(30, 20);
+            this.tsbSpinnerW.Size = new System.Drawing.Size(22, 20);
             this.tsbSpinnerW.Text = "Spinner (W)";
             this.tsbSpinnerW.Click += new System.EventHandler(this.tsbSpinnerW_Click);
             // 
@@ -194,7 +196,7 @@
             this.tsbSpinnerE.Image = global::TPPSimulator.Properties.Resources.spinner_e;
             this.tsbSpinnerE.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsbSpinnerE.Name = "tsbSpinnerE";
-            this.tsbSpinnerE.Size = new System.Drawing.Size(30, 20);
+            this.tsbSpinnerE.Size = new System.Drawing.Size(22, 20);
             this.tsbSpinnerE.Text = "Spinner (E)";
             this.tsbSpinnerE.Click += new System.EventHandler(this.tsbSpinnerE_Click);
             // 
@@ -204,7 +206,7 @@
             this.tsbSpinnerStop.Image = global::TPPSimulator.Properties.Resources.spinner_stop;
             this.tsbSpinnerStop.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsbSpinnerStop.Name = "tsbSpinnerStop";
-            this.tsbSpinnerStop.Size = new System.Drawing.Size(30, 20);
+            this.tsbSpinnerStop.Size = new System.Drawing.Size(22, 20);
             this.tsbSpinnerStop.Text = "Spinner (Stop)";
             this.tsbSpinnerStop.Click += new System.EventHandler(this.tsbSpinnerStop_Click);
             // 
@@ -214,7 +216,7 @@
             this.tsbShrub.Image = global::TPPSimulator.Properties.Resources.shrub;
             this.tsbShrub.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsbShrub.Name = "tsbShrub";
-            this.tsbShrub.Size = new System.Drawing.Size(30, 20);
+            this.tsbShrub.Size = new System.Drawing.Size(22, 20);
             this.tsbShrub.Text = "Shrub";
             this.tsbShrub.Click += new System.EventHandler(this.tsbShrub_Click);
             // 
@@ -303,6 +305,7 @@
             this.openToolStripMenuItem,
             this.saveToolStripMenuItem,
             this.saveAsToolStripMenuItem,
+            this.exportImageToolStripMenuItem,
             this.toolStripMenuItem1,
             this.exitToolStripMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
@@ -628,6 +631,17 @@
             this.docMgr.AttemptSaveFile += new System.EventHandler<TPPSimulator.DocumentManager.AttemptOpenFileEventArgs>(this.docMgr_AttemptSaveFile);
             this.docMgr.TitleChanged += new System.ComponentModel.PropertyChangedEventHandler(this.saveMgr_TitleChanged);
             // 
+            // exportImageToolStripMenuItem
+            // 
+            this.exportImageToolStripMenuItem.Name = "exportImageToolStripMenuItem";
+            this.exportImageToolStripMenuItem.Size = new System.Drawing.Size(155, 22);
+            this.exportImageToolStripMenuItem.Text = "Export &Image...";
+            this.exportImageToolStripMenuItem.Click += new System.EventHandler(this.exportImageToolStripMenuItem_Click);
+            // 
+            // exportImageDlg
+            // 
+            this.exportImageDlg.Filter = "Portable Network Graphics (*.png)|*.png|All files (*.*)|*.*";
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -719,6 +733,8 @@
         private System.Windows.Forms.ToolStripMenuItem debugToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem exportGraphToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem displayGraphToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem exportImageToolStripMenuItem;
+        private System.Windows.Forms.SaveFileDialog exportImageDlg;
 
     }
 }

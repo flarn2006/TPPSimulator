@@ -40,24 +40,26 @@ namespace TPPSimulator.PieChart
                 double angle = 0.0;
                 double angleFactor = 360.0 / total;
 
-                foreach (PieSlice slice in PieSlices) {
-                    double sliceAngle = slice.Value * angleFactor;
-                    pe.Graphics.FillPie(new SolidBrush(slice.FillColor), rect, (float)angle, (float)sliceAngle);
-                    angle += sliceAngle;
-                }
-
-                angle = 0.0;
-
-                foreach (PieSlice slice in PieSlices) {
-                    double sliceAngle = slice.Value * angleFactor;
-
-                    if (slice.BorderColor.A > 0) {
-                        Pen borderPen = new Pen(slice.BorderColor, 2.0f);
-                        borderPen.Alignment = PenAlignment.Inset;
-                        pe.Graphics.DrawPie(new Pen(slice.BorderColor, 2.0f), rect, (float)angle, (float)sliceAngle);
+                if (Height > 1) {
+                    foreach (PieSlice slice in PieSlices) {
+                        double sliceAngle = slice.Value * angleFactor;
+                        pe.Graphics.FillPie(new SolidBrush(slice.FillColor), rect, (float)angle, (float)sliceAngle);
+                        angle += sliceAngle;
                     }
 
-                    angle += sliceAngle;
+                    angle = 0.0;
+
+                    foreach (PieSlice slice in PieSlices) {
+                        double sliceAngle = slice.Value * angleFactor;
+
+                        if (slice.BorderColor.A > 0) {
+                            Pen borderPen = new Pen(slice.BorderColor, 2.0f);
+                            borderPen.Alignment = PenAlignment.Inset;
+                            pe.Graphics.DrawPie(new Pen(slice.BorderColor, 2.0f), rect, (float)angle, (float)sliceAngle);
+                        }
+
+                        angle += sliceAngle;
+                    }
                 }
             }
         }
