@@ -35,6 +35,9 @@
     <RunPostBuildEvent>Always</RunPostBuildEvent>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Sharkbite.Thresher">
+      <HintPath>..\..\..\..\Assemblies\Sharkbite.Thresher.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -71,6 +74,12 @@
     <Compile Include="InputGenerator.Designer.cs">
       <DependentUpon>InputGenerator.cs</DependentUpon>
     </Compile>
+    <Compile Include="IrcCommandListener.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="IrcCommandListener.Designer.cs">
+      <DependentUpon>IrcCommandListener.cs</DependentUpon>
+    </Compile>
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -79,6 +88,12 @@
     </Compile>
     <Compile Include="Menu.cs" />
     <Compile Include="MenuState.cs" />
+    <Compile Include="OAuthPromptForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="OAuthPromptForm.Designer.cs">
+      <DependentUpon>OAuthPromptForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="PieChart\PieChart.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -121,6 +136,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="OAuthPromptForm.resx">
+      <DependentUpon>OAuthPromptForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PieChart\PieChart.resx">
       <DependentUpon>PieChart.cs</DependentUpon>

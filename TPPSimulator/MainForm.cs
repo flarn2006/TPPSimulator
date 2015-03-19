@@ -27,6 +27,8 @@ namespace TPPSimulator
             set { _inputCount = value; inputCountText.Text = _inputCount.ToString(); }
         }
 
+        private Queue<IrcCommandEventArgs> ircCommands;
+
         private void DeselectAllTools()
         {
             foreach (ToolStripItem tsi in tsTools.Items) {
@@ -153,11 +155,9 @@ namespace TPPSimulator
 
         private void MainForm_Load(object sender, EventArgs e)
         {
-            /*if (MessageBox.Show(@"I haven't actually implemented the code to simulate inputs yet, but you can move around manually using WASD.
-In the mean time, enjoy this preview!", "Welcome!", MessageBoxButtons.OKCancel, MessageBoxIcon.Information) == DialogResult.Cancel) {
-                MessageBox.Show("If you're not going to enjoy it, I'll save you the trouble of quitting. Kappa", "Fine then.");
-                Application.Exit();
-            }*/
+            listener.PerformLogin();
+            ircCommands = new Queue<IrcCommandEventArgs>();
+            commandWatcher.Enabled = true;
         }
 
         private void tsbResetCount_Click(object sender, EventArgs e)
@@ -387,6 +387,28 @@ L = A", "Manual Input Controls", MessageBoxButtons.OK, MessageBoxIcon.Informatio
                             done = true;
                         }
                     }
+                }
+            }
+        }
+
+        private void listener_Command(object sender, IrcCommandEventArgs e)
+        {
+            ircCommands.Enqueue(e);
+        }
+
+        private void commandWatcher_Tick(object sender, EventArgs e_)
+        {
+            while (ircCommands.Count > 0) {
+                IrcCommandEventArgs e = ircCommands.Dequeue();
+                //if (e.Command.ToLower().Equals("tile"))
+            }
+        }
+
+        private void MainForm_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            if (listener.Connection != null) {
+                if (listener.Connection.Connected) {
+                    listener.Connection.Disconnect("bye");
                 }
             }
         }
