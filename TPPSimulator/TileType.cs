@@ -165,6 +165,21 @@ namespace TPPSimulator
             SoundPlayer.Play(Properties.Resources.ledge_snd);
         }
 
+        public static TileType FromChar(char ch)
+        {
+            switch (ch) {
+                case '#': return TileType.Wall;
+                case '_': return TileType.Ledge;
+                case '^': return TileType.SpinnerN;
+                case 'v': return TileType.SpinnerS;
+                case '<': return TileType.SpinnerW;
+                case '>': return TileType.SpinnerE;
+                case 'X': return TileType.SpinnerStop;
+                case 'S': return TileType.Shrub;
+                default: return TileType.Empty;
+            }
+        }
+
         public static TileType Empty { get { return empty; } }
         public static TileType Wall { get { return wall; } }
         public static TileType Ledge { get { return ledge; } }

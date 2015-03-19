@@ -287,18 +287,7 @@ namespace TPPSimulator
                     if (row >= Rows) break;
 
                     for (int col = 0; col < Columns; col++) {
-                        TileType tile = TileType.Empty;
-                        switch (line[col]) {
-                            case '#': tile = TileType.Wall; break;
-                            case '_': tile = TileType.Ledge; break;
-                            case '^': tile = TileType.SpinnerN; break;
-                            case 'v': tile = TileType.SpinnerS; break;
-                            case '<': tile = TileType.SpinnerW; break;
-                            case '>': tile = TileType.SpinnerE; break;
-                            case 'X': tile = TileType.SpinnerStop; break;
-                            case 'S': tile = TileType.Shrub; break;
-                        }
-                        grid[row, col] = tile;
+                        grid[row, col] = TileType.FromChar(line[col]);
                     }
 
                     row++;
