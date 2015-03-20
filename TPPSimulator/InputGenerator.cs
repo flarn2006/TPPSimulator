@@ -397,7 +397,7 @@ Note that this slider's maximum is 9 times more than the others.", "Explanation"
                 } catch (NullReferenceException) {
                     if (!shownImpossibleMessage) {
                         shownImpossibleMessage = true;
-                        MessageBox.Show("Not even Democracy would make this map possible.", "Impossible!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        //MessageBox.Show("Not even Democracy would make this map possible.", "Impossible!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     }
                     tileGrid.PathToDraw = null;
                 }
@@ -456,6 +456,14 @@ Note that this slider's maximum is 9 times more than the others.", "Explanation"
         {
             TrackBar tb = (TrackBar)sender;
             pieSlices[tb].BorderColor = Color.Transparent;
+        }
+
+        public void AddChatInputText(string text)
+        {
+            chatInputList.Items.Insert(0, text);
+            if (chatInputList.Items.Count > chatInputList.Height / chatInputList.ItemHeight && chatInputList.Items.Count > 0) {
+                chatInputList.Items.RemoveAt(chatInputList.Items.Count - 1);
+            }
         }
     }
 }

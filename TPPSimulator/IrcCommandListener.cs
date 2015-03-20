@@ -32,9 +32,9 @@ namespace TPPSimulator
             if (Command != null) Command(this, e);
         }
 
-        protected void OnCommand(string command, string argument)
+        protected void OnCommand(string command, string argument, string user)
         {
-            OnCommand(new IrcCommandEventArgs(command, argument));
+            OnCommand(new IrcCommandEventArgs(command, argument, user));
         }
 
         [Browsable(false)]
@@ -59,25 +59,23 @@ namespace TPPSimulator
 
         void Listener_OnPublic(UserInfo user, string channel, string message)
         {
-            if (message.Length > 1) {
-                if (message[0] == '!') {
-                    string rest = message.Substring(1);
-                    string command, argument;
-                    rest.SplitOnce(' ', out command, out argument);
-                    OnCommand(command, argument);
-                }
+            if (message.Length > 0) {
+                string command, argument;
+                message.SplitOnce(' ', out command, out argument);
+                OnCommand(command, argument, user.Nick);
             }
         }
     }
 
     public class IrcCommandEventArgs : EventArgs
     {
-        private string command, argument;
+        private string command, argument, user;
 
-        public IrcCommandEventArgs(string command, string argument)
+        public IrcCommandEventArgs(string command, string argument, string user)
         {
             this.command = command;
             this.argument = argument;
+            this.user = user;
         }
 
         public string Command
@@ -88,6 +86,11 @@ namespace TPPSimulator
         public string Argument
         {
             get { return argument; }
+        }
+
+        public string User
+        {
+            get { return user; }
         }
     }
 }

@@ -19,6 +19,9 @@ namespace TPPSimulator
             InitializeComponent();
         }
 
+        private bool chatDesignMode = true;
+        private bool chatEnabled = true;
+
         private int _inputCount = 0;
 
         private int InputCount
@@ -158,6 +161,7 @@ namespace TPPSimulator
             listener.PerformLogin();
             ircCommands = new Queue<IrcCommandEventArgs>();
             commandWatcher.Enabled = true;
+            inputGen.DrawPath = true;
         }
 
         private void tsbResetCount_Click(object sender, EventArgs e)
@@ -400,8 +404,71 @@ L = A", "Manual Input Controls", MessageBoxButtons.OK, MessageBoxIcon.Informatio
         {
             while (ircCommands.Count > 0) {
                 IrcCommandEventArgs e = ircCommands.Dequeue();
-                //if (e.Command.ToLower().Equals("tile"))
+                Input chatInput = InputFromCommand(e.Command.ToLower());
+                bool addToList = false;
+
+                if (chatEnabled) {
+                    if (chatInput != Input.None) {
+                        tileGrid.Player.Input(chatInput);
+                        addToList = true;
+                    } else if (chatDesignMode) {
+                        if (e.Command.ToLower().Equals("!tile")) {
+                            string[] args = e.Argument.Split(',');
+                            if (args.Length >= 3) {
+                                int x, y;
+                                if (Int32.TryParse(args[0], out x) && Int32.TryParse(args[1], out y) && args[2].Length > 0) {
+                                    if (x >= 0 && x < tileGrid.Columns && y >= 0 && y < tileGrid.Rows) {
+                                        tileGrid.SetTile(x, y, TileType.FromChar(args[2][0]));
+                                        addToList = true;
+                                    }
+                                }
+                            }
+
+                        } else if (e.Command.ToLower().Equals("!run")) {
+                            stepTimer.Enabled = true;
+                            tsbAutorun.Checked = true;
+                            inputGen.UpdateGraph();
+                            addToList = true;
+
+                        } else if (e.Command.ToLower().Equals("!stop")) {
+                            stepTimer.Enabled = false;
+                            tsbAutorun.Checked = false;
+                            addToList = true;
+
+                        } else if (e.Command.ToLower().Equals("!stopspinning")) {
+                            tileGrid.Player.SpinDirection = Direction.None;
+                            addToList = true;
+
+                        } else if (e.Command.ToLower().Equals("!interval")) {
+                            int interval;
+                            if (Int32.TryParse(e.Argument, out interval)) {
+                                if (interval >= 1 && interval <= 2000) {
+                                    inputGen.StepInterval = interval;
+                                    stepTimer.Interval = interval;
+                                    addToList = true;
+                                }
+                            }
+                        }
+                    }
+
+                    if (addToList) {
+                        inputGen.AddChatInputText(String.Format("{0}: {1} {2}", e.User, e.Command, e.Argument));
+                    }
+                }
             }
+        }
+
+        private static Input InputFromCommand(string command)
+        {
+            if (command.Equals("up")) return Input.Up;
+            if (command.Equals("down")) return Input.Down;
+            if (command.Equals("left")) return Input.Left;
+            if (command.Equals("right")) return Input.Right;
+            if (command.Equals("a")) return Input.A;
+            if (command.Equals("b")) return Input.B;
+            if (command.Equals("start")) return Input.Start;
+            if (command.Equals("select")) return Input.Select;
+            return Input.None;
         }
 
         private void MainForm_FormClosed(object sender, FormClosedEventArgs e)
@@ -411,6 +478,32 @@ L = A", "Manual Input Controls", MessageBoxButtons.OK, MessageBoxIcon.Informatio
                     listener.Connection.Disconnect("bye");
                 }
             }
+        }
+
+        private void designToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            chatEnabled = true;
+            chatDesignMode = true;
+            designToolStripMenuItem.Checked = true;
+            inputToolStripMenuItem.Checked = false;
+            offToolStripMenuItem.Checked = false;
+        }
+
+        private void inputToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            chatEnabled = true;
+            chatDesignMode = false;
+            designToolStripMenuItem.Checked = false;
+            inputToolStripMenuItem.Checked = true;
+            offToolStripMenuItem.Checked = false;
+        }
+
+        private void offToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            chatEnabled = false;
+            designToolStripMenuItem.Checked = false;
+            inputToolStripMenuItem.Checked = false;
+            offToolStripMenuItem.Checked = true;
         }
     }
 }

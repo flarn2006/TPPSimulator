@@ -59,6 +59,8 @@
             this.lastInputs = new System.Windows.Forms.ListBox();
             this.btnRebuildGraph = new System.Windows.Forms.Button();
             this.tabControl1 = new System.Windows.Forms.TabControl();
+            this.tabPage4 = new System.Windows.Forms.TabPage();
+            this.chatInputList = new System.Windows.Forms.ListBox();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.lblAIMonitor = new System.Windows.Forms.Label();
@@ -82,6 +84,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.tbUp)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tbPath)).BeginInit();
             this.tabControl1.SuspendLayout();
+            this.tabPage4.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
             this.tabPage3.SuspendLayout();
@@ -525,6 +528,7 @@
             this.tabControl1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.tabControl1.Controls.Add(this.tabPage4);
             this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Controls.Add(this.tabPage2);
             this.tabControl1.Controls.Add(this.tabPage3);
@@ -533,6 +537,31 @@
             this.tabControl1.SelectedIndex = 0;
             this.tabControl1.Size = new System.Drawing.Size(168, 152);
             this.tabControl1.TabIndex = 4;
+            // 
+            // tabPage4
+            // 
+            this.tabPage4.Controls.Add(this.chatInputList);
+            this.tabPage4.Location = new System.Drawing.Point(4, 22);
+            this.tabPage4.Name = "tabPage4";
+            this.tabPage4.Size = new System.Drawing.Size(160, 126);
+            this.tabPage4.TabIndex = 3;
+            this.tabPage4.Text = "Chat Inputs";
+            this.tabPage4.UseVisualStyleBackColor = true;
+            // 
+            // chatInputList
+            // 
+            this.chatInputList.BackColor = System.Drawing.Color.Black;
+            this.chatInputList.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.chatInputList.Font = new System.Drawing.Font("Courier New", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chatInputList.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
+            this.chatInputList.FormattingEnabled = true;
+            this.chatInputList.IntegralHeight = false;
+            this.chatInputList.ItemHeight = 14;
+            this.chatInputList.Location = new System.Drawing.Point(0, 0);
+            this.chatInputList.Name = "chatInputList";
+            this.chatInputList.SelectionMode = System.Windows.Forms.SelectionMode.None;
+            this.chatInputList.Size = new System.Drawing.Size(160, 126);
+            this.chatInputList.TabIndex = 0;
             // 
             // tabPage1
             // 
@@ -641,6 +670,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.tbUp)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.tbPath)).EndInit();
             this.tabControl1.ResumeLayout(false);
+            this.tabPage4.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.tabPage2.ResumeLayout(false);
             this.tabPage3.ResumeLayout(false);
@@ -689,6 +719,8 @@
         private System.Windows.Forms.Label lblAIMonitor;
         private System.Windows.Forms.TabPage tabPage3;
         private PieChart.PieChart pieChart;
+        private System.Windows.Forms.TabPage tabPage4;
+        private System.Windows.Forms.ListBox chatInputList;
 
     }
 }

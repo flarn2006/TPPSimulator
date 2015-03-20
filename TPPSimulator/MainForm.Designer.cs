@@ -53,6 +53,9 @@
             this.exportImageToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.commandModeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.designToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.inputToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.controlsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -84,9 +87,10 @@
             this.tsbDrawPath = new System.Windows.Forms.ToolStripButton();
             this.stepTimer = new System.Windows.Forms.Timer(this.components);
             this.exportImageDlg = new System.Windows.Forms.SaveFileDialog();
+            this.commandWatcher = new System.Windows.Forms.Timer(this.components);
             this.docMgr = new TPPSimulator.DocumentManager(this.components);
             this.listener = new TPPSimulator.IrcCommandListener(this.components);
-            this.commandWatcher = new System.Windows.Forms.Timer(this.components);
+            this.offToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tsTools.SuspendLayout();
             this.toolStripContainer1.ContentPanel.SuspendLayout();
             this.toolStripContainer1.LeftToolStripPanel.SuspendLayout();
@@ -281,6 +285,7 @@
             this.inputGen.Dock = System.Windows.Forms.DockStyle.Right;
             this.inputGen.Location = new System.Drawing.Point(829, 0);
             this.inputGen.Name = "inputGen";
+            this.inputGen.RebuildGraphEnabled = false;
             this.inputGen.Size = new System.Drawing.Size(174, 627);
             this.inputGen.TabIndex = 1;
             this.inputGen.TileGrid = this.tileGrid;
@@ -292,6 +297,7 @@
             this.menu.Dock = System.Windows.Forms.DockStyle.None;
             this.menu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.fileToolStripMenuItem,
+            this.commandModeToolStripMenuItem,
             this.helpToolStripMenuItem,
             this.debugToolStripMenuItem});
             this.menu.Location = new System.Drawing.Point(0, 0);
@@ -363,6 +369,32 @@
             this.exitToolStripMenuItem.Size = new System.Drawing.Size(155, 22);
             this.exitToolStripMenuItem.Text = "E&xit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
+            // 
+            // commandModeToolStripMenuItem
+            // 
+            this.commandModeToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.designToolStripMenuItem,
+            this.inputToolStripMenuItem,
+            this.offToolStripMenuItem});
+            this.commandModeToolStripMenuItem.Name = "commandModeToolStripMenuItem";
+            this.commandModeToolStripMenuItem.Size = new System.Drawing.Size(78, 20);
+            this.commandModeToolStripMenuItem.Text = "&Chat Mode";
+            // 
+            // designToolStripMenuItem
+            // 
+            this.designToolStripMenuItem.Checked = true;
+            this.designToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.designToolStripMenuItem.Name = "designToolStripMenuItem";
+            this.designToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.designToolStripMenuItem.Text = "&Design";
+            this.designToolStripMenuItem.Click += new System.EventHandler(this.designToolStripMenuItem_Click);
+            // 
+            // inputToolStripMenuItem
+            // 
+            this.inputToolStripMenuItem.Name = "inputToolStripMenuItem";
+            this.inputToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.inputToolStripMenuItem.Text = "&Input";
+            this.inputToolStripMenuItem.Click += new System.EventHandler(this.inputToolStripMenuItem_Click);
             // 
             // helpToolStripMenuItem
             // 
@@ -618,7 +650,9 @@
             // 
             // tsbDrawPath
             // 
+            this.tsbDrawPath.Checked = true;
             this.tsbDrawPath.CheckOnClick = true;
+            this.tsbDrawPath.CheckState = System.Windows.Forms.CheckState.Checked;
             this.tsbDrawPath.Image = global::TPPSimulator.Properties.Resources.pencil_go;
             this.tsbDrawPath.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsbDrawPath.Name = "tsbDrawPath";
@@ -636,6 +670,10 @@
             this.exportImageDlg.Filter = "Portable Network Graphics (*.png)|*.png|All files (*.*)|*.*";
             this.exportImageDlg.Title = "Export Image";
             // 
+            // commandWatcher
+            // 
+            this.commandWatcher.Tick += new System.EventHandler(this.commandWatcher_Tick);
+            // 
             // docMgr
             // 
             this.docMgr.AppTitle = "TPP Simulator BETA";
@@ -649,9 +687,12 @@
             // 
             this.listener.Command += new System.EventHandler<TPPSimulator.IrcCommandEventArgs>(this.listener_Command);
             // 
-            // commandWatcher
+            // offToolStripMenuItem
             // 
-            this.commandWatcher.Tick += new System.EventHandler(this.commandWatcher_Tick);
+            this.offToolStripMenuItem.Name = "offToolStripMenuItem";
+            this.offToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.offToolStripMenuItem.Text = "&Off";
+            this.offToolStripMenuItem.Click += new System.EventHandler(this.offToolStripMenuItem_Click);
             // 
             // MainForm
             // 
@@ -749,6 +790,10 @@
         private System.Windows.Forms.SaveFileDialog exportImageDlg;
         private IrcCommandListener listener;
         private System.Windows.Forms.Timer commandWatcher;
+        private System.Windows.Forms.ToolStripMenuItem commandModeToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem designToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem inputToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem offToolStripMenuItem;
 
     }
 }
