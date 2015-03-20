@@ -60,6 +60,7 @@ namespace TPPSimulator
         void Listener_OnPublic(UserInfo user, string channel, string message)
         {
             if (message.Length > 0) {
+                if (message[0] == ' ') message = message.Substring(1); //remove leading space, to allow workaround for 30-second "same message" delay on Twitch
                 string command, argument;
                 message.SplitOnce(' ', out command, out argument);
                 OnCommand(command, argument, user.Nick);
