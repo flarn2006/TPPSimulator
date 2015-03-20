@@ -1,0 +1,29 @@
+!tile x,y,c
+    Sets tile at x,y to tile represented by character c
+    . - empty
+    # - wall
+    _ - ledge
+    ^ - spinner (up)
+    v - spinner (down)
+    < - spinner (left)
+    > - spinner (right)
+    X - spinner (stop)
+    S - cuttable shrub
+    
+!run
+    Starts the simulation
+    
+!stop
+    Ends the simulation
+
+!stopspinning
+    Stops the effect of the spin tiles, as if the player landed on a stop tile
+
+!interval 1-2000
+    Sets the interval between inputs when the simulation is running, in milliseconds
+
+!player x,y
+    Moves the player
+
+!goal x,y
+    Moves the goal
