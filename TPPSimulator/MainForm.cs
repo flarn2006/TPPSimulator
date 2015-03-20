@@ -448,6 +448,22 @@ L = A", "Manual Input Controls", MessageBoxButtons.OK, MessageBoxIcon.Informatio
                                     addToList = true;
                                 }
                             }
+
+                        } else if (e.Command.ToLower().Equals("!player") || e.Command.ToLower().Equals("!goal")) {
+                            string xs, ys;
+                            if (e.Argument.SplitOnce(',', out xs, out ys)) {
+                                int x, y;
+                                if (Int32.TryParse(xs, out x) && Int32.TryParse(ys, out y)) {
+                                    if (x >= 0 && x < tileGrid.Columns && y >= 0 && y < tileGrid.Rows) {
+                                        if (e.Command.ToLower().Equals("!player")) {
+                                            tileGrid.Player.Location = new Point(x, y);
+                                        } else {
+                                            tileGrid.GoalLocation = new Point(x, y);
+                                        }
+                                        addToList = true;
+                                    }
+                                }
+                            }
                         }
                     }
 
