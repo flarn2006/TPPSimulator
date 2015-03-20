@@ -111,6 +111,12 @@
     <Compile Include="ResizeMapDialog.Designer.cs">
       <DependentUpon>ResizeMapDialog.cs</DependentUpon>
     </Compile>
+    <Compile Include="Ruler.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Ruler.Designer.cs">
+      <DependentUpon>Ruler.cs</DependentUpon>
+    </Compile>
     <Compile Include="SoundPlayer.cs" />
     <Compile Include="TileGrid.cs">
       <SubType>Component</SubType>

@@ -42,8 +42,6 @@
             this.tsbShrub = new System.Windows.Forms.ToolStripButton();
             this.toolStripContainer1 = new System.Windows.Forms.ToolStripContainer();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.tileGrid = new TPPSimulator.TileGrid();
-            this.inputGen = new TPPSimulator.InputGenerator();
             this.menu = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.newToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -56,6 +54,7 @@
             this.commandModeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.designToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.inputToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.offToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.controlsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -88,9 +87,12 @@
             this.stepTimer = new System.Windows.Forms.Timer(this.components);
             this.exportImageDlg = new System.Windows.Forms.SaveFileDialog();
             this.commandWatcher = new System.Windows.Forms.Timer(this.components);
+            this.tileGrid = new TPPSimulator.TileGrid();
+            this.ruler1 = new TPPSimulator.Ruler();
+            this.ruler2 = new TPPSimulator.Ruler();
+            this.inputGen = new TPPSimulator.InputGenerator();
             this.docMgr = new TPPSimulator.DocumentManager(this.components);
             this.listener = new TPPSimulator.IrcCommandListener(this.components);
-            this.offToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tsTools.SuspendLayout();
             this.toolStripContainer1.ContentPanel.SuspendLayout();
             this.toolStripContainer1.LeftToolStripPanel.SuspendLayout();
@@ -256,41 +258,13 @@
             // 
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.panel1.Controls.Add(this.tileGrid);
+            this.panel1.Controls.Add(this.ruler1);
+            this.panel1.Controls.Add(this.ruler2);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(829, 627);
             this.panel1.TabIndex = 0;
-            // 
-            // tileGrid
-            // 
-            this.tileGrid.AutoScroll = true;
-            this.tileGrid.AutoScrollMinSize = new System.Drawing.Size(640, 480);
-            this.tileGrid.Columns = 40;
-            this.tileGrid.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tileGrid.LeftClickTile = null;
-            this.tileGrid.Location = new System.Drawing.Point(0, 0);
-            this.tileGrid.Name = "tileGrid";
-            this.tileGrid.PathToDraw = null;
-            this.tileGrid.Rows = 30;
-            this.tileGrid.Size = new System.Drawing.Size(825, 623);
-            this.tileGrid.TabIndex = 0;
-            this.tileGrid.Text = "tileGrid1";
-            this.tileGrid.GridChanged += new System.EventHandler(this.tileGrid_GridChanged);
-            this.tileGrid.GoalReached += new System.EventHandler(this.tileGrid_GoalReached);
-            // 
-            // inputGen
-            // 
-            this.inputGen.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.inputGen.Dock = System.Windows.Forms.DockStyle.Right;
-            this.inputGen.Location = new System.Drawing.Point(829, 0);
-            this.inputGen.Name = "inputGen";
-            this.inputGen.RebuildGraphEnabled = false;
-            this.inputGen.Size = new System.Drawing.Size(174, 627);
-            this.inputGen.TabIndex = 1;
-            this.inputGen.TileGrid = this.tileGrid;
-            this.inputGen.StepIntervalChanged += new System.EventHandler(this.inputGen_StepIntervalChanged);
-            this.inputGen.Load += new System.EventHandler(this.inputGen_Load);
             // 
             // menu
             // 
@@ -385,16 +359,23 @@
             this.designToolStripMenuItem.Checked = true;
             this.designToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
             this.designToolStripMenuItem.Name = "designToolStripMenuItem";
-            this.designToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.designToolStripMenuItem.Size = new System.Drawing.Size(110, 22);
             this.designToolStripMenuItem.Text = "&Design";
             this.designToolStripMenuItem.Click += new System.EventHandler(this.designToolStripMenuItem_Click);
             // 
             // inputToolStripMenuItem
             // 
             this.inputToolStripMenuItem.Name = "inputToolStripMenuItem";
-            this.inputToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.inputToolStripMenuItem.Size = new System.Drawing.Size(110, 22);
             this.inputToolStripMenuItem.Text = "&Input";
             this.inputToolStripMenuItem.Click += new System.EventHandler(this.inputToolStripMenuItem_Click);
+            // 
+            // offToolStripMenuItem
+            // 
+            this.offToolStripMenuItem.Name = "offToolStripMenuItem";
+            this.offToolStripMenuItem.Size = new System.Drawing.Size(110, 22);
+            this.offToolStripMenuItem.Text = "&Off";
+            this.offToolStripMenuItem.Click += new System.EventHandler(this.offToolStripMenuItem_Click);
             // 
             // helpToolStripMenuItem
             // 
@@ -674,6 +655,55 @@
             // 
             this.commandWatcher.Tick += new System.EventHandler(this.commandWatcher_Tick);
             // 
+            // tileGrid
+            // 
+            this.tileGrid.AutoScroll = true;
+            this.tileGrid.AutoScrollMinSize = new System.Drawing.Size(640, 480);
+            this.tileGrid.Columns = 40;
+            this.tileGrid.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tileGrid.LeftClickTile = null;
+            this.tileGrid.Location = new System.Drawing.Point(18, 15);
+            this.tileGrid.Name = "tileGrid";
+            this.tileGrid.PathToDraw = null;
+            this.tileGrid.Rows = 30;
+            this.tileGrid.Size = new System.Drawing.Size(807, 608);
+            this.tileGrid.TabIndex = 0;
+            this.tileGrid.Text = "tileGrid1";
+            this.tileGrid.GridChanged += new System.EventHandler(this.tileGrid_GridChanged);
+            this.tileGrid.GoalReached += new System.EventHandler(this.tileGrid_GoalReached);
+            // 
+            // ruler1
+            // 
+            this.ruler1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.ruler1.Location = new System.Drawing.Point(18, 0);
+            this.ruler1.Name = "ruler1";
+            this.ruler1.Size = new System.Drawing.Size(807, 15);
+            this.ruler1.TabIndex = 0;
+            this.ruler1.Text = "ruler1";
+            // 
+            // ruler2
+            // 
+            this.ruler2.Dock = System.Windows.Forms.DockStyle.Left;
+            this.ruler2.Location = new System.Drawing.Point(0, 0);
+            this.ruler2.Name = "ruler2";
+            this.ruler2.OtherRuler = this.ruler1;
+            this.ruler2.Size = new System.Drawing.Size(18, 623);
+            this.ruler2.TabIndex = 0;
+            this.ruler2.Text = "ruler2";
+            // 
+            // inputGen
+            // 
+            this.inputGen.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.inputGen.Dock = System.Windows.Forms.DockStyle.Right;
+            this.inputGen.Location = new System.Drawing.Point(829, 0);
+            this.inputGen.Name = "inputGen";
+            this.inputGen.RebuildGraphEnabled = false;
+            this.inputGen.Size = new System.Drawing.Size(174, 627);
+            this.inputGen.TabIndex = 1;
+            this.inputGen.TileGrid = this.tileGrid;
+            this.inputGen.StepIntervalChanged += new System.EventHandler(this.inputGen_StepIntervalChanged);
+            this.inputGen.Load += new System.EventHandler(this.inputGen_Load);
+            // 
             // docMgr
             // 
             this.docMgr.AppTitle = "TPP Simulator BETA";
@@ -686,13 +716,6 @@
             // listener
             // 
             this.listener.Command += new System.EventHandler<TPPSimulator.IrcCommandEventArgs>(this.listener_Command);
-            // 
-            // offToolStripMenuItem
-            // 
-            this.offToolStripMenuItem.Name = "offToolStripMenuItem";
-            this.offToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.offToolStripMenuItem.Text = "&Off";
-            this.offToolStripMenuItem.Click += new System.EventHandler(this.offToolStripMenuItem_Click);
             // 
             // MainForm
             // 
@@ -794,6 +817,8 @@
         private System.Windows.Forms.ToolStripMenuItem designToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem inputToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem offToolStripMenuItem;
+        private Ruler ruler1;
+        private Ruler ruler2;
 
     }
 }
