@@ -338,6 +338,7 @@ L = A", "Manual Input Controls", MessageBoxButtons.OK, MessageBoxIcon.Informatio
         private void tsbAutorun_Click(object sender, EventArgs e)
         {
             stepTimer.Enabled = tsbAutorun.Checked;
+            spinTimer.Enabled = !tsbAutorun.Checked;
             if (tsbAutorun.Checked) {
                 inputGen.UpdateGraph();
             }
@@ -427,12 +428,14 @@ L = A", "Manual Input Controls", MessageBoxButtons.OK, MessageBoxIcon.Informatio
 
                         } else if (e.Command.ToLower().Equals("!run")) {
                             stepTimer.Enabled = true;
+                            spinTimer.Enabled = false;
                             tsbAutorun.Checked = true;
                             inputGen.UpdateGraph();
                             addToList = true;
 
                         } else if (e.Command.ToLower().Equals("!stop")) {
                             stepTimer.Enabled = false;
+                            spinTimer.Enabled = true;
                             tsbAutorun.Checked = false;
                             addToList = true;
 
@@ -524,6 +527,13 @@ L = A", "Manual Input Controls", MessageBoxButtons.OK, MessageBoxIcon.Informatio
             inputToolStripMenuItem.Checked = false;
             offToolStripMenuItem.Checked = true;
             tileGrid.DrawGrid = false;
+        }
+
+        private void spinTimer_Tick(object sender, EventArgs e)
+        {
+            if (tileGrid.Player.SpinDirection != Direction.None) {
+                tileGrid.Player.Input(Input.None);
+            }
         }
     }
 }
