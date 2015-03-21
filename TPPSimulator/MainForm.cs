@@ -410,6 +410,7 @@ L = A", "Manual Input Controls", MessageBoxButtons.OK, MessageBoxIcon.Informatio
                 if (chatEnabled) {
                     if (chatInput != Input.None) {
                         tileGrid.Player.Input(chatInput);
+                        InputCount++;
                         addToList = true;
                     } else if (chatDesignMode) {
                         if (e.Command.ToLower().Equals("!tile")) {
