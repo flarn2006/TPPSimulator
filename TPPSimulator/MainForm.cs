@@ -504,6 +504,7 @@ L = A", "Manual Input Controls", MessageBoxButtons.OK, MessageBoxIcon.Informatio
             designToolStripMenuItem.Checked = true;
             inputToolStripMenuItem.Checked = false;
             offToolStripMenuItem.Checked = false;
+            tileGrid.DrawGrid = true;
         }
 
         private void inputToolStripMenuItem_Click(object sender, EventArgs e)
@@ -513,6 +514,7 @@ L = A", "Manual Input Controls", MessageBoxButtons.OK, MessageBoxIcon.Informatio
             designToolStripMenuItem.Checked = false;
             inputToolStripMenuItem.Checked = true;
             offToolStripMenuItem.Checked = false;
+            tileGrid.DrawGrid = false;
         }
 
         private void offToolStripMenuItem_Click(object sender, EventArgs e)
@@ -521,6 +523,7 @@ L = A", "Manual Input Controls", MessageBoxButtons.OK, MessageBoxIcon.Informatio
             designToolStripMenuItem.Checked = false;
             inputToolStripMenuItem.Checked = false;
             offToolStripMenuItem.Checked = true;
+            tileGrid.DrawGrid = false;
         }
     }
 }

@@ -16,6 +16,14 @@ namespace TPPSimulator
     [DefaultEvent("GridChanged")]
     public partial class TileGrid : ScrollableControl
     {
+        private static Pen gridPen;
+
+        static TileGrid()
+        {
+            gridPen = new Pen(Color.Blue);
+            gridPen.DashPattern = new float[] { 1.0f, 1.0f };
+        }
+
         private int cols = 1, rows = 1;
         private TileType[,] grid;
         private Bitmap bmp;
@@ -25,6 +33,7 @@ namespace TPPSimulator
         private Point goalLocation = Point.Empty;
         private Point[] pathToDraw = null;
         private MD5 md5;
+        private bool drawGrid = true;
 
         public enum LeftClickMode { Player, Goal, Tile }
 
@@ -173,6 +182,16 @@ namespace TPPSimulator
             } else {
                 g.FillRectangle(Brushes.Red, TileSize * tileX, TileSize * tileY, TileSize, TileSize);
             }
+
+            if (DrawGrid) {
+                Point[] pts = new Point[] {
+                    new Point(tileX * TileSize, tileY * TileSize + TileSize), //bottom left
+                    new Point(tileX * TileSize, tileY * TileSize), //top left
+                    new Point(tileX * TileSize + TileSize, tileY * TileSize) //top right
+                };
+                g.DrawLines(gridPen, pts);
+            }
+
             Invalidate(new Rectangle(tileX * TileSize, tileY * TileSize, TileSize, TileSize));
         }
 
@@ -370,6 +389,13 @@ namespace TPPSimulator
         {
             get { return pathToDraw; }
             set { pathToDraw = value; Invalidate(); }
+        }
+
+        [DefaultValue(true)]
+        public bool DrawGrid
+        {
+            get { return drawGrid; }
+            set { drawGrid = value; FullImageUpdate(); }
         }
     }
 }

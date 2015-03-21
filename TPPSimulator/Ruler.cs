@@ -72,7 +72,7 @@ namespace TPPSimulator
                     pe.Graphics.DrawLine(pen, offset + i * UnitSize, 0, offset + i * UnitSize, Height - 1);
                     pe.Graphics.DrawString(i.ToString(), numberFont, Brushes.Black, offset + i * UnitSize, 0);
                 } else {
-                    pe.Graphics.DrawLine(pen, 0, i * UnitSize, Width - 1, i * UnitSize);
+                    pe.Graphics.DrawLine(pen, 0, offset + i * UnitSize, Width - 1, offset + i * UnitSize);
                     pe.Graphics.DrawString(i.ToString(), numberFont, Brushes.Black, 0, offset + i * UnitSize);
                 }
             }
