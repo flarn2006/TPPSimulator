@@ -173,7 +173,10 @@ In the mean time, enjoy this preview!", "Welcome!", MessageBoxButtons.OKCancel, 
         private void newToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (docMgr.NewDocument()) {
+                tileGrid.ResizeGrid(40, 30);
                 tileGrid.InitializeGrid();
+                tileGrid.Player.Location = Point.Empty;
+                tileGrid.GoalLocation = Point.Empty;
                 docMgr.Dirty = false;
             }
         }
