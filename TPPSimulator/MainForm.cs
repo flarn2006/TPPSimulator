@@ -165,7 +165,7 @@ In the mean time, enjoy this preview!", "Welcome!", MessageBoxButtons.OKCancel, 
             InputCount = 0;
         }
 
-        private void saveMgr_TitleChanged(object sender, PropertyChangedEventArgs e)
+        private void docMgr_TitleChanged(object sender, PropertyChangedEventArgs e)
         {
             Text = docMgr.WindowTitle;
         }
