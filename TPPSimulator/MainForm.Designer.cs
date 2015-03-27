@@ -273,6 +273,7 @@
             this.tileGrid.AutoScrollMinSize = new System.Drawing.Size(640, 480);
             this.tileGrid.Columns = 40;
             this.tileGrid.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tileGrid.GoalLocation = new System.Drawing.Point(39, 29);
             this.tileGrid.LeftClickTile = null;
             this.tileGrid.Location = new System.Drawing.Point(18, 15);
             this.tileGrid.Name = "tileGrid";
@@ -409,21 +410,21 @@
             this.designToolStripMenuItem.Checked = true;
             this.designToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
             this.designToolStripMenuItem.Name = "designToolStripMenuItem";
-            this.designToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.designToolStripMenuItem.Size = new System.Drawing.Size(110, 22);
             this.designToolStripMenuItem.Text = "&Design";
             this.designToolStripMenuItem.Click += new System.EventHandler(this.designToolStripMenuItem_Click);
             // 
             // inputToolStripMenuItem
             // 
             this.inputToolStripMenuItem.Name = "inputToolStripMenuItem";
-            this.inputToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.inputToolStripMenuItem.Size = new System.Drawing.Size(110, 22);
             this.inputToolStripMenuItem.Text = "&Input";
             this.inputToolStripMenuItem.Click += new System.EventHandler(this.inputToolStripMenuItem_Click);
             // 
             // offToolStripMenuItem
             // 
             this.offToolStripMenuItem.Name = "offToolStripMenuItem";
-            this.offToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.offToolStripMenuItem.Size = new System.Drawing.Size(110, 22);
             this.offToolStripMenuItem.Text = "&Off";
             this.offToolStripMenuItem.Click += new System.EventHandler(this.offToolStripMenuItem_Click);
             // 
@@ -712,7 +713,7 @@
             this.docMgr.SaveFilter = "Map files (*.tppmap)|*.tppmap|All files (*.*)|*.*";
             this.docMgr.AttemptOpenFile += new System.EventHandler<TPPSimulator.DocumentManager.AttemptOpenFileEventArgs>(this.docMgr_AttemptOpenFile);
             this.docMgr.AttemptSaveFile += new System.EventHandler<TPPSimulator.DocumentManager.AttemptOpenFileEventArgs>(this.docMgr_AttemptSaveFile);
-            this.docMgr.TitleChanged += new System.ComponentModel.PropertyChangedEventHandler(this.saveMgr_TitleChanged);
+            this.docMgr.TitleChanged += new System.ComponentModel.PropertyChangedEventHandler(this.docMgr_TitleChanged);
             // 
             // listener
             // 
