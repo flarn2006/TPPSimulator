@@ -176,7 +176,7 @@ In the mean time, enjoy this preview!", "Welcome!", MessageBoxButtons.OKCancel, 
                 tileGrid.ResizeGrid(40, 30);
                 tileGrid.InitializeGrid();
                 tileGrid.Player.Location = Point.Empty;
-                tileGrid.GoalLocation = Point.Empty;
+                tileGrid.GoalLocation = new Point(tileGrid.Columns - 1, tileGrid.Rows - 1);
                 docMgr.Dirty = false;
             }
         }

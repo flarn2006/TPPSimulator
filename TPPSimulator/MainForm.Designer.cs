@@ -42,6 +42,8 @@
             this.tsbShrub = new System.Windows.Forms.ToolStripButton();
             this.toolStripContainer1 = new System.Windows.Forms.ToolStripContainer();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.tileGrid = new TPPSimulator.TileGrid();
+            this.inputGen = new TPPSimulator.InputGenerator();
             this.menu = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.newToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -82,8 +84,6 @@
             this.tsbDrawPath = new System.Windows.Forms.ToolStripButton();
             this.stepTimer = new System.Windows.Forms.Timer(this.components);
             this.exportImageDlg = new System.Windows.Forms.SaveFileDialog();
-            this.tileGrid = new TPPSimulator.TileGrid();
-            this.inputGen = new TPPSimulator.InputGenerator();
             this.docMgr = new TPPSimulator.DocumentManager(this.components);
             this.tsTools.SuspendLayout();
             this.toolStripContainer1.ContentPanel.SuspendLayout();
@@ -255,6 +255,37 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(829, 627);
             this.panel1.TabIndex = 0;
+            // 
+            // tileGrid
+            // 
+            this.tileGrid.AutoScroll = true;
+            this.tileGrid.AutoScrollMinSize = new System.Drawing.Size(640, 480);
+            this.tileGrid.Columns = 40;
+            this.tileGrid.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tileGrid.GoalLocation = new System.Drawing.Point(39, 29);
+            this.tileGrid.LeftClickTile = null;
+            this.tileGrid.Location = new System.Drawing.Point(0, 0);
+            this.tileGrid.Name = "tileGrid";
+            this.tileGrid.PathToDraw = null;
+            this.tileGrid.Rows = 30;
+            this.tileGrid.Size = new System.Drawing.Size(825, 623);
+            this.tileGrid.TabIndex = 0;
+            this.tileGrid.Text = "tileGrid1";
+            this.tileGrid.GridChanged += new System.EventHandler(this.tileGrid_GridChanged);
+            this.tileGrid.GoalReached += new System.EventHandler(this.tileGrid_GoalReached);
+            // 
+            // inputGen
+            // 
+            this.inputGen.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.inputGen.Dock = System.Windows.Forms.DockStyle.Right;
+            this.inputGen.Location = new System.Drawing.Point(829, 0);
+            this.inputGen.Name = "inputGen";
+            this.inputGen.RebuildGraphEnabled = false;
+            this.inputGen.Size = new System.Drawing.Size(174, 627);
+            this.inputGen.TabIndex = 1;
+            this.inputGen.TileGrid = this.tileGrid;
+            this.inputGen.StepIntervalChanged += new System.EventHandler(this.inputGen_StepIntervalChanged);
+            this.inputGen.Load += new System.EventHandler(this.inputGen_Load);
             // 
             // menu
             // 
@@ -604,35 +635,6 @@
             // 
             this.exportImageDlg.Filter = "Portable Network Graphics (*.png)|*.png|All files (*.*)|*.*";
             this.exportImageDlg.Title = "Export Image";
-            // 
-            // tileGrid
-            // 
-            this.tileGrid.AutoScroll = true;
-            this.tileGrid.AutoScrollMinSize = new System.Drawing.Size(640, 480);
-            this.tileGrid.Columns = 40;
-            this.tileGrid.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tileGrid.LeftClickTile = null;
-            this.tileGrid.Location = new System.Drawing.Point(0, 0);
-            this.tileGrid.Name = "tileGrid";
-            this.tileGrid.PathToDraw = null;
-            this.tileGrid.Rows = 30;
-            this.tileGrid.Size = new System.Drawing.Size(825, 623);
-            this.tileGrid.TabIndex = 0;
-            this.tileGrid.Text = "tileGrid1";
-            this.tileGrid.GridChanged += new System.EventHandler(this.tileGrid_GridChanged);
-            this.tileGrid.GoalReached += new System.EventHandler(this.tileGrid_GoalReached);
-            // 
-            // inputGen
-            // 
-            this.inputGen.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.inputGen.Dock = System.Windows.Forms.DockStyle.Right;
-            this.inputGen.Location = new System.Drawing.Point(829, 0);
-            this.inputGen.Name = "inputGen";
-            this.inputGen.Size = new System.Drawing.Size(174, 627);
-            this.inputGen.TabIndex = 1;
-            this.inputGen.TileGrid = this.tileGrid;
-            this.inputGen.StepIntervalChanged += new System.EventHandler(this.inputGen_StepIntervalChanged);
-            this.inputGen.Load += new System.EventHandler(this.inputGen_Load);
             // 
             // docMgr
             // 
