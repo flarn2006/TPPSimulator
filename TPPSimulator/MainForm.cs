@@ -169,17 +169,23 @@ namespace TPPSimulator
             InputCount = 0;
         }
 
-        private void saveMgr_TitleChanged(object sender, PropertyChangedEventArgs e)
+        private void docMgr_TitleChanged(object sender, PropertyChangedEventArgs e)
         {
             Text = docMgr.WindowTitle;
         }
 
         private void newToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            docMgr.SuppressTitleChangedEvents = true;
             if (docMgr.NewDocument()) {
+                tileGrid.ResizeGrid(40, 30);
                 tileGrid.InitializeGrid();
+                tileGrid.Player.Location = Point.Empty;
+                tileGrid.GoalLocation = new Point(tileGrid.Columns - 1, tileGrid.Rows - 1);
                 docMgr.Dirty = false;
             }
+            docMgr.SuppressTitleChangedEvents = false;
+            Text = docMgr.WindowTitle;
         }
 
         private void openToolStripMenuItem_Click(object sender, EventArgs e)
