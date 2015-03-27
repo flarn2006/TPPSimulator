@@ -17,6 +17,7 @@ namespace TPPSimulator
         private string documentTitle = "Untitled";
         private string documentPath = "";
         private string defaultDocTitle = "Untitled";
+        private bool noTitleEvents = false;
 
         public class AttemptOpenFileEventArgs : EventArgs
         {
@@ -88,7 +89,7 @@ namespace TPPSimulator
 
         protected void OnTitleChanged()
         {
-            OnTitleChanged(new PropertyChangedEventArgs("WindowTitle"));
+            if (!noTitleEvents) OnTitleChanged(new PropertyChangedEventArgs("WindowTitle"));
         }
 
         protected virtual void OnTitleChanged(PropertyChangedEventArgs e)
@@ -156,6 +157,14 @@ namespace TPPSimulator
         {
             get { return saveDlg.Filter; }
             set { saveDlg.Filter = value; }
+        }
+
+        [DefaultValue(false), Category("Behavior")]
+        [Description("Set this to True to prevent the TitleChanged event from being fired.")]
+        public bool SuppressTitleChangedEvents
+        {
+            get { return noTitleEvents; }
+            set { noTitleEvents = value; }
         }
 
         [Browsable(false)]
