@@ -175,6 +175,7 @@ namespace TPPSimulator
             if (PromptBeforeExit()) {
                 Dirty = false;
                 DocumentTitle = DefaultDocTitle;
+                DocumentPath = "";
                 return true;
             } else {
                 return false;
