@@ -25,6 +25,7 @@ namespace TPPSimulator
         private Point goalLocation = Point.Empty;
         private Point[] pathToDraw = null;
         private MD5 md5;
+        private IInputGenerator inputGen;
 
         public enum LeftClickMode { Player, Goal, Tile }
 
@@ -246,6 +247,7 @@ namespace TPPSimulator
         {
             StreamReader sr = new StreamReader(filename);
             int row = -1;
+            int columns = 40, rows = 30;
             int playerX = 0, playerY = 0;
             int goalX = 0, goalY = 0;
 
@@ -268,12 +270,14 @@ namespace TPPSimulator
                         } else if (left.Equals("GoalY")) {
                             goalY = Int32.Parse(right);
                         } else if (left.Equals("Columns")) {
-                            Columns = Int32.Parse(right);
+                            columns = Int32.Parse(right);
                         } else if (left.Equals("Rows")) {
-                            Rows = Int32.Parse(right);
+                            rows = Int32.Parse(right);
                         } else if (left.Equals("StartMap")) {
-                            Player.Location = new Point(playerX, playerY);
-                            GoalLocation = new Point(goalX, goalY);
+                            ResizeGrid(columns, rows);
+                            goalLocation = new Point(goalX, goalY);
+                            player.SetLocationInternal(new Point(playerX, playerY));
+                            FullImageUpdate();
                             row = 0;
                         }
                     } catch (FormatException) {
@@ -356,6 +360,7 @@ namespace TPPSimulator
             AutoScrollMinSize = new Size(cols * TileSize, rows * TileSize);
 
             FullImageUpdate();
+            if (inputGen != null) inputGen.MapChanged();
             OnGridChanged();
         }
 
@@ -370,6 +375,14 @@ namespace TPPSimulator
         {
             get { return pathToDraw; }
             set { pathToDraw = value; Invalidate(); }
+        }
+
+        [DefaultValue(null), Category("Behavior")]
+        [Description("The input generator associated with this tile grid.")]
+        public IInputGenerator InputGen
+        {
+            get { return inputGen; }
+            set { inputGen = value; }
         }
     }
 }

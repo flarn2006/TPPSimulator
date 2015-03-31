@@ -103,7 +103,7 @@ namespace TPPSimulator
         public Point Location
         {
             get { return location; }
-            set { location = value; OnMoved(); OnNeedsTileGridRedraw(); }
+            set { SetLocationInternal(value); OnMoved(); OnNeedsTileGridRedraw(); }
         }
 
         public Direction Facing
@@ -158,6 +158,11 @@ namespace TPPSimulator
             } else {
                 return tileGrid.GetTile(newLocation.X, newLocation.Y).AttemptStep(this, dir.Opposite(), newLocation);
             }
+        }
+
+        internal void SetLocationInternal(Point location)
+        {
+            this.location = location;
         }
 
         public void Input(Input button)
