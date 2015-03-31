@@ -300,6 +300,7 @@ namespace TPPSimulator
 
             sr.Close();
             FullImageUpdate();
+            if (inputGen != null) inputGen.MapChanged();
         }
 
         private void PerformLeftClickAction(MouseEventArgs e)
@@ -341,6 +342,12 @@ namespace TPPSimulator
             }
         }
 
+        protected override void OnMouseUp(MouseEventArgs e)
+        {
+            base.OnMouseUp(e);
+            if (inputGen != null) inputGen.MapChanged();
+        }
+
         public void ResizeGrid(int cols, int rows)
         {
             TileType[,] oldGrid = grid;
@@ -360,7 +367,7 @@ namespace TPPSimulator
             AutoScrollMinSize = new Size(cols * TileSize, rows * TileSize);
 
             FullImageUpdate();
-            if (inputGen != null) inputGen.MapChanged();
+            if (inputGen != null) inputGen.MapChanged(true);
             OnGridChanged();
         }
 

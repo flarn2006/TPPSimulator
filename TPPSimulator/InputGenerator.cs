@@ -15,7 +15,7 @@ namespace TPPSimulator
     public interface IInputGenerator
     {
         Input GetNextInput();
-        void MapChanged();
+        void MapChanged(bool silent = false);
     }
 
     public partial class InputGenerator : UserControl, IInputGenerator
@@ -461,9 +461,9 @@ Note that this slider's maximum is 9 times more than the others.", "Explanation"
             pieSlices[tb].BorderColor = Color.Transparent;
         }
 
-        public void MapChanged()
+        public void MapChanged(bool silent = false)
         {
-            UpdateGraph(false);
+            UpdateGraph(!silent);
         }
     }
 }
