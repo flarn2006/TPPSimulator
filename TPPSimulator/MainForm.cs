@@ -191,7 +191,14 @@ In the mean time, enjoy this preview!", "Welcome!", MessageBoxButtons.OKCancel, 
 
         private void SaveMap(string filename)
         {
-            StreamWriter sw = new StreamWriter(filename);
+            FileStream file = File.OpenWrite(filename);
+            SaveMap(file);
+            file.Close();
+        }
+
+        private void SaveMap(Stream stream)
+        {
+            StreamWriter sw = new StreamWriter(stream);
             sw.WriteLine("TPP Simulator Map File");
             sw.WriteLine("PlayerX=" + tileGrid.Player.Location.X);
             sw.WriteLine("PlayerY=" + tileGrid.Player.Location.Y);
@@ -219,7 +226,7 @@ In the mean time, enjoy this preview!", "Welcome!", MessageBoxButtons.OKCancel, 
                 sw.WriteLine();
             }
 
-            sw.Close();
+            sw.Flush();
         }
 
         private void saveToolStripMenuItem_Click(object sender, EventArgs e)
@@ -403,6 +410,13 @@ L = A", "Manual Input Controls", MessageBoxButtons.OK, MessageBoxIcon.Informatio
             if (PastebinImportForm.ImportMap(out filename) == DialogResult.OK) {
                 docMgr.Open(filename);
             }
+        }
+
+        private void exportTextToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            MemoryStream stream = new MemoryStream();
+            SaveMap(stream);
+            TextCopyDialog.ShowDialog(Encoding.UTF8.GetString(stream.ToArray()), "Export Text");
         }
     }
 }

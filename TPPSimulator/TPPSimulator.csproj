@@ -104,6 +104,12 @@
       <DependentUpon>ResizeMapDialog.cs</DependentUpon>
     </Compile>
     <Compile Include="SoundPlayer.cs" />
+    <Compile Include="TextCopyDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TextCopyDialog.Designer.cs">
+      <DependentUpon>TextCopyDialog.cs</DependentUpon>
+    </Compile>
     <Compile Include="TileGrid.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -147,6 +153,9 @@
     </Compile>
     <EmbeddedResource Include="ResizeMapDialog.resx">
       <DependentUpon>ResizeMapDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TextCopyDialog.resx">
+      <DependentUpon>TextCopyDialog.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

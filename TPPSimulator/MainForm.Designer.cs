@@ -87,6 +87,7 @@
             this.stepTimer = new System.Windows.Forms.Timer(this.components);
             this.exportImageDlg = new System.Windows.Forms.SaveFileDialog();
             this.docMgr = new TPPSimulator.DocumentManager(this.components);
+            this.exportTextToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tsTools.SuspendLayout();
             this.toolStripContainer1.ContentPanel.SuspendLayout();
             this.toolStripContainer1.LeftToolStripPanel.SuspendLayout();
@@ -312,6 +313,7 @@
             this.saveAsToolStripMenuItem,
             this.toolStripSeparator7,
             this.pastebinToolStripMenuItem,
+            this.exportTextToolStripMenuItem,
             this.exportImageToolStripMenuItem,
             this.toolStripMenuItem1,
             this.exitToolStripMenuItem});
@@ -662,6 +664,13 @@
             this.docMgr.AttemptSaveFile += new System.EventHandler<TPPSimulator.DocumentManager.AttemptOpenFileEventArgs>(this.docMgr_AttemptSaveFile);
             this.docMgr.TitleChanged += new System.ComponentModel.PropertyChangedEventHandler(this.docMgr_TitleChanged);
             // 
+            // exportTextToolStripMenuItem
+            // 
+            this.exportTextToolStripMenuItem.Name = "exportTextToolStripMenuItem";
+            this.exportTextToolStripMenuItem.Size = new System.Drawing.Size(196, 22);
+            this.exportTextToolStripMenuItem.Text = "Export &Text...";
+            this.exportTextToolStripMenuItem.Click += new System.EventHandler(this.exportTextToolStripMenuItem_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -757,6 +766,7 @@
         private System.Windows.Forms.SaveFileDialog exportImageDlg;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator7;
         private System.Windows.Forms.ToolStripMenuItem pastebinToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem exportTextToolStripMenuItem;
 
     }
 }
