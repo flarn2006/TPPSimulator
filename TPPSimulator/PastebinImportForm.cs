@@ -28,7 +28,7 @@ namespace TPPSimulator
             string clipboard = Clipboard.GetText();
             txtURL.SelectAll();
             lblStatus.Text = "";
-            if (clipboard.StartsWith("http://")) {
+            if (clipboard.StartsWith("http://") || clipboard.StartsWith("https://")) {
                 txtURL.Text = clipboard;
                 await DownloadMap();
             }
@@ -36,7 +36,7 @@ namespace TPPSimulator
 
         public async Task DownloadMap()
         {
-            Match match = Regex.Match(txtURL.Text, "^(?:http://)?(?:www.)?pastebin.com/([A-Za-z0-9]+)$");
+            Match match = Regex.Match(txtURL.Text, "^(?:https?:\\/\\/)?(?:www\\.)?pastebin\\.com\\/([A-Za-z0-9]+)$");
             if (match.Success) {
                 txtURL.Text = "http://pastebin.com/raw.php?i=" + match.Groups[1].Value;
             }
