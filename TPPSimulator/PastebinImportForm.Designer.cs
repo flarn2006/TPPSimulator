@@ -32,6 +32,7 @@
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnOK = new System.Windows.Forms.Button();
             this.lblStatus = new System.Windows.Forms.Label();
+            this.linkWikiPage = new System.Windows.Forms.LinkLabel();
             this.SuspendLayout();
             // 
             // label1
@@ -59,7 +60,7 @@
             // 
             this.btnCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnCancel.Location = new System.Drawing.Point(229, 61);
+            this.btnCancel.Location = new System.Drawing.Point(229, 57);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(75, 23);
             this.btnCancel.TabIndex = 2;
@@ -71,7 +72,7 @@
             this.btnOK.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnOK.DialogResult = System.Windows.Forms.DialogResult.OK;
             this.btnOK.Enabled = false;
-            this.btnOK.Location = new System.Drawing.Point(148, 61);
+            this.btnOK.Location = new System.Drawing.Point(148, 57);
             this.btnOK.Name = "btnOK";
             this.btnOK.Size = new System.Drawing.Size(75, 23);
             this.btnOK.TabIndex = 3;
@@ -80,13 +81,25 @@
             // 
             // lblStatus
             // 
+            this.lblStatus.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.lblStatus.AutoSize = true;
-            this.lblStatus.Location = new System.Drawing.Point(12, 66);
+            this.lblStatus.Location = new System.Drawing.Point(12, 62);
             this.lblStatus.Name = "lblStatus";
             this.lblStatus.Size = new System.Drawing.Size(37, 13);
             this.lblStatus.TabIndex = 4;
             this.lblStatus.Text = "Status";
             this.lblStatus.Click += new System.EventHandler(this.lblStatus_Click);
+            // 
+            // linkWikiPage
+            // 
+            this.linkWikiPage.AutoSize = true;
+            this.linkWikiPage.Location = new System.Drawing.Point(181, 9);
+            this.linkWikiPage.Name = "linkWikiPage";
+            this.linkWikiPage.Size = new System.Drawing.Size(123, 13);
+            this.linkWikiPage.TabIndex = 5;
+            this.linkWikiPage.TabStop = true;
+            this.linkWikiPage.Text = "Custom Maps Wiki Page";
+            this.linkWikiPage.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkWikiPage_LinkClicked);
             // 
             // PastebinImportForm
             // 
@@ -94,7 +107,8 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnCancel;
-            this.ClientSize = new System.Drawing.Size(316, 96);
+            this.ClientSize = new System.Drawing.Size(316, 92);
+            this.Controls.Add(this.linkWikiPage);
             this.Controls.Add(this.lblStatus);
             this.Controls.Add(this.btnOK);
             this.Controls.Add(this.btnCancel);
@@ -118,5 +132,6 @@
         private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.Button btnOK;
         private System.Windows.Forms.Label lblStatus;
+        private System.Windows.Forms.LinkLabel linkWikiPage;
     }
 }

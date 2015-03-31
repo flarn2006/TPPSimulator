@@ -52,20 +52,24 @@ namespace TPPSimulator
             btnOK.Enabled = false;
 
             try {
-                HttpResponseMessage resp = await client.SendAsync(req);
-                if (resp.Content.Headers.ContentType.MediaType.Equals("text/plain")) {
-                    byte[] content = await resp.Content.ReadAsByteArrayAsync();
-                    filename = Path.Combine(Path.GetTempPath(), "Imported.tppmap");
-                    FileStream file = File.OpenWrite(filename);
-                    file.Write(content, 0, content.Length);
-                    file.Close();
-                    lblStatus.ForeColor = Color.Green;
-                    lblStatus.Text = "Downloaded";
-                    btnOK.Enabled = true;
-                    btnOK.Focus();
+                if (txtURL.Text.Length == 0) {
+                    lblStatus.Text = "";
                 } else {
-                    lblStatus.ForeColor = Color.Red;
-                    lblStatus.Text = "Wrong content type";
+                    HttpResponseMessage resp = await client.SendAsync(req);
+                    if (resp.Content.Headers.ContentType.MediaType.Equals("text/plain")) {
+                        byte[] content = await resp.Content.ReadAsByteArrayAsync();
+                        filename = Path.Combine(Path.GetTempPath(), "Imported.tppmap");
+                        FileStream file = File.OpenWrite(filename);
+                        file.Write(content, 0, content.Length);
+                        file.Close();
+                        lblStatus.ForeColor = Color.Green;
+                        lblStatus.Text = "Downloaded";
+                        btnOK.Enabled = true;
+                        btnOK.Focus();
+                    } else {
+                        lblStatus.ForeColor = Color.Red;
+                        lblStatus.Text = "Wrong content type";
+                    }
                 }
             } catch (InvalidOperationException) {
                 lblStatus.ForeColor = Color.Red;
@@ -115,6 +119,11 @@ namespace TPPSimulator
             if (!btnOK.Enabled) {
                 await DownloadMap();
             }
+        }
+
+        private void linkWikiPage_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            System.Diagnostics.Process.Start("https://github.com/flarn2006/TPPSimulator/wiki/Custom-Maps");
         }
     }
 }
