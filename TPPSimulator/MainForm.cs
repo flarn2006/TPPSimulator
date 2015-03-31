@@ -396,5 +396,13 @@ L = A", "Manual Input Controls", MessageBoxButtons.OK, MessageBoxIcon.Informatio
                 }
             }
         }
+
+        private void pastebinToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            string filename;
+            if (PastebinImportForm.ImportMap(out filename) == DialogResult.OK) {
+                docMgr.Open(filename);
+            }
+        }
     }
 }

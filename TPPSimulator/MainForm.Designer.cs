@@ -42,8 +42,6 @@
             this.tsbShrub = new System.Windows.Forms.ToolStripButton();
             this.toolStripContainer1 = new System.Windows.Forms.ToolStripContainer();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.tileGrid = new TPPSimulator.TileGrid();
-            this.inputGen = new TPPSimulator.InputGenerator();
             this.menu = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.newToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -84,7 +82,11 @@
             this.tsbDrawPath = new System.Windows.Forms.ToolStripButton();
             this.stepTimer = new System.Windows.Forms.Timer(this.components);
             this.exportImageDlg = new System.Windows.Forms.SaveFileDialog();
+            this.tileGrid = new TPPSimulator.TileGrid();
+            this.inputGen = new TPPSimulator.InputGenerator();
             this.docMgr = new TPPSimulator.DocumentManager(this.components);
+            this.toolStripSeparator7 = new System.Windows.Forms.ToolStripSeparator();
+            this.pastebinToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tsTools.SuspendLayout();
             this.toolStripContainer1.ContentPanel.SuspendLayout();
             this.toolStripContainer1.LeftToolStripPanel.SuspendLayout();
@@ -256,37 +258,6 @@
             this.panel1.Size = new System.Drawing.Size(829, 627);
             this.panel1.TabIndex = 0;
             // 
-            // tileGrid
-            // 
-            this.tileGrid.AutoScroll = true;
-            this.tileGrid.AutoScrollMinSize = new System.Drawing.Size(640, 480);
-            this.tileGrid.Columns = 40;
-            this.tileGrid.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tileGrid.GoalLocation = new System.Drawing.Point(39, 29);
-            this.tileGrid.LeftClickTile = null;
-            this.tileGrid.Location = new System.Drawing.Point(0, 0);
-            this.tileGrid.Name = "tileGrid";
-            this.tileGrid.PathToDraw = null;
-            this.tileGrid.Rows = 30;
-            this.tileGrid.Size = new System.Drawing.Size(825, 623);
-            this.tileGrid.TabIndex = 0;
-            this.tileGrid.Text = "tileGrid1";
-            this.tileGrid.GridChanged += new System.EventHandler(this.tileGrid_GridChanged);
-            this.tileGrid.GoalReached += new System.EventHandler(this.tileGrid_GoalReached);
-            // 
-            // inputGen
-            // 
-            this.inputGen.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.inputGen.Dock = System.Windows.Forms.DockStyle.Right;
-            this.inputGen.Location = new System.Drawing.Point(829, 0);
-            this.inputGen.Name = "inputGen";
-            this.inputGen.RebuildGraphEnabled = false;
-            this.inputGen.Size = new System.Drawing.Size(174, 627);
-            this.inputGen.TabIndex = 1;
-            this.inputGen.TileGrid = this.tileGrid;
-            this.inputGen.StepIntervalChanged += new System.EventHandler(this.inputGen_StepIntervalChanged);
-            this.inputGen.Load += new System.EventHandler(this.inputGen_Load);
-            // 
             // menu
             // 
             this.menu.Dock = System.Windows.Forms.DockStyle.None;
@@ -307,6 +278,8 @@
             this.openToolStripMenuItem,
             this.saveToolStripMenuItem,
             this.saveAsToolStripMenuItem,
+            this.toolStripSeparator7,
+            this.pastebinToolStripMenuItem,
             this.exportImageToolStripMenuItem,
             this.toolStripMenuItem1,
             this.exitToolStripMenuItem});
@@ -318,7 +291,7 @@
             // 
             this.newToolStripMenuItem.Name = "newToolStripMenuItem";
             this.newToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.N)));
-            this.newToolStripMenuItem.Size = new System.Drawing.Size(155, 22);
+            this.newToolStripMenuItem.Size = new System.Drawing.Size(196, 22);
             this.newToolStripMenuItem.Text = "&New";
             this.newToolStripMenuItem.Click += new System.EventHandler(this.newToolStripMenuItem_Click);
             // 
@@ -326,7 +299,7 @@
             // 
             this.openToolStripMenuItem.Name = "openToolStripMenuItem";
             this.openToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.O)));
-            this.openToolStripMenuItem.Size = new System.Drawing.Size(155, 22);
+            this.openToolStripMenuItem.Size = new System.Drawing.Size(196, 22);
             this.openToolStripMenuItem.Text = "&Open...";
             this.openToolStripMenuItem.Click += new System.EventHandler(this.openToolStripMenuItem_Click);
             // 
@@ -334,33 +307,33 @@
             // 
             this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
             this.saveToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
-            this.saveToolStripMenuItem.Size = new System.Drawing.Size(155, 22);
+            this.saveToolStripMenuItem.Size = new System.Drawing.Size(196, 22);
             this.saveToolStripMenuItem.Text = "&Save";
             this.saveToolStripMenuItem.Click += new System.EventHandler(this.saveToolStripMenuItem_Click);
             // 
             // saveAsToolStripMenuItem
             // 
             this.saveAsToolStripMenuItem.Name = "saveAsToolStripMenuItem";
-            this.saveAsToolStripMenuItem.Size = new System.Drawing.Size(155, 22);
+            this.saveAsToolStripMenuItem.Size = new System.Drawing.Size(196, 22);
             this.saveAsToolStripMenuItem.Text = "Save &As...";
             this.saveAsToolStripMenuItem.Click += new System.EventHandler(this.saveAsToolStripMenuItem_Click);
             // 
             // exportImageToolStripMenuItem
             // 
             this.exportImageToolStripMenuItem.Name = "exportImageToolStripMenuItem";
-            this.exportImageToolStripMenuItem.Size = new System.Drawing.Size(155, 22);
+            this.exportImageToolStripMenuItem.Size = new System.Drawing.Size(196, 22);
             this.exportImageToolStripMenuItem.Text = "Export &Image...";
             this.exportImageToolStripMenuItem.Click += new System.EventHandler(this.exportImageToolStripMenuItem_Click);
             // 
             // toolStripMenuItem1
             // 
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(152, 6);
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(193, 6);
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(155, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(196, 22);
             this.exitToolStripMenuItem.Text = "E&xit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
@@ -636,6 +609,37 @@
             this.exportImageDlg.Filter = "Portable Network Graphics (*.png)|*.png|All files (*.*)|*.*";
             this.exportImageDlg.Title = "Export Image";
             // 
+            // tileGrid
+            // 
+            this.tileGrid.AutoScroll = true;
+            this.tileGrid.AutoScrollMinSize = new System.Drawing.Size(640, 480);
+            this.tileGrid.Columns = 40;
+            this.tileGrid.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tileGrid.GoalLocation = new System.Drawing.Point(39, 29);
+            this.tileGrid.LeftClickTile = null;
+            this.tileGrid.Location = new System.Drawing.Point(0, 0);
+            this.tileGrid.Name = "tileGrid";
+            this.tileGrid.PathToDraw = null;
+            this.tileGrid.Rows = 30;
+            this.tileGrid.Size = new System.Drawing.Size(825, 623);
+            this.tileGrid.TabIndex = 0;
+            this.tileGrid.Text = "tileGrid1";
+            this.tileGrid.GridChanged += new System.EventHandler(this.tileGrid_GridChanged);
+            this.tileGrid.GoalReached += new System.EventHandler(this.tileGrid_GoalReached);
+            // 
+            // inputGen
+            // 
+            this.inputGen.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.inputGen.Dock = System.Windows.Forms.DockStyle.Right;
+            this.inputGen.Location = new System.Drawing.Point(829, 0);
+            this.inputGen.Name = "inputGen";
+            this.inputGen.RebuildGraphEnabled = false;
+            this.inputGen.Size = new System.Drawing.Size(174, 627);
+            this.inputGen.TabIndex = 1;
+            this.inputGen.TileGrid = this.tileGrid;
+            this.inputGen.StepIntervalChanged += new System.EventHandler(this.inputGen_StepIntervalChanged);
+            this.inputGen.Load += new System.EventHandler(this.inputGen_Load);
+            // 
             // docMgr
             // 
             this.docMgr.AppTitle = "TPP Simulator BETA";
@@ -644,6 +648,18 @@
             this.docMgr.AttemptOpenFile += new System.EventHandler<TPPSimulator.DocumentManager.AttemptOpenFileEventArgs>(this.docMgr_AttemptOpenFile);
             this.docMgr.AttemptSaveFile += new System.EventHandler<TPPSimulator.DocumentManager.AttemptOpenFileEventArgs>(this.docMgr_AttemptSaveFile);
             this.docMgr.TitleChanged += new System.ComponentModel.PropertyChangedEventHandler(this.docMgr_TitleChanged);
+            // 
+            // toolStripSeparator7
+            // 
+            this.toolStripSeparator7.Name = "toolStripSeparator7";
+            this.toolStripSeparator7.Size = new System.Drawing.Size(193, 6);
+            // 
+            // pastebinToolStripMenuItem
+            // 
+            this.pastebinToolStripMenuItem.Name = "pastebinToolStripMenuItem";
+            this.pastebinToolStripMenuItem.Size = new System.Drawing.Size(196, 22);
+            this.pastebinToolStripMenuItem.Text = "Import from &Pastebin...";
+            this.pastebinToolStripMenuItem.Click += new System.EventHandler(this.pastebinToolStripMenuItem_Click);
             // 
             // MainForm
             // 
@@ -738,6 +754,8 @@
         private System.Windows.Forms.ToolStripMenuItem displayGraphToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem exportImageToolStripMenuItem;
         private System.Windows.Forms.SaveFileDialog exportImageDlg;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator7;
+        private System.Windows.Forms.ToolStripMenuItem pastebinToolStripMenuItem;
 
     }
 }

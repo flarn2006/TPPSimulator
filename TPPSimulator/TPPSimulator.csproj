@@ -37,6 +37,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -79,6 +80,12 @@
     </Compile>
     <Compile Include="Menu.cs" />
     <Compile Include="MenuState.cs" />
+    <Compile Include="PastebinImportForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PastebinImportForm.Designer.cs">
+      <DependentUpon>PastebinImportForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="PieChart\PieChart.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -121,6 +128,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PastebinImportForm.resx">
+      <DependentUpon>PastebinImportForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PieChart\PieChart.resx">
       <DependentUpon>PieChart.cs</DependentUpon>

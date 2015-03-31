@@ -194,17 +194,24 @@ namespace TPPSimulator
         public bool Open()
         {
             if (openDlg.ShowDialog() == DialogResult.OK) {
-                if (PromptBeforeExit()) {
-                    if (!OnAttemptOpenFile(openDlg.FileName)) { //that is, if "Cancel" is false...
-                        DocumentPath = openDlg.FileName;
-                        DocumentTitle = System.IO.Path.GetFileName(DocumentPath);
-                        Dirty = false;
-                        return true;
-                    }
+                return Open(openDlg.FileName);
+            } else {
+                return false;
+            }
+        }
+
+        public bool Open(string filename)
+        {
+            if (PromptBeforeExit()) {
+                if (!OnAttemptOpenFile(filename)) { //that is, if "Cancel" is false...
+                    DocumentPath = filename;
+                    DocumentTitle = System.IO.Path.GetFileName(DocumentPath);
+                    Dirty = false;
+                    return true;
                 }
             }
-            
-            return false; //if it hasn't already returned true
+
+            return false;
         }
 
         public bool Save()
