@@ -34,6 +34,9 @@
   <PropertyGroup>
     <RunPostBuildEvent>Always</RunPostBuildEvent>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>Resources\MainIcon.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -231,6 +234,7 @@
     <None Include="Resources\pencil_go.png" />
     <None Include="Resources\chart_organisation.png" />
     <Content Include="Images\shrub_removed.png" />
+    <None Include="Resources\MainIcon.ico" />
     <Content Include="Sounds\bulbasaur.wav" />
     <Content Include="Sounds\charmander.wav" />
     <Content Include="Sounds\goal.wav" />

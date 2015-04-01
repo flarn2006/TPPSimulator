@@ -52,6 +52,7 @@
             this.saveAsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator7 = new System.Windows.Forms.ToolStripSeparator();
             this.pastebinToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.exportTextToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exportImageToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -87,7 +88,6 @@
             this.stepTimer = new System.Windows.Forms.Timer(this.components);
             this.exportImageDlg = new System.Windows.Forms.SaveFileDialog();
             this.docMgr = new TPPSimulator.DocumentManager(this.components);
-            this.exportTextToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tsTools.SuspendLayout();
             this.toolStripContainer1.ContentPanel.SuspendLayout();
             this.toolStripContainer1.LeftToolStripPanel.SuspendLayout();
@@ -363,6 +363,13 @@
             this.pastebinToolStripMenuItem.Size = new System.Drawing.Size(196, 22);
             this.pastebinToolStripMenuItem.Text = "Import from &Pastebin...";
             this.pastebinToolStripMenuItem.Click += new System.EventHandler(this.pastebinToolStripMenuItem_Click);
+            // 
+            // exportTextToolStripMenuItem
+            // 
+            this.exportTextToolStripMenuItem.Name = "exportTextToolStripMenuItem";
+            this.exportTextToolStripMenuItem.Size = new System.Drawing.Size(196, 22);
+            this.exportTextToolStripMenuItem.Text = "Export &Text...";
+            this.exportTextToolStripMenuItem.Click += new System.EventHandler(this.exportTextToolStripMenuItem_Click);
             // 
             // exportImageToolStripMenuItem
             // 
@@ -664,19 +671,13 @@
             this.docMgr.AttemptSaveFile += new System.EventHandler<TPPSimulator.DocumentManager.AttemptOpenFileEventArgs>(this.docMgr_AttemptSaveFile);
             this.docMgr.TitleChanged += new System.ComponentModel.PropertyChangedEventHandler(this.docMgr_TitleChanged);
             // 
-            // exportTextToolStripMenuItem
-            // 
-            this.exportTextToolStripMenuItem.Name = "exportTextToolStripMenuItem";
-            this.exportTextToolStripMenuItem.Size = new System.Drawing.Size(196, 22);
-            this.exportTextToolStripMenuItem.Text = "Export &Text...";
-            this.exportTextToolStripMenuItem.Click += new System.EventHandler(this.exportTextToolStripMenuItem_Click);
-            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1027, 701);
             this.Controls.Add(this.toolStripContainer1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.KeyPreview = true;
             this.MainMenuStrip = this.menu;
             this.Name = "MainForm";
