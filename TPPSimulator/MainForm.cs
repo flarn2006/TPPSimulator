@@ -14,8 +14,17 @@ namespace TPPSimulator
 {
     public partial class MainForm : Form
     {
+        private string[] commandLineArgs;
+
         public MainForm()
         {
+            commandLineArgs = new string[] { };
+            InitializeComponent();
+        }
+        
+        public MainForm(string[] args)
+        {
+            commandLineArgs = args;
             InitializeComponent();
         }
 
@@ -153,11 +162,9 @@ namespace TPPSimulator
 
         private void MainForm_Load(object sender, EventArgs e)
         {
-            /*if (MessageBox.Show(@"I haven't actually implemented the code to simulate inputs yet, but you can move around manually using WASD.
-In the mean time, enjoy this preview!", "Welcome!", MessageBoxButtons.OKCancel, MessageBoxIcon.Information) == DialogResult.Cancel) {
-                MessageBox.Show("If you're not going to enjoy it, I'll save you the trouble of quitting. Kappa", "Fine then.");
-                Application.Exit();
-            }*/
+            if (commandLineArgs.Length > 1) {
+                docMgr.Open(commandLineArgs[1]);
+            }
         }
 
         private void tsbResetCount_Click(object sender, EventArgs e)
