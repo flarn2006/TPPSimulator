@@ -161,11 +161,24 @@ namespace TPPSimulator
             Invalidate();
         }
 
+        private Point TileAtCoordinates(Point location)
+        {
+            int x = location.X - AutoScrollPosition.X;
+            int y = location.Y - AutoScrollPosition.Y;
+            return new Point(x / TileSize, y / TileSize);
+        }
+
+        private Point TileAtCoordinates(int x, int y)
+        {
+            return TileAtCoordinates(new Point(x, y));
+        }
+
         private void DrawTile(Graphics g, int tileX, int tileY)
         {
             if (grid[tileY, tileX] != null) {
                 Image img = grid[tileY, tileX].Image;
                 if (grid[tileY, tileX].ImageAlt != null) {
+                    // TODO: use a more efficient algorithm than MD5
                     if (md5.ComputeHash(new byte[] { (byte)(tileX & 255), (byte)(tileY & 255) })[0] < 16) {
                         img = grid[tileY, tileX].ImageAlt;
                     }
@@ -297,7 +310,7 @@ namespace TPPSimulator
                     row++;
                 }
             }
-
+            
             sr.Close();
             FullImageUpdate();
             if (inputGen != null) inputGen.MapChanged();
@@ -307,13 +320,13 @@ namespace TPPSimulator
         {
             switch (leftClickMode) {
                 case LeftClickMode.Player:
-                    player.Location = new Point(e.X / TileSize, e.Y / TileSize);
+                    player.Location = TileAtCoordinates(e.Location);
                     break;
                 case LeftClickMode.Goal:
-                    GoalLocation = new Point(e.X / TileSize, e.Y / TileSize);
+                    GoalLocation = TileAtCoordinates(e.Location);
                     break;
                 case LeftClickMode.Tile:
-                    SetTile(e.X / TileSize, e.Y / TileSize, leftClickTile);
+                    SetTile(TileAtCoordinates(e.Location), leftClickTile);
                     break;
             }
         }
@@ -321,11 +334,12 @@ namespace TPPSimulator
         protected override void OnMouseDown(MouseEventArgs e)
         {
             base.OnMouseDown(e);
-            if (e.X < TileSize * cols && e.Y < TileSize * rows) {
+            Point tile = TileAtCoordinates(e.Location);
+            if (tile.X < cols && tile.Y < rows && tile.X >= 0 && tile.Y >= 0) {
                 if (e.Button == MouseButtons.Left) {
                     PerformLeftClickAction(e);
                 } else if (e.Button == MouseButtons.Right) {
-                    SetTile(e.X / TileSize, e.Y / TileSize, TileType.Empty);
+                    SetTile(tile, TileType.Empty);
                 }
             }
         }
@@ -333,11 +347,12 @@ namespace TPPSimulator
         protected override void OnMouseMove(MouseEventArgs e)
         {
             base.OnMouseMove(e);
-            if (e.X < TileSize * cols && e.Y < TileSize * rows && e.X >= 0 && e.Y >= 0) {
+            Point tile = TileAtCoordinates(e.Location);
+            if (tile.X < cols && tile.Y < rows && tile.X >= 0 && tile.Y >= 0) {
                 if ((MouseButtons & MouseButtons.Left) > 0) {
                     PerformLeftClickAction(e);
                 } else if ((MouseButtons & MouseButtons.Right) > 0) {
-                    SetTile(e.X / TileSize, e.Y / TileSize, TileType.Empty);
+                    SetTile(tile, TileType.Empty);
                 }
             }
         }
