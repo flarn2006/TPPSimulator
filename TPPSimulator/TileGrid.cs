@@ -187,7 +187,7 @@ namespace TPPSimulator
             } else {
                 g.FillRectangle(Brushes.Red, TileSize * tileX, TileSize * tileY, TileSize, TileSize);
             }
-            Invalidate(new Rectangle(tileX * TileSize, tileY * TileSize, TileSize, TileSize));
+            Invalidate(new Rectangle(tileX * TileSize + AutoScrollPosition.X, tileY * TileSize + AutoScrollPosition.Y, TileSize, TileSize));
         }
 
         public void DrawMapImage(Graphics g)
