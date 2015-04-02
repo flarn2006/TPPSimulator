@@ -32,7 +32,6 @@ namespace TPPSimulator
         private Graph<Point> graph;
         private IEnumerable<Point> path = null;
         private bool drawPath = false;
-        private bool shownImpossibleMessage = false;
         TrackBar[] sliders;
         Color[] pieSliceColors;
         Dictionary<TrackBar, PieSlice> pieSlices;
@@ -341,7 +340,6 @@ Note that this slider's maximum is 9 times more than the others.", "Explanation"
         {
             if (tileGrid == null) return;
 
-            shownImpossibleMessage = false;
             graph = new Graph<Point>((uint)(tileGrid.Rows * tileGrid.Columns));
 
             for (int y = 0; y < tileGrid.Rows; y++) {
@@ -398,12 +396,7 @@ Note that this slider's maximum is 9 times more than the others.", "Explanation"
                 try {
                     path = graph.GetNode(tileGrid.GoalLocation).FindPath(tileGrid.Player.Location).Select(node => node.Data);
                     tileGrid.PathToDraw = path.Select(p => new Point(16 * p.X + 8, 16 * p.Y + 8)).ToArray();
-                    shownImpossibleMessage = false;
                 } catch (NullReferenceException) {
-                    if (!shownImpossibleMessage) {
-                        shownImpossibleMessage = true;
-                        MessageBox.Show("Not even Democracy would make this map possible.", "Impossible!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    }
                     tileGrid.PathToDraw = null;
                 }
             }
