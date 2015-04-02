@@ -21,7 +21,7 @@ namespace TPPSimulator
         private static Image GetImage(string filename)
         {
             Image result;
-            filename = System.IO.Path.Combine("Menu", filename);
+            filename = System.IO.Path.Combine(Menu.MenuPath, filename);
             if (!imageCache.TryGetValue(filename, out result)) {
                 Bitmap original_bitmap = (Bitmap) Image.FromFile(filename);
                 result = new Bitmap(original_bitmap.Width, original_bitmap.Height);

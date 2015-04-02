@@ -12,12 +12,19 @@ namespace TPPSimulator
     {
         private static Image emptyImage;
         private static Random rng;
+        private static string menuPath;
 
         static Menu()
         {
             emptyImage = new Bitmap(1, 1);
             ((Bitmap)emptyImage).SetPixel(0, 0, Color.Transparent);
             rng = new Random();
+            menuPath = Path.Combine(Path.GetDirectoryName(System.Diagnostics.Process.GetCurrentProcess().MainModule.FileName), "Menu");
+        }
+
+        public static string MenuPath
+        {
+            get { return menuPath; }
         }
 
         private MenuState state = null;
@@ -29,7 +36,7 @@ namespace TPPSimulator
         {
             stateTable = new Dictionary<string,MenuState>();
             try {
-                StreamReader sr = new StreamReader("Menu/menu.csv");
+                StreamReader sr = new StreamReader(Path.Combine(menuPath, "Menu.csv"));
                 while (!sr.EndOfStream) {
                     string[] fields = sr.ReadLine().Split(',');
                     if (fields[0][0] == '#') continue;
