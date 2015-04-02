@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Net.Http;
@@ -17,6 +18,8 @@ namespace TPPSimulator
     {
         private Exception downloadError = null;
         private string filename = null;
+        private Task downloadAfterDelayTask;
+        private CancellationTokenSource cancelDownload = null;
 
         public PastebinImportForm()
         {
@@ -34,7 +37,19 @@ namespace TPPSimulator
             }
         }
 
-        public async Task DownloadMap()
+        private async Task DownloadMapAfterDelay(int millisecondsDelay, CancellationToken ct)
+        {
+            await Task.Delay(millisecondsDelay);
+            if (!ct.IsCancellationRequested) {
+                if (cancelDownload != null) {
+                    cancelDownload.Cancel();
+                }
+                cancelDownload = new CancellationTokenSource();
+                await DownloadMap();
+            }
+        }
+
+        private async Task DownloadMap()
         {
             Match match = Regex.Match(txtURL.Text, "^(?:https?:\\/\\/)?(?:www\\.)?pastebin\\.com\\/([A-Za-z0-9]+)$");
             if (match.Success) {
@@ -109,9 +124,15 @@ namespace TPPSimulator
 
         private void txtURL_TextChanged(object sender, EventArgs e)
         {
+            if (cancelDownload != null) {
+                cancelDownload.Cancel();
+            }
+            cancelDownload = new CancellationTokenSource();
+
             lblStatus.Text = "";
             downloadError = null;
             btnOK.Enabled = false;
+            downloadAfterDelayTask = DownloadMapAfterDelay(250, cancelDownload.Token);
         }
 
         private async void txtURL_Validating(object sender, CancelEventArgs e)
@@ -124,6 +145,13 @@ namespace TPPSimulator
         private void linkWikiPage_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             System.Diagnostics.Process.Start("https://github.com/flarn2006/TPPSimulator/wiki/Custom-Maps");
+        }
+
+        private void btnCancel_Click(object sender, EventArgs e)
+        {
+            if (cancelDownload != null) {
+                cancelDownload.Cancel();
+            }
         }
     }
 }
