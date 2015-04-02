@@ -259,7 +259,7 @@ namespace TPPSimulator
         private void tileGrid_GridChanged(object sender, EventArgs e)
         {
             docMgr.Dirty = true;
-            inputGen.RebuildGraphEnabled = true;
+            //inputGen.RebuildGraphEnabled = true;
         }
 
         private void tsbGen1Movement_Click(object sender, EventArgs e)
@@ -424,6 +424,11 @@ L = A", "Manual Input Controls", MessageBoxButtons.OK, MessageBoxIcon.Informatio
             MemoryStream stream = new MemoryStream();
             SaveMap(stream);
             TextCopyDialog.ShowDialog(Encoding.UTF8.GetString(stream.ToArray()), "Export Text");
+        }
+
+        private void forceRebuildGraphToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            inputGen.UpdateGraph();
         }
     }
 }

@@ -379,15 +379,17 @@ Note that this slider's maximum is 9 times more than the others.", "Explanation"
 
             if (recalculatePath) RecalculatePath();
 
-            btnRebuildGraph.Enabled = false;
+            //btnRebuildGraph.Enabled = false;
         }
 
+        /*
         [DefaultValue(true), Category("Appearance"), Description("Indicates whether the \"Recompile Map\" button can be selected.")]
         public bool RebuildGraphEnabled
         {
             get { return btnRebuildGraph.Enabled; }
             set { btnRebuildGraph.Enabled = value; }
         }
+        */
 
         public void RecalculatePath()
         {
@@ -420,11 +422,6 @@ Note that this slider's maximum is 9 times more than the others.", "Explanation"
                     tileGrid.PathToDraw = null;
                 }
             }
-        }
-
-        private void btnRebuildGraph_Click(object sender, EventArgs e)
-        {
-            UpdateGraph();
         }
 
         [Browsable(false)]
