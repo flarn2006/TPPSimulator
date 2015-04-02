@@ -20,6 +20,7 @@ namespace TPPSimulator
         private string filename = null;
         private Task downloadAfterDelayTask;
         private CancellationTokenSource cancelDownload = null;
+        private bool ignoreDownloadBoxTextChanged = false;
 
         public PastebinImportForm()
         {
@@ -53,7 +54,10 @@ namespace TPPSimulator
         {
             Match match = Regex.Match(txtURL.Text, "^(?:https?:\\/\\/)?(?:www\\.)?pastebin\\.com\\/([A-Za-z0-9]+)$");
             if (match.Success) {
+                ignoreDownloadBoxTextChanged = true;
                 txtURL.Text = "http://pastebin.com/raw.php?i=" + match.Groups[1].Value;
+                ignoreDownloadBoxTextChanged = false;
+                if (txtURL.Focused) txtURL.Select(txtURL.Text.Length, 0);
             }
 
             HttpClient client = new HttpClient();
@@ -80,7 +84,6 @@ namespace TPPSimulator
                         lblStatus.ForeColor = Color.Green;
                         lblStatus.Text = "Downloaded";
                         btnOK.Enabled = true;
-                        btnOK.Focus();
                     } else {
                         lblStatus.ForeColor = Color.Red;
                         lblStatus.Text = "Wrong content type";
@@ -124,15 +127,17 @@ namespace TPPSimulator
 
         private void txtURL_TextChanged(object sender, EventArgs e)
         {
-            if (cancelDownload != null) {
-                cancelDownload.Cancel();
-            }
-            cancelDownload = new CancellationTokenSource();
+            if (!ignoreDownloadBoxTextChanged) {
+                if (cancelDownload != null) {
+                    cancelDownload.Cancel();
+                }
+                cancelDownload = new CancellationTokenSource();
 
-            lblStatus.Text = "";
-            downloadError = null;
-            btnOK.Enabled = false;
-            downloadAfterDelayTask = DownloadMapAfterDelay(250, cancelDownload.Token);
+                lblStatus.Text = "";
+                downloadError = null;
+                btnOK.Enabled = false;
+                downloadAfterDelayTask = DownloadMapAfterDelay(250, cancelDownload.Token);
+            }
         }
 
         private async void txtURL_Validating(object sender, CancelEventArgs e)
