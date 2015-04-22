@@ -83,6 +83,7 @@
     <Compile Include="DebugShowGraphForm.Designer.cs">
       <DependentUpon>DebugShowGraphForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="DelayTask.cs" />
     <Compile Include="DocumentManager.cs">
       <SubType>Component</SubType>
     </Compile>
