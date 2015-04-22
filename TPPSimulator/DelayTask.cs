@@ -33,5 +33,12 @@ namespace TPPSimulator
             : base(new Action(DelayAction.GetAction(milliseconds)))
         {
         }
+
+        public static DelayTask CreateAndStart(int milliseconds)
+        {
+            DelayTask task = new DelayTask(milliseconds);
+            task.Start();
+            return task;
+        }
     }
 }

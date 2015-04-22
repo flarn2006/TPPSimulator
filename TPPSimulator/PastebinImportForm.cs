@@ -40,7 +40,7 @@ namespace TPPSimulator
 
         private async Task DownloadMapAfterDelay(int millisecondsDelay, CancellationToken ct)
         {
-            await new DelayTask(millisecondsDelay);
+            await DelayTask.CreateAndStart(millisecondsDelay);
             if (!ct.IsCancellationRequested) {
                 if (cancelDownload != null) {
                     cancelDownload.Cancel();
