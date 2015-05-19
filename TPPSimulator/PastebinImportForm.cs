@@ -78,6 +78,7 @@ namespace TPPSimulator
                     if (resp.Content.Headers.ContentType.MediaType.Equals("text/plain")) {
                         byte[] content = await resp.Content.ReadAsByteArrayAsync();
                         filename = Path.Combine(Path.GetTempPath(), "Imported.tppmap");
+                        if (File.Exists(filename)) File.Delete(filename);
                         FileStream file = File.OpenWrite(filename);
                         file.Write(content, 0, content.Length);
                         file.Close();
